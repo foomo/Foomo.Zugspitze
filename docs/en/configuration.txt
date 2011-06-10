@@ -1,0 +1,1 @@
+Install Zugspitze Server and Client and you're ready to go.

@@ -1,0 +1,15 @@
+++ Client Project Hierarchy
+
+|| src || sources ||
+|| src/main.mxml || main application ||
+|| src/main-config.xml || main application config ||
+|| src/projectConfigDebug.xml || debugging config ||
+|| src/projectConfigRelease.xml || release config ||
+|| libs || swcs ||
+|| locale/en_US/application.properties ||  ||
+|| locale/de_DE/application.properties ||  ||
+|| vendor || vendor swcs -  use externals ...||
+
+++ Compiler
+
+-load-config+=projectConfigDebug.xml

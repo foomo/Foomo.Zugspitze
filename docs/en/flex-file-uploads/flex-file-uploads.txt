@@ -1,0 +1,120 @@
++++ Abstract
+
+**The file uploads functionality of the framework helps you to handle file uploads from the flash player**
+
+When it comes to uploading files from the flash player, you will find yourself being locked in the browsers sandbox, this means, that you can browse for files, but you will not get a handle to read file contents. With AIR this is different, you can access file data.
+
+If you are using the radact frameworks service functionality, you will want to use files as parameters. Because of the limitations mentioned before this is not possible.
+
+The approach that solves the problem has the following steps
+
+* upload a file and get a file reference
+* use the file reference as a parameter in rpc calls
+
++++ Uploading files from flash to the upload service
+
+<code type="javascript">
+	// 
+    // from the FileUploadExample.mxml in the radact repo
+    //
+    // ...
+
+    private var fileRef:FileReference = new FileRefence(); 
+    
+    // ...
+    
+    
+    // get notified, when a file was selected
+    
+	private function init():void
+	{
+		this.fileRef.addEventListener(Event.SELECT, this.fileSelected);
+	}
+	
+	
+	// start browsing for a file
+	
+	private function browse():void
+	{
+		this.fileRef.browse();
+	}
+	
+	
+	// file was selected
+	
+	private function fileSelected(event:Event):void
+	{
+		this.fileDisplay.text = this.fileRef.toString();
+		UploadCommand.SERVER = 'http://radact';
+		var cmd:UploadCommand = new UploadCommand(this.fileRef);
+		cmd.addEventListener(CommandEvent.COMMAND_COMPLETE, this.uploadComplete);
+		cmd.execute();
+	}
+	
+	// upload is done
+	
+	private function uploadComplete(event:CommandEvent):void
+	{
+		var uploadCommand:UploadCommand = event.command as UploadCommand; 
+		trace('this is the filerefence you want to use as an argument in webservice calls ' + uploadCommand.uploadReference);
+		trace('this is where you can get the uploaded file within the next 10 seconds ' + UploadCommand.SERVER + uploadCommand.uploadReference.getReflectionUri());
+	}
+
+	// ...
+	
+</code>
+
++++ Retrieving file uploads on the server
+
+<code type="php">
+/**
+  * example call in a webservice saving a previously uploaded file
+  * 
+  * @param RadFileUploadReference $ref previously uploaded file
+  * @return boolean
+  *
+  */
+function someCall(RadFileUploadReference $ref) {
+	$upload = RadFileUploadServer::getUpload($ref->id);
+	// do some cool stuff
+	return true;
+}
+</code>
+
++++ Uploading files from php
+
+This is most useful, when working on unit tests for services providing file uploads. But of course you may also use it to post files from server to server.
+
+<code type="php">
+$files = array(
+	'/path/to/fileA',
+	'/path/to/fileB'
+);
+$uploadRefs = RadFileUploadClient::uploadFilesToRemoteServer(
+	$files,
+	'http://some.radact.server.org'
+);
+
+foreach($uploadRefs as $uploadReference) {
+	/* @var uploadReference RadFileUploadReference */
+	$someService->uploadFile($uploadReference);
+}
+</code>
+
++++ Reflecting files back to the client
+
+It is a common scenario, that you want to display files to the user, that were just "selected" to be uploaded. The browser sandbox will not allow access to the local file. Thus if you want to display that file in the client, you need to upload it to the server first, so that you can "reflect" it back to the client. Since this may potentially be very dangerous, it is only allowed in the same session from the same IP.
+
+<code type="javascript">
+
+	// check the full example above
+	// upload is done
+	
+	private function uploadComplete(event:CommandEvent):void
+	{
+		var uploadCommand:UploadCommand = event.command as UploadCommand; 
+		trace('this is the filerefence you want to use as an argument in webservice calls ' + uploadCommand.uploadReference);
+		trace('this is where you can get the uploaded file within the next 10 seconds ' + UploadCommand.SERVER + uploadCommand.uploadReference.getReflectionUri());
+	}
+
+</code>

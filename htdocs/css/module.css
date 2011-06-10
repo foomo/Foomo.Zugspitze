@@ -1,0 +1,54 @@
+
+#zugspitze {
+	
+}
+
+
+
+/** zugspitze 
+
+#zsToolboxContentDisplay {
+	z-index:1;
+	left:30px;
+	top:50px;
+	left:10px;
+	right:10px;
+	bottom:10px;
+	position:absolute;
+	background-color:white;
+}
+
+#zsToolboxContentDisplay iframe {
+	background-color:white;
+	border:0;
+	border-top:3px grey solid;
+}
+
+#ZSFormContainer table, #ZSFormContainer td {
+	border: 1px dotted grey;
+}
+
+#ZSFormContainer THEAD {
+	font-weight:bold;
+}
+
+#zsAppWizard TD {
+	border-style: none;
+}
+
+#zsAppWizard TEXTAREA, #zsAppWizard INPUT, #zsAppWizard iframe {
+	width:400px;
+	border-collapse: collapse;
+}
+#zsAppWizard iframe {
+	height:200px;
+}
+#zsAppWizard TEXTAREA, #zsAppWizard iframe {
+	height:100px;
+}
+#zsAppWizard #existingApps #appList{
+	overflow: auto;
+	height: 400px;
+	
+}
+**/
