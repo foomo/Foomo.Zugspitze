@@ -1,3 +1,3 @@
 <?php
 
-\Zugspitze\Upload\Server::serve();
+\Foomo\Zugspitze\Upload\Server::serve();

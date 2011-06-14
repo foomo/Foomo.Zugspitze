@@ -1,0 +1,42 @@
+[submodule "vendor/org.foomo.zugspitze.air3"]
+	path = vendor/org.foomo.zugspitze.air3
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air3.git
+[submodule "vendor/org.foomo.zugspitze.air4"]
+	path = vendor/org.foomo.zugspitze.air4
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air4.git
+[submodule "vendor/org.foomo.zugspitze.air4.examples"]
+	path = vendor/org.foomo.zugspitze.air4.examples
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air4Examples.git
+[submodule "vendor/org.foomo.zugspitze.as3"]
+	path = vendor/org.foomo.zugspitze.as3
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-as3.git
+[submodule "vendor/org.foomo.zugspitze.as3.examples"]
+	path = vendor/org.foomo.zugspitze.as3.examples
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-as3Examples.git
+[submodule "vendor/org.foomo.zugspitze.core"]
+	path = vendor/org.foomo.zugspitze.core
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-core.git
+[submodule "vendor/org.foomo.zugspitze.flex3"]
+	path = vendor/org.foomo.zugspitze.flex3
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-flex3.git
+[submodule "vendor/org.foomo.zugspitze.flex3.examples"]
+	path = vendor/org.foomo.zugspitze.flex3.examples
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-flex3Examples.git
+[submodule "vendor/org.foomo.zugspitze.flex4"]
+	path = vendor/org.foomo.zugspitze.flex4
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-flex4.git
+[submodule "vendor/org.foomo.zugspitze.flex4.examples"]
+	path = vendor/org.foomo.zugspitze.flex4.examples
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-flex4Examples.git
+[submodule "vendor/org.foomo.zugspitze.module"]
+	path = vendor/org.foomo.zugspitze.module
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-module.git
+[submodule "vendor/org.foomo.zugspitze.module.examples"]
+	path = vendor/org.foomo.zugspitze.module.examples
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-moduleExamples.git
+[submodule "vendor/org.foomo.zugspitze.services"]
+	path = vendor/org.foomo.zugspitze.services
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-services.git
+[submodule "vendor/org.foomo.zugspitze.services.examples"]
+	path = vendor/org.foomo.zugspitze.services.examples
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-servicesExamples.git
