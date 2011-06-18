@@ -52,8 +52,7 @@ class Module extends ModuleBase
 		return array(
 			\Foomo\Modules\Resource\Module::getResource('Foomo.Services', self::VERSION),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'tmp' . DIRECTORY_SEPARATOR . self::NAME),
-			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'modules' . DIRECTORY_SEPARATOR . self::NAME),
-			\Foomo\Config::getTempDir()
+			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'modules' . DIRECTORY_SEPARATOR . self::NAME)
 		);
 	}
 
