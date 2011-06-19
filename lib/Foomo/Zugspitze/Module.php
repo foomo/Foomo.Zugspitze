@@ -76,7 +76,7 @@ class Module extends ModuleBase
 	/**
 	 * @return string
 	 */
-	public static function getTmpDir($className=null)
+	public static function getTmpDir()
 	{
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . self::NAME;
 		self::validateResourceDir($filename);
