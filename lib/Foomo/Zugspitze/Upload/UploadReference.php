@@ -1,14 +1,13 @@
 <?php
 
-namespace Foomo\Zugspitze\Services\Upload;
+namespace Foomo\Zugspitze\Upload;
 
 /**
  * value object containing flash client side of an uploaded file plus its uploadId
  *
- * @see flash docs flash.net.FileReference
- * @Foomo\Services\Reflection\RemoteClass(package='com.bestbytes.services.sharedVo')
+ * @Foomo\Services\Reflection\RemoteClass(package='com.test.services.upload.vos')
  */
-class Reference 
+class UploadReference
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Variables
