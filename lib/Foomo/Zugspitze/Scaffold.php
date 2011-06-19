@@ -120,7 +120,7 @@ class Scaffold
 
 			if ($config->type == \Foomo\Zugspitze\Scaffold\Config::TYPE_CORE_LIBRARY) {
 				# validate id
-				if (isset($this->libraries[$config->id])) throw new \Exception($config->id . ' already exists!');
+				if (isset($this->libraries[$config->id])) throw new \Exception($config->id . ' already exists for "' . $config->name . '"!');
 				# create object
 				$this->libraries[$config->id] = new \Foomo\Zugspitze\Scaffold\Library(
 					$config->id,
