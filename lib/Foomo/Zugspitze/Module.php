@@ -24,12 +24,6 @@ class Module extends ModuleBase
 	 */
 	public static function initializeModule()
 	{
-		if (!isset(\Foomo\Flex\Settings::$PROJECT_DIR)) {
-			\Foomo\Flex\Settings::$PROJECT_DIR = \Foomo\Config::getTempDir() . DIRECTORY_SEPARATOR . 'flexClient';
-		}
-		if (!is_dir(\Foomo\Flex\Settings::$PROJECT_DIR)) {
-			mkdir(\Foomo\Flex\Settings::$PROJECT_DIR);
-		}
 	}
 
 	/**
