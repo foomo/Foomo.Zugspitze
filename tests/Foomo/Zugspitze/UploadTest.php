@@ -23,6 +23,12 @@ class UploadTest extends \PHPUnit_Framework_TestCase
 	// ~ Test methods
 	//---------------------------------------------------------------------------------------------
 
+	public function setUp()
+	{
+		if(php_sapi_name() == 'cli') {
+			$this->markTestSkipped('will not run this test on the command line');
+		}
+	}
 
 	public function testUploadFiles()
 	{

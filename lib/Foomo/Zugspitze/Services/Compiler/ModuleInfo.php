@@ -1,8 +1,11 @@
 <?php
+
+namespace Foomo\Zugspitze\Services\Compiler;
+
 /**
  * services in a module
  */
-class ZSCompilerServiceModuleInfo {
+class ModuleInfo {
 	/**
 	 * name of the module
 	 *

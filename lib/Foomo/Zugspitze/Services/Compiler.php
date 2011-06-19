@@ -1,13 +1,16 @@
 <?php
+
+namespace Foomo\Zugspitze\Services;
+
 /**
  * get infos about compileable services on this server
  */
-class ZSCompilerService {
+class Compiler {
 	const VERSION = 0.1;
 	/**
 	 * get services informations
 	 * 
-	 * @return ZSCompilerServiceModuleInfo[]
+	 * @return Foomo\Zugspitze\Services\Compiler\ModuleInfo[]
 	 */
 	public function getServices()
 	{
@@ -19,11 +22,11 @@ class ZSCompilerService {
 			foreach($serviceDescriptions as $serviceDescription) {
 				/* @var $serviceDescription ServiceDescription */
 				if($serviceDescription->compilerAvailable) {
-					$zsServices[] = ZSCompilerServiceServiceInfo::fromServiceDescription($serviceDescription, $module);
+					$zsServices[] = Compiler\ServiceInfo::fromServiceDescription($serviceDescription, $module);
 				}
 			}
 			if(count($zsServices)> 0) {
-				$entry = new ZSCompilerServiceModuleInfo();
+				$entry = new Compiler\ModuleInfo();
 				$entry->module = $module;
 				$entry->services = $zsServices;
 				$ret[] = $entry;

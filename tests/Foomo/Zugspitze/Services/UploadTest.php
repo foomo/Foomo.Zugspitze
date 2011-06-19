@@ -20,6 +20,10 @@ class UploadTest extends \PHPUnit_Framework_TestCase
 	
 	public function setUp()
 	{
+		if(php_sapi_name() == 'cli') {
+			$this->markTestSkipped('will not run this test on the command line');
+		}
+		
 		$this->service = new \Foomo\Zugspitze\Services\Upload();
 	}
 	
