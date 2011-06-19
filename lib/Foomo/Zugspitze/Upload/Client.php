@@ -13,8 +13,8 @@ class Client
 	 *
 	 * @param array $fileNames array of filenames to be uploaded
 	 * @param string $server
-	 * @param resource $ch 
-	 * @return Foomo\Zugspitze\Services\Upload\Reference[] 
+	 * @param resource $ch
+	 * @return Foomo\Zugspitze\Upload\UploadReference[]
 	 */
 	public static function uploadFilesToRemoteServer($fileNames, $server=null, $ch=null)
 	{
@@ -23,21 +23,21 @@ class Client
 		$ret = array();
 		$i = 0;
 		$files = array();
-		
+
 		foreach ($fileNames as $fileName) {
 			$files['upload_' . $i] = '@' . $fileName;
 			$i++;
 		}
-		
+
 		$post_data = array();
-		
+
 		if ($ch) {
 			$saveCurlHandle = true;
 		} else {
 			$saveCurlHandle = false;
 			$ch = curl_init();
 		}
-		
+
 		$url = $server . \Foomo\ROOT_HTTP . '/modules/' . \Foomo\Zugspitze\Module::NAME . '/upload.php';
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_POST, 1);
@@ -45,15 +45,15 @@ class Client
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
 		if (curl_errno($ch)) throw new Exception('curl post failed ' . curl_error($ch), 1);
-		
+
 		$postResult = explode(PHP_EOL, curl_exec($ch));
-		
+
 		if (!$saveCurlHandle) curl_close($ch);
 
 		$i = 0;
 		foreach ($postResult as $uploadId) {
 			$fileName = $fileNames[$i];
-			$uploadRef = new \Foomo\Zugspitze\Services\Upload\Reference();
+			$uploadRef = new \Foomo\Zugspitze\Upload\UploadReference();
 			$ret[] = $uploadRef;
 			if (function_exists('posix_getpwuid')) {
 				$userInfo = posix_getpwuid(fileowner($fileName));
