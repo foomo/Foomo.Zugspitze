@@ -1,9 +1,12 @@
 <?php
+
+namespace Foomo\Zugspitze\Services\Compiler;
+
 use Foomo\Services\ServiceDescription;
 /**
  * a service info
  */
-class ZSCompilerServiceServiceInfo {
+class ServiceInfo {
 	/**
 	 * a rpc service at this point using AMF for transports
 	 *
@@ -84,7 +87,7 @@ class ZSCompilerServiceServiceInfo {
 //				case 'recompileUrl':
 				case 'documentationUrl':
 				case 'compileAndDownloadUrl':
-					$ret->$k = Foomo\Utils::getServerUrl() . $serviceDescription->$k;
+					$ret->$k = \Foomo\Utils::getServerUrl() . $serviceDescription->$k;
 					break;
 				case 'asPackage':
 					$ret->asPackage = $serviceDescription->package;

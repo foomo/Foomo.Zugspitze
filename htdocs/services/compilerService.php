@@ -1,9 +1,11 @@
 <?php
 
-include(\Foomo\ROOT . DIRECTORY_SEPARATOR . 'htdocs' . DIRECTORY_SEPARATOR . 'tools.inc.php');
+namespace Foomo;
 
-Foomo\Services\RPC::serveClass(
-	new ZSCompilerService(),
-	new Foomo\Services\RPC\Serializer\AMF(),
+Frontend::setUpToolbox();
+
+Services\RPC::serveClass(
+	new Zugspitze\Services\Compiler,
+	new Services\RPC\Serializer\AMF(),
 	'com.bestbytes.services'
 );

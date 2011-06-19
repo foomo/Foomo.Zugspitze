@@ -101,7 +101,7 @@ class Model
 		} else {
 			$php = self::generateAppPHP($fullClassName, $description);
 			file_put_contents(self::getAppClassFilename($fullClassName, $moduleName), $php);
-			\Foomo\AutoLoader::reset();
+			\Foomo\AutoLoader::resetCache();
 			if (!self::appExists($fullClassName)) {
 				throw new \Exception('the class file was written, but the autoloader could not register the newly created class', 1);
 			}
