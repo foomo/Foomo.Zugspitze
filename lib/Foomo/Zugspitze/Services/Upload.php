@@ -5,21 +5,21 @@ namespace Foomo\Zugspitze\Services;
 /**
  * support for chunked file uploads
  */
-class Upload 
+class Upload
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Constants
 	//---------------------------------------------------------------------------------------------
 
 	const VERSION = 0.1;
-	
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Public methods
 	//---------------------------------------------------------------------------------------------
 
 	/**
 	 * chunked upload
-	 * 
+	 *
 	 * @param string $chunk base64 encoded chunk
 	 * @param integer $totalLength length of the file to be uploaded
 	 * @param string $uploadName basename of the file on the client
@@ -36,14 +36,14 @@ class Upload
 			if (!file_exists($filename)) throw new \Exception('File ' . $filename . ' does not exist!');
 			$fp = fopen($filename, 'a');
 		}
-		
+
 		if ($fp === FALSE)  throw new \Exception('Could not open ' . $filename . '!');
-		
+
 		$data = base64_decode($chunk);
 		fwrite($fp, $data);
 		fclose($fp);
 		clearstatcache();
-		
+
 		$uploadInfo = new \Foomo\Zugspitze\Services\Upload\Info(basename($filename));
 		$uploadInfo->uploadSessionId = session_id();
 		$uploadInfo->uploadIp = $_SERVER['REMOTE_ADDR'];
@@ -59,7 +59,7 @@ class Upload
 
 	/**
 	 * Cancel an already started chunkUpload
-	 * 
+	 *
 	 * @param string $uploadId
 	 * @return boolean
 	 */
@@ -71,4 +71,4 @@ class Upload
 		}
 		return true;
 	}
-}
+}	
