@@ -22,10 +22,30 @@ class Controller
 	// ~ Action methods
 	//---------------------------------------------------------------------------------------------
 
+	/**
+	 *
+	 */
 	public function actionDefault()
 	{
 	}
 
+	/**
+	 *
+	 */
+	public function actionApplicationGenerator()
+	{
+	}
+
+	/**
+	 *
+	 */
+	public function actionLibraryGenerator()
+	{
+	}
+
+	/**
+	 *
+	 */
 	public function actionProxyUpdater()
 	{
 	}

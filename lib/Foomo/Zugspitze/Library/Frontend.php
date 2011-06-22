@@ -1,6 +1,6 @@
 <?php
 
-namespace Foomo\Zugspitze\Scaffold;
+namespace Foomo\Zugspitze\Library;
 
 class Frontend extends \Foomo\MVC\AbstractApp
 {
@@ -12,7 +12,6 @@ class Frontend extends \Foomo\MVC\AbstractApp
 	{
 		parent::__construct();
 		$HTMLDoc = \Foomo\HTMLDocument::getInstance();
-		$HTMLDoc->addJavascripts(array(\Foomo\ROOT_HTTP . '/modules/' . \Foomo\Zugspitze\Module::NAME . '/js/scaffold.js'));
-		$HTMLDoc->addJavascript('window.zugspitze.services.scaffold.server=\'\';window.zugspitze.services.scaffold.endPoint = \'' . \Foomo\ROOT_HTTP. '/modules/Foomo.Zugspitze/services/scaffold.php/Foomo.Services.RPC/serve\';');
+		$HTMLDoc->addJavascripts(array(\Foomo\ROOT_HTTP . '/modules/' . \Foomo\Zugspitze\Module::NAME . '/js/library.js'));
 	}
 }

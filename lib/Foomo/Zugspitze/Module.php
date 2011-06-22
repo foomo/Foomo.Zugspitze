@@ -2,12 +2,10 @@
 
 namespace Foomo\Zugspitze;
 
-use Foomo\Modules\ModuleBase;
-
 /**
  * zugspitze module
  */
-class Module extends ModuleBase
+class Module extends \Foomo\Modules\ModuleBase
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Constants
@@ -45,6 +43,8 @@ class Module extends ModuleBase
 	{
 		return array(
 			\Foomo\Modules\Resource\Module::getResource('Foomo.Services', self::VERSION),
+			\Foomo\Modules\Resource\Config::getResource('Foomo.Services', Library\DomainConfig::NAME),
+			\Foomo\Modules\Resource\Config::getResource('Foomo.Services', \Foomo\Flex\DomainConfig::NAME),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'tmp' . DIRECTORY_SEPARATOR . self::NAME),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'modules' . DIRECTORY_SEPARATOR . self::NAME)
 		);
@@ -102,5 +102,14 @@ class Module extends ModuleBase
 		$resource = \Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, $filename);
 		if (!$resource->resourceValid()) $resource->tryCreate();
 		if (!\file_exists(\Foomo\Config::getVarDir() . DIRECTORY_SEPARATOR . $filename)) throw new \Exception('Resource ' . $filename . ' does not exits');
+	}
+
+	/**
+	 *
+	 * @return Foomo\Zugspitze\Library\DomainConfig
+	 */
+	public static function getLibraryConfig()
+	{
+		return \Foomo\Config::getConf(self::NAME, Library\DomainConfig::NAME);
 	}
 }

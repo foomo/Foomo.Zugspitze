@@ -35,3 +35,6 @@
 [submodule "vendor/sources/org.foomo.zugspitze.services.upload.examples"]
 	path = vendor/sources/org.foomo.zugspitze.services.upload.examples
 	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-servicesUploadExamples.git
+[submodule "vendor/sources/org.foomo.zugspitze.air4"]
+	path = vendor/sources/org.foomo.zugspitze.air4
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air4.git
