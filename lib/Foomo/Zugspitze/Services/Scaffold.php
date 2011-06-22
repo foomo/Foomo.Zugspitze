@@ -13,50 +13,50 @@ class Scaffold
 	//---------------------------------------------------------------------------------------------
 	// ~ Variables
 	//---------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @var Foomo\Zugspitze\Scaffolding
 	 */
-	private $scaffold;
+	private $sources;
 
 	//---------------------------------------------------------------------------------------------
 	// ~ Constructor
 	//---------------------------------------------------------------------------------------------
-	
+
 	public function __construct()
 	{
-		$this->scaffold = new \Foomo\Zugspitze\Scaffold(\Foomo\Zugspitze\Module::getVendorDir());
+		$this->sources = new \Foomo\Zugspitze\Scaffold(\Foomo\Zugspitze\Module::getVendorDir());
 	}
 
 	//---------------------------------------------------------------------------------------------
 	// ~ Service methods
 	//---------------------------------------------------------------------------------------------
-	
+
 	/**
-	 * @return Foomo\Zugspitze\Services\Scaffold\Library[] 
+	 * @return Foomo\Zugspitze\Services\Scaffold\Library[]
 	 */
 	public function getLibraries()
 	{
 		$result = array();
-		$libraries = $this->scaffold->getLibraries();
-		foreach ($libraries as $library) {
+		foreach (\Foomo\Zugspitze\Vendor::getSources()->getLibraryProjects() as $project) {
+			/* @var  $library Foomo\Zugspitze\Vendor\Sources\Project */
 			$obj = new \Foomo\Zugspitze\Services\Scaffold\Library();
-			$obj->id = $library->id;
-			$obj->name = $library->name;
-			$obj->description = $library->description;
+			$obj->id = $project->id;
+			$obj->name = $project->name;
+			$obj->description = $project->description;
 			$result[] = $obj;
 		}
 		return $result;
 	}
-	
+
 	/**
-	 * @return Foomo\Zugspitze\Services\Scaffold\Project[] 
+	 * @return Foomo\Zugspitze\Services\Scaffold\Project[]
 	 */
-	public function getProjects($libraryId)
+	public function getProjects($libraryProjectId)
 	{
 		$result = array();
-		$projects = $this->scaffold->getProjects($libraryId);
-		foreach ($projects as $project) {
+		foreach (\Foomo\Zugspitze\Vendor::getSources()->getImplementationProjects($libraryProjectId) as $project) {
+			/* @var  $library Foomo\Zugspitze\Vendor\Sources\Project */
 			$obj = new \Foomo\Zugspitze\Services\Scaffold\Project();
 			$obj->id = $project->id;
 			$obj->name = $project->name;
@@ -65,15 +65,15 @@ class Scaffold
 		}
 		return $result;
 	}
-	
+
 	/**
-	 * @return Foomo\Zugspitze\Services\Scaffold\Application[] 
+	 * @return Foomo\Zugspitze\Services\Scaffold\Application[]
 	 */
-	public function getApplications($projectId)
+	public function getApplications($implementationProjectId)
 	{
 		$result = array();
-		$applications = $this->scaffold->getApplications($projectId);
-		foreach ($applications as $application) {
+		foreach (\Foomo\Zugspitze\Vendor::getSources()->getImplementationProjectApplications($implementationProjectId) as $application) {
+			/* @var  $library Foomo\Zugspitze\Vendor\Sources\Application */
 			$obj = new \Foomo\Zugspitze\Services\Scaffold\Application();
 			$obj->id = $application->id;
 			$obj->name = $application->name;

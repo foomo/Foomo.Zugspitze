@@ -8,7 +8,8 @@ class TestSuite extends \Foomo\TestRunner\Suite
 	// ~ Constants
 	//---------------------------------------------------------------------------------------------
 
-	const LIBRARY_COUNT						= 7;
+	const LIBRARY_COUNT						= 4;
+	const TOTAL_LIBRARY_COUNT				= 7;
 	const CORE_LIBRARY_ID					= 'org.foomo.zugspitze.core';
 	const FLEX4_LIBRARY_ID					= 'org.foomo.zugspitze.flex4';
 	const FLEX4_EXAMPLES_ID					= 'org.foomo.zugspitze.flex4.examples';
@@ -28,11 +29,14 @@ class TestSuite extends \Foomo\TestRunner\Suite
 	{
  		return array(
 			'Foomo\\Zugspitze\\UploadTest',
+			'Foomo\\Zugspitze\\VendorTest',
+			'Foomo\\Zugspitze\\Vendor\\SourcesTest',
 			'Foomo\\Zugspitze\\ScaffoldTest',
-			'Foomo\\Zugspitze\\Scaffold\\ConfigTest',
 			'Foomo\\Zugspitze\\Services\\LoggerTest',
 			'Foomo\\Zugspitze\\Services\\UploadTest',
+			'Foomo\\Zugspitze\\Services\\CompilerTest',
 			'Foomo\\Zugspitze\\Services\\ScaffoldTest',
+			'Foomo\\Zugspitze\\Scaffold\\ApplicationGeneratorTest',
         );
 	}
 }

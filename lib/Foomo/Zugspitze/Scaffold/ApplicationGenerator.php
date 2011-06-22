@@ -2,7 +2,7 @@
 
 namespace Foomo\Zugspitze\Scaffold;
 
-class Generator
+class ApplicationGenerator
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Constants
@@ -18,21 +18,18 @@ class Generator
 	// ~ Variables
 	//---------------------------------------------------------------------------------------------
 
-	
-	
 	/**
-	 * @var Foomo\Zugspitze\Scaffold\Library
+	 * @var Foomo\Zugspitze\Vendor\Sources\Project
 	 */
-	private $library;
+	private $libraryProject;
 	/**
-	 * @var Foomo\Zugspitze\Scaffold\Project
+	 * @var Foomo\Zugspitze\Vendor\Sources\Project
 	 */
-	private $project;
+	private $implementationProject;
 	/**
-	 * @var Foomo\Zugspitze\Scaffold\Application
+	 * @var Foomo\Zugspitze\Vendor\Sources\Application
 	 */
-	private $application;
-
+	private $implementationProjectApplication;
 	/**
 	 * @var string
 	 */
@@ -41,71 +38,76 @@ class Generator
 	 * @var string
 	 */
 	private $workingDir;
-	
 	/**
 	 * @var string
 	 */
-	public $package;
-	
+	private $packageName;
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Constructor
 	//---------------------------------------------------------------------------------------------
-	
-	public function __construct($library, $project, $application, $package)
+
+	/**
+	 * @param Foomo\Zugspitze\Vendor\Sources\Project $libraryProject
+	 * @param Foomo\Zugspitze\Vendor\Sources\Project $implementationProject
+	 * @param Foomo\Zugspitze\Vendor\Sources\Application $implementationProjectApplication
+	 * @param string $packageName
+	 */
+	public function __construct(\Foomo\Zugspitze\Vendor\Sources\Project $libraryProject, \Foomo\Zugspitze\Vendor\Sources\Project $implementationProject, \Foomo\Zugspitze\Vendor\Sources\Application $implementationProjectApplication, $packageName)
 	{
 		# set values
-		$this->library = $library;
-		$this->project = $project;
-		$this->application = $application;
-		
-		$this->package = $package;
-		
+		$this->libraryProject = $libraryProject;
+		$this->implementationProject = $implementationProject;
+		$this->implementationProjectApplication = $implementationProjectApplication;
+
+		$this->packageName = $packageName;
+
 		$this->baseDir = \Foomo\Zugspitze\Module::getTmpDir(__CLASS__);
 		$this->workingDir = $this->baseDir . DIRECTORY_SEPARATOR . $this->getWorkingDirName();
 	}
-	
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Public methods
 	//---------------------------------------------------------------------------------------------
-	
+
 	/**
-	 * 
+	 *
 	 */
 	public function render()
 	{
 		# remove old files
 		$this->rmdir($this->workingDir);
-		
+
 		// create base folders
 		$this->mkdir($this->workingDir, self::UMASK_DIR);
-		
-		$fromFiles = $this->application->getFiles();
-		$toFiles = $this->getToFiles($fromFiles, $this->application->package, $this->package);
-		
+
+		$fromFiles = $this->implementationProjectApplication->getFiles();
+		$toFiles = $this->getToFiles($fromFiles, $this->implementationProjectApplication->package, $this->packageName);
+
 		for ($i=0; $i<count($fromFiles); $i++) {
-			$fromFile = $this->application->pathname . \DIRECTORY_SEPARATOR . $fromFiles[$i];
+			$fromFile = $this->implementationProjectApplication->pathname . \DIRECTORY_SEPARATOR . $fromFiles[$i];
 			$toFile = $this->workingDir . \DIRECTORY_SEPARATOR . $toFiles[$i];
 			$toDir = $this->dirname($toFile);
 			$this->mkdir($toDir, self::UMASK_DIR);
 			$this->copy($fromFile, $toFile);
-			
+
 			$search = array(
-				$this->getXMLNamespace($this->application->package),
-				$this->getOpeningXMLTag($this->application->package),
-				$this->getClosingXMLTag($this->application->package),
-				$this->application->package
+				$this->getXMLNamespace($this->implementationProjectApplication->package),
+				$this->getOpeningXMLTag($this->implementationProjectApplication->package),
+				$this->getClosingXMLTag($this->implementationProjectApplication->package),
+				$this->implementationProjectApplication->package
 			);
 			$replace = array(
-				$this->getXMLNamespace($this->package),
-				$this->getOpeningXMLTag($this->package),
-				$this->getClosingXMLTag($this->package),
-				$this->package
+				$this->getXMLNamespace($this->packageName),
+				$this->getOpeningXMLTag($this->packageName),
+				$this->getClosingXMLTag($this->packageName),
+				$this->packageName
 			);
-			
+
 			$this->replace($toFile, $search, $replace);
 		}
 	}
-	
+
 	/**
 	 * creates the downloadable archive-file
 	 */
@@ -119,29 +121,37 @@ class Generator
 	 */
 	public function streamPackage()
 	{
-		\Foomo\Utils::streamFile($this->baseDir . DIRECTORY_SEPARATOR . $this->getArchiveFileName(), $this->getArchiveFileName(), 'application/octet-stream', true);
+		\Foomo\Utils::streamFile($this->baseDir . DIRECTORY_SEPARATOR . $this->getArchiveFileName(), $this->getArchiveFileName(), '	application/x-gzip', true);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getWorkingDirName()
+	{
+		return $this->libraryProject->id . '_' . $this->packageName;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getArchiveFileName()
+	{
+		return $this->getWorkingDirName() . '.tgz';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getBaseDir()
+	{
+		return $this->baseDir;
 	}
 
 	//---------------------------------------------------------------------------------------------
 	// ~ Private methods
 	//---------------------------------------------------------------------------------------------
-	
-	/**
-	 * @return string
-	 */
-	private function getWorkingDirName()
-	{
-		return $this->library->id . '_' . $this->package;
-	}	
-	
-	/**
-	 * @return string
-	 */
-	private function getArchiveFileName()
-	{
-		return $this->getWorkingDirName() . '.tgz';
-	}	
-	
+
 	/**
 	 * @param string $fromFiles
 	 * @param string $fromPackage
@@ -156,7 +166,7 @@ class Generator
 		}
 		return $toFiles;
 	}
-	
+
 	/**
 	 * @param string $filename
 	 * @return string
@@ -167,7 +177,7 @@ class Generator
 		\array_pop($path);
 		return implode(DIRECTORY_SEPARATOR, $path);
 	}
-	
+
 	/**
 	 * @param string $pathname
 	 * @param string $umask
@@ -175,10 +185,10 @@ class Generator
 	private function mkdir($pathname, $umask)
 	{
 		if (\file_exists($pathname)) return;
-		
+
 		$path = '';
 		$pathnames = \explode(DIRECTORY_SEPARATOR, $pathname);
-		
+
 		foreach ($pathnames as $value) {
 			if ($value == '') continue;
 			$path .= DIRECTORY_SEPARATOR . $value;
@@ -188,7 +198,7 @@ class Generator
 			if (!\file_exists($path)) throw new \Exception($path . ' could not be created!');
 		}
 	}
-	
+
 	/**
 	 * @param string $pathname
 	 */
@@ -199,18 +209,18 @@ class Generator
 		\shell_exec('rm -rf ' . $pathname);
 		if (\file_exists($pathname))  throw new \Exception($pathname . ' could not be removed!');
 	}
-		
+
 	/**
 	 * @param string $source
-	 * @param string $dest 
+	 * @param string $dest
 	 */
 	private function copy($source, $dest)
 	{
 		\copy($source, $dest);
 		if (!\file_exists($dest)) throw new \Exception('Could not copy ' . $source . ' to ' . $dest);
-		
+
 	}
-	
+
 	/**
 	 * @param string $filename
 	 * @param mixed $search
@@ -233,7 +243,7 @@ class Generator
 		\rename($temp, $filename);
 		\chmod($filename, self::UMASK_FILE);
 	}
-	
+
 	/**
 	 * @param string $package
 	 * @return string
@@ -243,7 +253,7 @@ class Generator
 		$parts = \explode('.', $package);
 		return 'xmlns:' . \array_pop($parts);
 	}
-	
+
 	/**
 	 * @param string $package
 	 * @return string
@@ -253,7 +263,7 @@ class Generator
 		$parts = \explode('.', $package);
 		return '<' . \array_pop($parts) . ':';
 	}
-	
+
 	/**
 	 * @param string $package
 	 * @return string

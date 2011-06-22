@@ -29,12 +29,6 @@ class ServiceInfo
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * the uri on the host the service is running on - it can possibly contain ampersands, so do not forget to escape them, when you use them in a markup context
-	 *
-	 * @var string
-	 */
-	public $downloadUrl;
-	/**
 	 * uri, where to find a html documentation
 	 *
 	 * @var string
@@ -104,7 +98,6 @@ class ServiceInfo
 		$ret->module = $module;
 		foreach($ret as $k => $v) {
 			switch($k) {
-				case 'downloadUrl':
 				case 'documentationUrl':
 				case 'compileAndDownloadUrl':
 					$ret->$k = \Foomo\Utils::getServerUrl() . $serviceDescription->$k;

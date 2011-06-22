@@ -2,27 +2,34 @@
 
 namespace Foomo\Zugspitze\Services;
 
-use PHPUnit_Framework_TestCase;
-
 /**
  * Description of ZSCompilerServiceTestclass
- *
- * @author jan
  */
-class CompilerTest extends PHPUnit_Framework_TestCase {
+class CompilerTest extends \PHPUnit_Framework_TestCase
+{
+	//---------------------------------------------------------------------------------------------
+	// ~ Variables
+	//---------------------------------------------------------------------------------------------
+
 	/**
-	 * me service
-	 * 
-	 * @var ZSCompilerService
+	 * @var Foomo\Zugspitze\Services\Compiler
 	 */
 	private $service;
+
+	//---------------------------------------------------------------------------------------------
+	// ~ Setup
+	//---------------------------------------------------------------------------------------------
+
 	public function setUp()
 	{
-		if(php_sapi_name() == 'cli') {
-			$this->markTestSkipped('will not run this test on the command line');
-		}
+		if (php_sapi_name() == 'cli') $this->markTestSkipped('will not run this test on the command line');
 		$this->service = new Compiler;
 	}
+
+	//---------------------------------------------------------------------------------------------
+	// ~ Test methods
+	//---------------------------------------------------------------------------------------------
+
 	public function testGetServices()
 	{
 		$services = $this->service->getServices();

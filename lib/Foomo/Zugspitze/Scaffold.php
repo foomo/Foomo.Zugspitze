@@ -5,37 +5,14 @@ namespace Foomo\Zugspitze;
 class Scaffold
 {
 	//---------------------------------------------------------------------------------------------
-	// ~ Variables
-	//---------------------------------------------------------------------------------------------
-
-	/**
-	 * @var string
-	 */
-	public $pathname;
-	/**
-	 * @var Foomo\Zugspitze\Scaffold\Library[]
-	 */
-	public $libraries;
-	/**
-	 * @var Foomo\Zugspitze\Scaffold\Project[]
-	 */
-	public $projects;
-	/**
-	 * @var Foomo\Zugspitze\Scaffold\Application[]
-	 */
-	public $applications;
-
-	//---------------------------------------------------------------------------------------------
 	// ~ Constructor
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * @param string $pathname
+	 *
 	 */
-	public function __construct($pathname)
+	public function __construct()
 	{
-		$this->pathname = $pathname;
-		$this->scan();
 	}
 
 	//---------------------------------------------------------------------------------------------
@@ -43,139 +20,18 @@ class Scaffold
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * @param boolean $all	Include excluded resources
-	 * @return Foomo\Zugspitze\Scaffold\Library[]
+	 * @param string $projectLibraryId
+	 * @param string $implementationProjectId
+	 * @param string $implementationProjectApplicationId
+	 * @param string $packageName
+	 * @return Foomo\Zugspitze\Scaffold\ApplicationGenerator
 	 */
-	public function getLibraries($exclude=true)
+	public static function getApplicationGenerator($libraryProjectId, $implementationProjectId, $implementationProjectApplicationId, $packageName)
 	{
-		$data = array();
-		foreach ($this->libraries as $id => $library) {
-			if ($exclude && $library->exclude) continue;
-			$data[$id] = $library;
-		}
-		return $data;
-	}
-
-	/**
-	 * @param boolean $all	Include excluded resources
-	 * @return Foomo\Zugspitze\Scaffold\Project[]
-	 */
-	public function getProjects($libraryId, $exclude=true)
-	{
-		$data = array();
-		foreach ($this->projects[$libraryId] as $id => $project) {
-			if ($exclude && $project->exclude) continue;
-			$data[$id] = $project;
-		}
-		return $data;
-	}
-
-	/**
-	 * @param boolean $all	Include excluded resources
-	 * @return Foomo\Zugspitze\Scaffold\Application[]
-	 */
-	public function getApplications($projectId)
-	{
-		$data = array();
-		foreach ($this->applications[$projectId] as $id => $application) {
-			$data[$id] = $application;
-		}
-		return $data;
-	}
-
-	/**
-	 * @param string $libraryId
-	 * @param string $projectId
-	 * @param string $applicationId
-	 * @param string $package
-	 * @return Foomo\Zugspitze\Scaffold\Generator;
-	 */
-	public function getGenerator($libraryId, $projectId, $applicationId, $package)
-	{
-		$library = $this->libraries[$libraryId];
-		$project = $this->projects[$libraryId][$projectId];
-		$application = $this->applications[$projectId][$applicationId];
-		return new \Foomo\Zugspitze\Scaffold\Generator($library, $project, $application, $package);
-	}
-
-	//---------------------------------------------------------------------------------------------
-	// ~ Private methods
-	//---------------------------------------------------------------------------------------------
-
-	/**
-	 * Scans the vendor folder
-	 */
-	private function scan()
-	{
-		$dirs = \scandir($this->pathname);
-
-		foreach ($dirs as $dir) {
-			$pathname = $this->pathname . '/' . $dir;
-
-			if (\in_array($dir, array('.', '..', '.svn', '.git'))) continue;
-			if (!\is_dir($pathname)) continue;
-
-			# get config files
-			$config = $this->getConfig($pathname);
-
-			if ($config->type == \Foomo\Zugspitze\Scaffold\Config::TYPE_CORE_LIBRARY) {
-				# validate id
-				if (isset($this->libraries[$config->id])) throw new \Exception($config->id . ' already exists for "' . $config->name . '"!');
-				# create object
-				$this->libraries[$config->id] = new \Foomo\Zugspitze\Scaffold\Library(
-					$config->id,
-					$config->name,
-					$config->description,
-					$config->dependencies,
-					$config->exclude,
-					$pathname
-				);
-			} else if ($config->type == \Foomo\Zugspitze\Scaffold\Config::TYPE_IMPLEMENTATION_PROJECT) {
-				# create package
-				if (!isset($this->projects[$config->getLastDependencyId()])) $this->projects[$config->getLastDependencyId()] = array();
-				# validate id
-				if (isset($this->projects[$config->getLastDependencyId()][$config->id])) throw new \Exception($config->id . ' already exists!');
-				# create object
-				$this->projects[$config->getLastDependencyId()][$config->id] = new \Foomo\Zugspitze\Scaffold\Project(
-					$config->id,
-					$config->name,
-					$config->description,
-					$config->dependencies,
-					$config->exclude,
-					$pathname
-				);
-				# get applications
-				foreach ($config->applications as $applicationConfig) {
-					# create package
-					if (!isset($this->applications[$config->id])) $this->applications[$config->id] = array();
-					# validate id
-					if (isset($this->applications[$config->id][$applicationConfig->id])) throw new \Exception($applicationConfig->id . ' already exists!');
-					# create object
-					$this->applications[$config->id][$applicationConfig->id] = new \Foomo\Zugspitze\Scaffold\Application(
-						$applicationConfig->id,
-						$applicationConfig->name,
-						$applicationConfig->description,
-						$applicationConfig->package,
-						$applicationConfig->exclude,
-						$applicationConfig->sources,
-						$applicationConfig->externals,
-						$pathname
-					);
-				}
-			} else {
-				throw new \Exception('Unknown type "' . $config->type . '"');
-			}
-		}
-	}
-
-	/**
-	 * @param string $pathname
-	 * @return Foomo\Zugspitze\Scaffold\Config
-	 */
-	private function getConfig($pathname)
-	{
-		$xml = $pathname . '/resources/configs/zugspitze-scaffold.xml';
-		if ((!\file_exists($xml))) throw new \Exception('Vendor  ' . $pathname . ' does not contain a /resources/configs/zugspitze-scaffold.xml file!' . $xml);
-		return \Foomo\Zugspitze\Scaffold\Config::parseXML($xml);
+		$sources = Vendor::getSources();
+		$libraryProject = $sources->getLibraryProject($libraryProjectId);
+		$implementationProject = $sources->getImplementationProject($libraryProjectId, $implementationProjectId);
+		$implementationProjectApplication = $sources->getImplementationProjectApplication($implementationProjectId, $implementationProjectApplicationId);
+		return new \Foomo\Zugspitze\Scaffold\ApplicationGenerator($libraryProject, $implementationProject, $implementationProjectApplication, $packageName);
 	}
 }

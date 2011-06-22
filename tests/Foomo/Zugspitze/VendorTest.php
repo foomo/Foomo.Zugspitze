@@ -2,7 +2,7 @@
 
 namespace Foomo\Zugspitze;
 
-class ScaffoldTest extends \PHPUnit_Framework_TestCase
+class VendorTest extends \PHPUnit_Framework_TestCase
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Setup
@@ -16,9 +16,8 @@ class ScaffoldTest extends \PHPUnit_Framework_TestCase
 	// ~ Test methods
 	//---------------------------------------------------------------------------------------------
 
-	public function testGetApplicationGenerator()
+	public function testGetSources()
 	{
-		$generator = Scaffold::getApplicationGenerator(TestSuite::FLEX4_LIBRARY_ID, TestSuite::FLEX4_EXAMPLES_ID, TestSuite::FLEX4_EXAMPLES_APPLICATION_ID, TestSuite::TEST_PACKAGE);
-		$this->assertNotNull($generator);
+		$this->assertNotNull(Vendor::getSources());
 	}
 }

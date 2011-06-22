@@ -1,6 +1,6 @@
 <?php
 
-namespace Foomo\Zugspitze\Scaffold;
+namespace Foomo\Zugspitze\Vendor\Sources;
 
 class Application
 {
@@ -31,11 +31,11 @@ class Application
 	/**
 	 * @var string[]
 	 */
-	public $sources;	
+	public $sources = array();
 	/**
 	 * @var string[]
 	 */
-	public $externals;	
+	public $externals = array();
 	/**
 	 * @var string
 	 */
@@ -45,22 +45,28 @@ class Application
 	// ~ Constructor
 	//---------------------------------------------------------------------------------------------
 
-	public function __construct($id, $name, $description, $package, $exclude, $sources, $externals, $pathname)
+	/**
+	 * @param string $id
+	 * @param string $name
+	 * @param string $description
+	 * @param string $package
+	 * @param bool $exclude
+	 * @param string $pathname
+	 */
+	public function __construct($id, $name, $description, $package, $exclude, $pathname)
 	{
 		$this->id = $id;
 		$this->name = $name;
 		$this->description = $description;
 		$this->package = $package;
 		$this->exclude = $exclude;
-		$this->sources = $sources;
-		$this->externals = $externals;
 		$this->pathname = $pathname;
-	}	
+	}
 
 	//---------------------------------------------------------------------------------------------
 	// ~ Public methods
 	//---------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @return string[]
 	 */
@@ -76,7 +82,23 @@ class Application
 		}
 		return $files;
 	}
-	
+
+	/**
+	 * @param string $source
+	 */
+	public function addSource($source)
+	{
+		$this->sources[] = $source;
+	}
+
+	/**
+	 * @param string $external
+	 */
+	public function addExternal($external)
+	{
+		$this->externals[] = $external;
+	}
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Private methods
 	//---------------------------------------------------------------------------------------------
@@ -109,5 +131,49 @@ class Application
 		}
 		return $path;
 	}
-	
+
+	//---------------------------------------------------------------------------------------------
+	// ~ Public static methods
+	//---------------------------------------------------------------------------------------------
+
+	/**
+	 * @param SimpleXMLElement $xml
+	 * @param string $pathname
+	 * @return Foomo\Zugspitze\Scaffold\Config\Application
+	 */
+	public static function fromXML(\SimpleXMLElement $xml, $pathname)
+	{
+		$application = new self(
+				(string) $xml->id,
+				(string) $xml->name,
+				(string) $xml->description,
+				(string) $xml->package,
+				(isset($xml->exclude) && $xml->exclude == 'true'),
+				$pathname
+		);
+
+		# parse sources
+		if (isset($xml->sources->path)) {
+			if (\count($xml->sources->path) > 1) {
+				foreach ($xml->sources->path as $value) {
+					$application->addSource((string) $value);
+				}
+			} else {
+				$application->addSource((string) $xml->sources->path);
+			}
+		}
+
+		# parse externals
+		if (isset($xml->externals->path)) {
+			if (\count($xml->externals->path) > 1) {
+				foreach ($xml->externals->path as $value) {
+					$application->addExternal((string) $value);
+				}
+			} else {
+				$application->addExternal((string) $xml->externals->path);
+			}
+		}
+
+		return $application;
+	}
 }
