@@ -1,9 +1,9 @@
 <?php
 
-namespace Foomo\Zugspitze\Frontend;
+namespace Foomo\Zugspitze\ProxyUpdater\Frontend;
 
 /**
- * controller
+ *
  */
 class Controller
 {
@@ -12,9 +12,7 @@ class Controller
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * model
-	 *
-	 * @var Foomo\Zugspitze\Module\Frontend\Model
+	 * @var Foomo\Zugspitze\ProxyUpdater\Frontend\Model
 	 */
 	public $model;
 
@@ -22,11 +20,23 @@ class Controller
 	// ~ Action methods
 	//---------------------------------------------------------------------------------------------
 
+	/**
+	 * This method is executed by default
+	 */
 	public function actionDefault()
 	{
 	}
 
-	public function actionProxyUpdater()
+	/**
+	 * Renders an ant file and pumps it out
+	 */
+	public function actionGetAntBuildFile($configId)
 	{
+		$this->model->filename = \Foomo\Zugspitze\ProxyUpdater::generateAntBuildFile($configId);
+		if ($this->model->filename) {
+			\Foomo\MVC::abort();
+			\Foomo\Zugspitze\ProxyUpdater::streamAntBuildFile($this->model->filename);
+			exit;
+		}
 	}
 }

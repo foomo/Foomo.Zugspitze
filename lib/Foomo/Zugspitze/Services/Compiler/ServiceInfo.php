@@ -3,10 +3,16 @@
 namespace Foomo\Zugspitze\Services\Compiler;
 
 use Foomo\Services\ServiceDescription;
+
 /**
  * a service info
  */
-class ServiceInfo {
+class ServiceInfo
+{
+	//---------------------------------------------------------------------------------------------
+	// ~ Constants
+	//---------------------------------------------------------------------------------------------
+
 	/**
 	 * a rpc service at this point using AMF for transports
 	 *
@@ -17,6 +23,11 @@ class ServiceInfo {
 	 *
 	 */
 	const TYPE_SOAP = 'serviceTypeSoap';
+
+	//---------------------------------------------------------------------------------------------
+	// ~ Variables
+	//---------------------------------------------------------------------------------------------
+
 	/**
 	 * the uri on the host the service is running on - it can possibly contain ampersands, so do not forget to escape them, when you use them in a markup context
 	 *
@@ -77,6 +88,16 @@ class ServiceInfo {
 	 * @var string
 	 */
 	public $module;
+
+	//---------------------------------------------------------------------------------------------
+	// ~ Public static methods
+	//---------------------------------------------------------------------------------------------
+
+	/**
+	 * @param ServiceDescription $serviceDescription
+	 * @param string $module
+	 * @return Foomo\Zugspitze\Services\Compiler\ServiceInfo
+	 */
 	public static function fromServiceDescription(ServiceDescription $serviceDescription, $module)
 	{
 		$ret = new self;
@@ -84,7 +105,6 @@ class ServiceInfo {
 		foreach($ret as $k => $v) {
 			switch($k) {
 				case 'downloadUrl':
-//				case 'recompileUrl':
 				case 'documentationUrl':
 				case 'compileAndDownloadUrl':
 					$ret->$k = \Foomo\Utils::getServerUrl() . $serviceDescription->$k;

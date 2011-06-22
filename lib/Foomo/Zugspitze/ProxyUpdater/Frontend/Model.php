@@ -1,27 +1,20 @@
 <?php
 
-namespace Foomo\Zugspitze\Services\Compiler;
+namespace Foomo\Zugspitze\ProxyUpdater\Frontend;
 
 /**
- * services in a module
+ *
  */
-class ModuleInfo
+class Model
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Variables
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * name of the module
+	 * The generated ant build file
 	 *
 	 * @var string
 	 */
-	public $module;
-	/**
-	 * available services
-	 *
-	 * @var Foomo\Zugspitze\Services\Compiler\ServiceInfo[]
-	 */
-	public $services = array();
+	public $filename;
 }
-
