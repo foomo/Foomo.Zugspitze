@@ -2,21 +2,37 @@ $(document).ready(function() {
 
 	var defaultFormAction = $('#zugspitze-library-form').attr('action');
 
-	$('#zugspitze-library-form').submit(function(event){
+	$('#zugspitze-library-form').submit(function(event) {
 		var configId = $('select.flexConfigEntryList').val();
 		var url = defaultFormAction + '/' + configId;
 		$('#zugspitze-library-form').attr('action', url);
 		return true;
 	});
 
-	$('select.libraryConfigPresetList').change(function(event){
+	$('select.libraryConfigPresetList').change(function(event) {
 		var select = $(this);
 		selectLibraryProjects(select.val().split(','));
 	});
 
-	$('#zugspitze-library-form input.libraryProject').change(function(index, value){
+	$('#zugspitze-library-form input.libraryProject').change(function(index, value) {
+		updateDependencies();
 		updatePresetList();
 	});
+
+	function updateDependencies() {
+		var dependencies = [];
+		$('#zugspitze-library-form input.libraryProject:checked').each(function(index, value) {
+			dependencies = dependencies.concat($(value).attr('dependencies').split(','));
+		});
+
+		$('#zugspitze-library-form input.libraryProject').each(function(index, value) {
+			var input = $(this);
+			dependencies = dependencies.concat($(value).attr('dependencies').split(','));
+			var dependend = (jQuery.inArray(input.attr('value'), dependencies) >= 0);
+			if (dependend) input.prop('checked', dependend);
+			input.prop('disabled', dependend);
+		});
+	}
 
 	function updatePresetList() {
 		var selectedLibraryConfigIds = [];

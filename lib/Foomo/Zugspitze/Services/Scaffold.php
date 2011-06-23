@@ -50,6 +50,7 @@ class Scaffold
 	}
 
 	/**
+	 * @param string $libraryProjectId
 	 * @return Foomo\Zugspitze\Services\Scaffold\Project[]
 	 */
 	public function getProjects($libraryProjectId)
@@ -67,6 +68,7 @@ class Scaffold
 	}
 
 	/**
+	 * @param string $implementationProjectId
 	 * @return Foomo\Zugspitze\Services\Scaffold\Application[]
 	 */
 	public function getApplications($implementationProjectId)

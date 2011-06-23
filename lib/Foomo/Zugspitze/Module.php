@@ -42,7 +42,8 @@ class Module extends \Foomo\Modules\ModuleBase
 	public static function getResources()
 	{
 		return array(
-			\Foomo\Modules\Resource\Module::getResource('Foomo.Services', self::VERSION),
+			\Foomo\Modules\Resource\Module::getResource('Foomo.Flash', self::VERSION),
+			\Foomo\Modules\Resource\Config::getResource('Foomo.Flash', 'Foomo.Flash.flex'),
 			\Foomo\Modules\Resource\Config::getResource(self::NAME, LibraryGenerator\DomainConfig::NAME),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'tmp' . DIRECTORY_SEPARATOR . self::NAME),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'modules' . DIRECTORY_SEPARATOR . self::NAME)

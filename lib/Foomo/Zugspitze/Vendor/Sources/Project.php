@@ -8,7 +8,8 @@ class Project
 	// ~ Constants
 	//---------------------------------------------------------------------------------------------
 
-	const TYPE_LIBRARY_PROJECT			= 'Core Library';
+	const TYPE_LIBRARY_PROJECT			= 'Library Project';
+	const TYPE_CORE_LIBRARY_PROJECT		= 'Core Library Project';
 	const TYPE_IMPLEMENTATION_PROJECT	= 'Implementation Project';
 
 	//---------------------------------------------------------------------------------------------

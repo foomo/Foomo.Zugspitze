@@ -81,6 +81,21 @@ class Sources
 	}
 
 	/**
+	 * @param bool $exclude
+	 * @return Foomo\Zugspitze\Vendor\Sources\Project[]
+	 */
+	public function getLibraryProjectsByType($type, $exclude=true)
+	{
+		$data = array();
+		foreach ($this->libraryProjects as $projectId => $project) {
+			if ($type != $project->type) continue;
+			if ($exclude && $project->exclude) continue;
+			$data[$projectId] = $project;
+		}
+		return $data;
+	}
+
+	/**
 	 * @param string $libraryProjectId
 	 * @param string $implementationProjectId
 	 * @return Foomo\Zugspitze\Vendor\Sources\Project
@@ -180,6 +195,7 @@ class Sources
 
 		switch ($project->type) {
 			case Sources\Project::TYPE_LIBRARY_PROJECT:
+			case Sources\Project::TYPE_CORE_LIBRARY_PROJECT:
 				# validate id
 				if (isset($this->libraries[$project->id])) throw new \Exception($project->id . ' already exists for "' . $project->name . '"!');
 				# create object

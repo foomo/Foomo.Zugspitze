@@ -31,12 +31,26 @@ Select a configuration preset: <select class="libraryConfigPresetList">
 			</tr>
 		</thead>
 		<tbody>
+			<tr>
+				<td colspan="4">Core Library Projects</td>
+			</tr>
+<? foreach($model->coreLibraryProjects as $libraryProject): ?>
+			<tr>
+				<td><?= $view->escape($libraryProject->name) ?></td>
+				<td><?= $view->escape($libraryProject->description) ?></td>
+				<td><?= $view->escape(implode(', ', $libraryProject->dependencies)) ?></td>
+				<td><input class="libraryProject" value="<?= $libraryProject->id ?>" name="projectLibraryIds[]" type="checkbox" dependencies="<?= implode(',', $libraryProject->dependencies) ?>"></input></td>
+			</tr>
+<? endforeach; ?>
+			<tr>
+				<td colspan="4">Additional Library Projects</td>
+			</tr>
 <? foreach($model->libraryProjects as $libraryProject): ?>
 			<tr>
 				<td><?= $view->escape($libraryProject->name) ?></td>
 				<td><?= $view->escape($libraryProject->description) ?></td>
 				<td><?= $view->escape(implode(', ', $libraryProject->dependencies)) ?></td>
-				<td><input class="libraryProject" value="<?= $libraryProject->id ?>" name="projectLibraryIds[]" type="checkbox"></input></td>
+				<td><input class="libraryProject" value="<?= $libraryProject->id ?>" name="projectLibraryIds[]" type="checkbox" dependencies="<?= implode(',', $libraryProject->dependencies) ?>"></input></td>
 			</tr>
 <? endforeach; ?>
 		</tbody>

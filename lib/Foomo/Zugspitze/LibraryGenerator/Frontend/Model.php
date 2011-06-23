@@ -20,8 +20,11 @@ class Model
 	 */
 	public $presets;
 	/**
-	 *
 	 * @var Foomo\Zugspitze\Vendor\Sources\Project[]
 	 */
 	public $libraryProjects;
+	/**
+	 * @var Foomo\Zugspitze\Vendor\Sources\Project[]
+	 */
+	public $coreLibraryProjects;
 }

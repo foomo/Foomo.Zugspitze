@@ -28,7 +28,8 @@ class Controller
 	public function actionDefault()
 	{
 		$this->model->presets = \Foomo\Zugspitze\Module::getLibraryGeneratorConfig()->entries;
-		$this->model->libraryProjects = \Foomo\Zugspitze\Vendor::getSources()->getLibraryProjects(false);
+		$this->model->libraryProjects = \Foomo\Zugspitze\Vendor::getSources()->getLibraryProjectsByType(\Foomo\Zugspitze\Vendor\Sources\Project::TYPE_LIBRARY_PROJECT, false);
+		$this->model->coreLibraryProjects = \Foomo\Zugspitze\Vendor::getSources()->getLibraryProjectsByType(\Foomo\Zugspitze\Vendor\Sources\Project::TYPE_CORE_LIBRARY_PROJECT, false);
 	}
 
 	/**

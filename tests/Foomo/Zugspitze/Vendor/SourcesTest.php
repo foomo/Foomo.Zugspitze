@@ -44,11 +44,22 @@ class SourcesTest extends \PHPUnit_Framework_TestCase
 	{
 		$libraries = $this->sources->getLibraryProjects();
 		$this->assertEquals(\Foomo\Zugspitze\TestSuite::LIBRARY_COUNT, count($libraries));
-		//trigger_error(\var_export(array_keys($libraries), true));
 
-		$libraries = $this->sources->getLibraryProjects(false);
-		$this->assertEquals(\Foomo\Zugspitze\TestSuite::TOTAL_LIBRARY_COUNT, count($libraries));
-		//trigger_error(\var_export(array_keys($libraries), true));
+		$allLibraries = $this->sources->getLibraryProjects(false);
+		$this->assertEquals(\Foomo\Zugspitze\TestSuite::TOTAL_LIBRARY_COUNT, count($allLibraries));
+
+		$this->assertTrue(count($allLibraries) > count($libraries));
+	}
+
+	public function testGetLibraryProjectsByType()
+	{
+		$libraries = $this->sources->getLibraryProjectsByType(Sources\Project::TYPE_LIBRARY_PROJECT);
+		$this->assertTrue(count($libraries) > 0);
+
+		$allLibraries = $this->sources->getLibraryProjectsByType(Sources\Project::TYPE_CORE_LIBRARY_PROJECT);
+		$this->assertTrue(count($allLibraries) > 0);
+
+		$this->assertTrue(count($allLibraries) > count($libraries));
 	}
 
 	public function testGetImplementationProject()
