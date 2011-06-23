@@ -55,16 +55,15 @@ Select a configuration entry: <select class="flexConfigEntryList">
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td>name</td>
-							<td>type</td>
 							<td>version</td>
 							<td>location</td>
 						</tr>
 						<?php foreach($serviceDescriptions as $serviceDescription):  ?>
+						<? if ($serviceDescription->type != \Foomo\Services\ServiceDescription::TYPE_RPC_AMF) continue; ?>
 							<tr>
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 								<td><?php echo $serviceDescription->name; ?></td>
-								<td><?php echo $serviceDescription->type; ?></td>
 								<td><?php echo $serviceDescription->version; ?></td>
 								<td><a href="<?php echo \Foomo\Services\Utils::getRemoteServiceUrl($host) . htmlspecialchars($serviceDescription->documentationUrl) ?>"><?php echo parse_url($serviceDescription->documentationUrl, PHP_URL_PATH); ?></a></td>
 							</tr>

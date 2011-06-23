@@ -14,13 +14,15 @@ class ServiceInfo
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * a rpc service at this point using AMF for transports
-	 *
+	 * a rpc service using JSON for transports
 	 */
-	const TYPE_RPC = 'serviceTypeRPC';
+	const TYPE_RPC_JSON = 'serviceTypeRpcJson';
+	/**
+	 * a rpc service using AMF for transports
+	 */
+	const TYPE_RPC_AMF = 'serviceTypeRpcAmf';
 	/**
 	 * a soap service
-	 *
 	 */
 	const TYPE_SOAP = 'serviceTypeSoap';
 

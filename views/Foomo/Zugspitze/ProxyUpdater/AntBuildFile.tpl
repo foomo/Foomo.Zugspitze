@@ -19,6 +19,7 @@
 	<!--  host : <?= $host; ?> <?= \Foomo\Services\Utils::getServiceToolsUrl($host); ?> -->
 <?php foreach ($domainServices as $moduleName => $serviceDescriptions):	?>
 <?php foreach($serviceDescriptions as $serviceDescription): ?>
+<? if ($serviceDescription->type != \Foomo\Services\ServiceDescription::TYPE_RPC_AMF) continue; ?>
 	<target name="<?= ucfirst($moduleName) ?> :: <?= ucfirst($serviceDescription->name) ?> - <?= parse_url($serviceDescription->compileAndDownloadUrl, PHP_URL_PATH); ?>" description="<?=$host ?> : <?=$serviceDescription->name ?>">
 		<echo message="Generating client source code, compiling it and downloading swc:"/>
 		<echo message="Calling: <?php echo \Foomo\Services\Utils::getRemoteServiceUrl($host) . htmlspecialchars($serviceDescription->compileAndDownloadUrl); ?>/<?= $model->id ?>"/>
