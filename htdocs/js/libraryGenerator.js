@@ -12,6 +12,7 @@ $(document).ready(function() {
 	$('select.libraryConfigPresetList').change(function(event) {
 		var select = $(this);
 		selectLibraryProjects(select.val().split(','));
+		updateDependencies();
 	});
 
 	$('#zugspitze-library-form input.libraryProject').change(function(index, value) {
@@ -30,7 +31,8 @@ $(document).ready(function() {
 			dependencies = dependencies.concat($(value).attr('dependencies').split(','));
 			var dependend = (jQuery.inArray(input.attr('value'), dependencies) >= 0);
 			if (dependend) input.prop('checked', dependend);
-			input.prop('disabled', dependend);
+			input.attr('readonly', (dependend) ? 'readonly' : '');
+			input.css('opacity', (dependend) ? 0.5 : 1);
 		});
 	}
 

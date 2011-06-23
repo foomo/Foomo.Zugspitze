@@ -1,10 +1,4 @@
 
-[submodule "vendor/sources/org.foomo.zugspitze.air3"]
-	path = vendor/sources/org.foomo.zugspitze.air3
-	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air3.git
-[submodule "vendor/sources/org.foomo.zugspitze.air4.examples"]
-	path = vendor/sources/org.foomo.zugspitze.air4.examples
-	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air4Examples.git
 [submodule "vendor/sources/org.foomo.zugspitze.as3"]
 	path = vendor/sources/org.foomo.zugspitze.as3
 	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-as3.git
@@ -35,6 +29,18 @@
 [submodule "vendor/sources/org.foomo.zugspitze.services.upload.examples"]
 	path = vendor/sources/org.foomo.zugspitze.services.upload.examples
 	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-servicesUploadExamples.git
-[submodule "vendor/sources/org.foomo.zugspitze.air4"]
-	path = vendor/sources/org.foomo.zugspitze.air4
-	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air4.git
+[submodule "vendor/sources/org.foomo.zugspitze.flex4Mobile"]
+	path = vendor/sources/org.foomo.zugspitze.flex4Mobile
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-flex4Mobile.git
+[submodule "vendor/sources/org.foomo.zugspitze.flex4MobileExamples"]
+	path = vendor/sources/org.foomo.zugspitze.flex4MobileExamples
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-flex4MobileExamples.git
+[submodule "vendor/sources/org.foomo.zugspitze.air1"]
+	path = vendor/sources/org.foomo.zugspitze.air1
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air1.git
+[submodule "vendor/sources/org.foomo.zugspitze.air2"]
+	path = vendor/sources/org.foomo.zugspitze.air2
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air1.git
+[submodule "vendor/sources/org.foomo.zugspitze.air2.examples"]
+	path = vendor/sources/org.foomo.zugspitze.air2.examples
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air1.git

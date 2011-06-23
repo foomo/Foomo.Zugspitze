@@ -8,8 +8,8 @@ class TestSuite extends \Foomo\TestRunner\Suite
 	// ~ Constants
 	//---------------------------------------------------------------------------------------------
 
-	const LIBRARY_COUNT						= 5;
-	const TOTAL_LIBRARY_COUNT				= 8;
+	const LIBRARY_COUNT						= 6;
+	const TOTAL_LIBRARY_COUNT				= 9;
 	const CORE_LIBRARY_ID					= 'org.foomo.zugspitze.core';
 	const FLEX4_LIBRARY_ID					= 'org.foomo.zugspitze.flex4';
 	const FLEX4_EXAMPLES_ID					= 'org.foomo.zugspitze.flex4.examples';
