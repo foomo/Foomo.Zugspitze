@@ -40,7 +40,7 @@
 	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air1.git
 [submodule "vendor/sources/org.foomo.zugspitze.air2"]
 	path = vendor/sources/org.foomo.zugspitze.air2
-	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air1.git
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air2.git
 [submodule "vendor/sources/org.foomo.zugspitze.air2.examples"]
 	path = vendor/sources/org.foomo.zugspitze.air2.examples
-	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air1.git
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air2Examples.git

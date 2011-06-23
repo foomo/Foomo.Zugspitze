@@ -25,13 +25,13 @@ $(document).ready(function() {
 		$('#zugspitze-library-form input.libraryProject:checked').each(function(index, value) {
 			dependencies = dependencies.concat($(value).attr('dependencies').split(','));
 		});
+		array_unique(dependencies);
 
 		$('#zugspitze-library-form input.libraryProject').each(function(index, value) {
 			var input = $(this);
-			dependencies = dependencies.concat($(value).attr('dependencies').split(','));
 			var dependend = (jQuery.inArray(input.attr('value'), dependencies) >= 0);
 			if (dependend) input.prop('checked', dependend);
-			input.attr('readonly', (dependend) ? 'readonly' : '');
+			input.attr('readonly', (dependend) ? 'true' : '');
 			input.css('opacity', (dependend) ? 0.5 : 1);
 		});
 	}
@@ -73,4 +73,20 @@ $(document).ready(function() {
 		}
 		return true;
 	};
+
+	function array_unique(ar) {
+		if(ar.length && typeof ar!=='string'){
+			var sorter = {};
+			var out = [];
+			for(var i=0,j=ar.length;i<j;i++){
+			if(!sorter[ar[i]+typeof ar[i]]){
+				out.push(ar[i]);
+				sorter[ar[i]+typeof ar[i]]=true;
+			}
+		}
+	}
+	return out || ar;
+	}
+
+	updateDependencies();
 });
