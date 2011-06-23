@@ -8,8 +8,8 @@ class Project
 	// ~ Constants
 	//---------------------------------------------------------------------------------------------
 
-	const TYPE_LIBRARY_PROJECT = 'Core Library';
-	const TYPE_IMPLEMENTATION_PROJECT = 'Implementation Project';
+	const TYPE_LIBRARY_PROJECT			= 'Core Library';
+	const TYPE_IMPLEMENTATION_PROJECT	= 'Implementation Project';
 
 	//---------------------------------------------------------------------------------------------
 	// ~ Variables
@@ -107,7 +107,7 @@ class Project
 	/**
 	 * @param SimpleXMLElement $xml
 	 * @param string $pathname
-	 * @return Foomo\Zugspitze\Vendors\Project
+	 * @return Foomo\Zugspitze\Vendor\Sources\Project
 	 */
 	public static function fromXML(\SimpleXMLElement $xml, $pathname)
 	{

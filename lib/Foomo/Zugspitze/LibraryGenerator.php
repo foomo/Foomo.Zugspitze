@@ -2,7 +2,7 @@
 
 namespace Foomo\Zugspitze;
 
-class Library
+class LibraryGenerator
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Public static methods
@@ -26,6 +26,11 @@ class Library
 			$libraryProject = $sources->getLibraryProject($libraryProjectId);
 			$sourcePaths[] = $libraryProject->pathname . '/src';
 			$includePaths[] = $libraryProject->pathname . '/src';
+
+			$libraryConfig = $sources->getLibrary($libraryProjectId);
+			if (!$libraryConfig) continue;
+			$sourcePaths = array_unique(array_merge($sourcePaths, $libraryConfig->getSources(true)));
+			$externalLibs = array_unique(array_merge($externalLibs, $libraryConfig->getExternals(true)));
 		}
 
 		$swcFile = \Foomo\Flex\Utils::compileLibrarySWC($report, $sdk->sdkPath, $sourcePaths, $includePaths, $externalLibs);
@@ -51,7 +56,7 @@ class Library
 		$filename = self::getSWCFileName($libraryProjectIds);
 
 		if (!@rename($swcFile, $filename)) {
-			throw new Exception('created swc ' . $swcFile . ' coudl not be moved to ' . $filename, 1);
+			throw new Exception('created swc ' . $swcFile . ' could not be moved to ' . $filename, 1);
 		} else {
 			$report .= 'moving created swc ' . $swcFile . ' to ' . $filename . PHP_EOL;
 		}
@@ -63,6 +68,11 @@ class Library
 	// ~ Private static methods
 	//---------------------------------------------------------------------------------------------
 
+	/**
+	 *
+	 * @param string[] $libraryProjectIds
+	 * @return string
+	 */
 	private static function getSWCFileName($libraryProjectIds)
 	{
 		return Module::getTmpDir() . DIRECTORY_SEPARATOR . 'Zugspitze-' . substr(md5(implode('.', $libraryProjectIds)), 0, 10) .'.swc';

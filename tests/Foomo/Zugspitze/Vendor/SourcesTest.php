@@ -76,4 +76,16 @@ class SourcesTest extends \PHPUnit_Framework_TestCase
 		$this->assertNotEquals(0, count($applications));
 		#\var_dump($projects);
 	}
+
+	public function testGetLibrary()
+	{
+		$library = $this->sources->getLibrary(\Foomo\Zugspitze\TestSuite::SERVICES_UPLOAD_LIBRARY_ID);
+		$this->assertNotNull($library);
+	}
+
+	public function testGetLibraries()
+	{
+		$libraries = $this->sources->getLibraries();
+		$this->assertTrue(count($libraries) > 0);
+	}
 }

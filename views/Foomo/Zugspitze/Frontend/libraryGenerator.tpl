@@ -4,5 +4,5 @@
 ?>
 <div id="zugspitze" class="module">
 	<?= $view->partial('menu') ?>
-	<?= \Foomo\MVC::run('Foomo\\Zugspitze\\Library\\Frontend'); ?>
+	<?= \Foomo\MVC::run('Foomo\\Zugspitze\\LibraryGenerator\\Frontend'); ?>
 </div>

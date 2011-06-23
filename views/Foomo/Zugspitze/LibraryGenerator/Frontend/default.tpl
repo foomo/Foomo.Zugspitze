@@ -1,6 +1,6 @@
 <?php
 /* @var $view Foomo\MVC\View */
-/* @var $model Foomo\Zugspitze\Library\Frontend\Model */
+/* @var $model Foomo\Zugspitze\LibraryGenerator\Frontend\Model */
 /* @var $libraryProject Foomo\Zugspitze\Vendor\Sources\Project */
 ?>
 <h2>Zugspitze Library Generator</h2>

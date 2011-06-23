@@ -43,8 +43,7 @@ class Module extends \Foomo\Modules\ModuleBase
 	{
 		return array(
 			\Foomo\Modules\Resource\Module::getResource('Foomo.Services', self::VERSION),
-			\Foomo\Modules\Resource\Config::getResource('Foomo.Services', Library\DomainConfig::NAME),
-			\Foomo\Modules\Resource\Config::getResource('Foomo.Services', \Foomo\Flex\DomainConfig::NAME),
+			\Foomo\Modules\Resource\Config::getResource(self::NAME, LibraryGenerator\DomainConfig::NAME),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'tmp' . DIRECTORY_SEPARATOR . self::NAME),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'modules' . DIRECTORY_SEPARATOR . self::NAME)
 		);
@@ -106,10 +105,19 @@ class Module extends \Foomo\Modules\ModuleBase
 
 	/**
 	 *
-	 * @return Foomo\Zugspitze\Library\DomainConfig
+	 * @return Foomo\Zugspitze\LibraryGenerator\DomainConfig
 	 */
-	public static function getLibraryConfig()
+	public static function getLibraryGeneratorConfig()
 	{
-		return \Foomo\Config::getConf(self::NAME, Library\DomainConfig::NAME);
+		return \Foomo\Config::getConf(self::NAME, LibraryGenerator\DomainConfig::NAME);
+	}
+
+	/**
+	 *
+	 * @return Foomo\Flex\DomainConfig
+	 */
+	public static function getFlexConfig()
+	{
+		return \Foomo\Config::getConf(\Foomo\Flash\Module::NAME, \Foomo\Flex\DomainConfig::NAME);
 	}
 }

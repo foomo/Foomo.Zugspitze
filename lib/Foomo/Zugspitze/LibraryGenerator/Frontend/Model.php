@@ -1,27 +1,27 @@
 <?php
 
-namespace Foomo\Zugspitze\Library\DomainConfig;
+namespace Foomo\Zugspitze\LibraryGenerator\Frontend;
 
-class Entry
+/**
+ *
+ */
+class Model
 {
 	//---------------------------------------------------------------------------------------------
-	// ~ Public methods
+	// ~ Variables
 	//---------------------------------------------------------------------------------------------
 
 	/**
 	 * @var string
 	 */
-	public $id;
+	public $report;
 	/**
-	 * @var string
+	 * @var array
 	 */
-	public $name;
+	public $presets;
 	/**
-	 * @var string
+	 *
+	 * @var Foomo\Zugspitze\Vendor\Sources\Project[]
 	 */
-	public $description;
-	/**
-	 * @var string[]
-	 */
-	public $projectLibraryIds = array();
+	public $libraryProjects;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Foomo\Zugspitze\Library;
+namespace Foomo\Zugspitze\LibraryGenerator;
 
 class DomainConfig extends \Foomo\Config\AbstractConfig
 {
@@ -8,7 +8,7 @@ class DomainConfig extends \Foomo\Config\AbstractConfig
 	// ~ Constants
 	//---------------------------------------------------------------------------------------------
 
-	const NAME = 'Foomo.Zugspitze.Library.presets';
+	const NAME = 'Foomo.Zugspitze.libraryGenerator';
 
 	//---------------------------------------------------------------------------------------------
 	// ~ Variables
@@ -48,7 +48,7 @@ class DomainConfig extends \Foomo\Config\AbstractConfig
 
 	/**
 	 * @param string $id
-	 * @return Foomo\Zugspitze\Library\DomainConfigEntry
+	 * @return Foomo\Zugspitze\LibraryGenerator\DomainConfigEntry
 	 */
 	public function getEntry($id)
 	{
