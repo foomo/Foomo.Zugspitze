@@ -1,4 +1,3 @@
-
 [submodule "vendor/sources/org.foomo.zugspitze.as3"]
 	path = vendor/sources/org.foomo.zugspitze.as3
 	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-as3.git
@@ -20,9 +19,6 @@
 [submodule "vendor/sources/org.foomo.zugspitze.flex4.examples"]
 	path = vendor/sources/org.foomo.zugspitze.flex4.examples
 	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-flex4Examples.git
-[submodule "vendor/sources/org.foomo.zugspitze.services.core"]
-	path = vendor/sources/org.foomo.zugspitze.services.core
-	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-servicesCore.git
 [submodule "vendor/sources/org.foomo.zugspitze.services.upload"]
 	path = vendor/sources/org.foomo.zugspitze.services.upload
 	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-servicesUpload.git
@@ -44,3 +40,9 @@
 [submodule "vendor/sources/org.foomo.zugspitze.air2.examples"]
 	path = vendor/sources/org.foomo.zugspitze.air2.examples
 	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-air2Examples.git
+[submodule "vendor/sources/org.foomo.zugspitze.services.core.rpc"]
+	path = vendor/sources/org.foomo.zugspitze.services.core.rpc
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-servicesCoreRpc.git
+[submodule "vendor/sources/org.foomo.zugspitze.services.core.proxy"]
+	path = vendor/sources/org.foomo.zugspitze.services.core.proxy
+	url = ssh://git.bestbytes.net/var/git/Foomo.Zugspitze-servicesCoreProxy.git

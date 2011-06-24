@@ -14,7 +14,7 @@ class Controller
 	/**
 	 * model
 	 *
-	 * @var Foomo\Zugspitze\Module\Frontend\Model
+	 * @var Foomo\Zugspitze\Frontend\Model
 	 */
 	public $model;
 
