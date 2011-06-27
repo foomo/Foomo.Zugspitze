@@ -46,8 +46,6 @@ class SourcesTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(\Foomo\Zugspitze\TestSuite::LIBRARY_COUNT, count($libraries));
 
 		$allLibraries = $this->sources->getLibraryProjects(false);
-		$this->assertEquals(\Foomo\Zugspitze\TestSuite::TOTAL_LIBRARY_COUNT, count($allLibraries));
-
 		$this->assertTrue(count($allLibraries) > count($libraries));
 	}
 

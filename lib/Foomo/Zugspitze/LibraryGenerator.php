@@ -10,32 +10,41 @@ class LibraryGenerator
 
 	/**
 	 * @param string $libraryProjectIds
-	 * @param string $sdkId
+	 * @param string $configId
 	 * @param string $report
 	 * @return string SWC file name
 	 */
-	public static function compile($libraryProjectIds, $sdkId, &$report)
+	public static function compile($libraryProjectIds, $configId, &$report)
 	{
-		$sdk = \Foomo\Flex\DomainConfig::getInstance()->getEntry($sdkId);
-		$includePaths = $sdk->sourcePaths;
-		$sourcePaths = $sdk->sourcePaths;
-		$externalLibs = $sdk->externalLibs;
+		$flexConfigEntry = \Foomo\Flex\DomainConfig::getInstance()->getEntry($configId);
+
+		$compc = \Foomo\CliCall\Compc::create(
+					$flexConfigEntry->sdkPath,
+					$flexConfigEntry->sourcePaths,
+					$flexConfigEntry->externalLibs,
+					$flexConfigEntry->sourcePaths
+				);
+
+		$includePaths = $flexConfigEntry->sourcePaths;
+		$sourcePaths = $flexConfigEntry->sourcePaths;
+		$externalLibs = $flexConfigEntry->externalLibs;
 
 		$sources = Vendor::getSources();
 		foreach ($libraryProjectIds as $libraryProjectId) {
 			$libraryProject = $sources->getLibraryProject($libraryProjectId);
-			$sourcePaths[] = $libraryProject->pathname . '/src';
-			$includePaths[] = $libraryProject->pathname . '/src';
+			$compc->addSourcePaths(array($libraryProject->pathname . '/src'));
+			$compc->addIncludeSources(array($libraryProject->pathname . '/src'));
 
 			$libraryConfig = $sources->getLibrary($libraryProjectId);
 			if (!$libraryConfig) continue;
-			$sourcePaths = array_unique(array_merge($sourcePaths, $libraryConfig->getSources(true)));
-			$externalLibs = array_unique(array_merge($externalLibs, $libraryConfig->getExternals(true)));
+			$compc->addSourcePaths($libraryConfig->getSources(true));
+			$compc->addIncludeSources($libraryConfig->getSources(true));
+			$compc->addExternalLibraryPaths($libraryConfig->getExternals(true));
 		}
 
-		$swcFile = \Foomo\Flex\Utils::compileLibrarySWC($report, $sdk->sdkPath, $sourcePaths, $includePaths, $externalLibs);
+		$compc->compileSwc(self::getSWCFileName($libraryProjectIds));
 
-		if (!file_exists($swcFile)) {
+		if (!file_exists(self::getSWCFileName($libraryProjectIds))) {
 			throw new \Exception(
 					'Adobe Compc (Flex Component Compiler) failed to create the swc.' . PHP_EOL .
 					PHP_EOL .
@@ -53,15 +62,7 @@ class LibraryGenerator
 			);
 		}
 
-		$filename = self::getSWCFileName($libraryProjectIds);
-
-		if (!@rename($swcFile, $filename)) {
-			throw new Exception('created swc ' . $swcFile . ' could not be moved to ' . $filename, 1);
-		} else {
-			$report .= 'moving created swc ' . $swcFile . ' to ' . $filename . PHP_EOL;
-		}
-
-		return $filename;
+		return self::getSWCFileName($libraryProjectIds);
 	}
 
 	//---------------------------------------------------------------------------------------------

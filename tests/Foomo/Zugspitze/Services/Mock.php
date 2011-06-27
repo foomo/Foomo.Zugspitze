@@ -68,11 +68,21 @@ class Mock
 	}
 
 	/**
+	 * @param string[] $value
+	 * @return string[]
+	 */
+	public function getArray($value)
+	{
+		return $value;
+	}
+
+	/**
 	 * Returning complex type
 	 *
+	 * @param Foomo\Zugspitze\Services\Mock\ComplexType $value
 	 * @return Foomo\Zugspitze\Services\Mock\ComplexType
 	 */
-	public function getComplexType()
+	public function getComplexType($value)
 	{
 		return new Mock\ComplexType();
 	}

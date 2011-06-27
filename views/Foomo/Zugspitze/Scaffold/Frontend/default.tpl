@@ -1,3 +1,6 @@
+<?
+/* @var $view Foomo\MVC\View */
+?>
 <h2>Zugspitze Project Scaffolding</h2>
 
 <div id="ZSFormContainer">
