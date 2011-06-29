@@ -29,10 +29,10 @@ class Upload
 	public function chunkUpload($chunk, $totalLength, $uploadName, $uploadId=null)
 	{
 		if (empty($uploadId)) {
-			$filename = tempnam(\Foomo\Zugspitze\Upload::getTmpDir(), 'upload_');
+			$filename = tempnam(\Foomo\Zugspitze\Module::getTempDir(), 'upload_');
 			$fp = fopen($filename, 'w');
 		} else {
-			$filename = \Foomo\Zugspitze\Upload::getTmpDir() . DIRECTORY_SEPARATOR . basename($uploadId);
+			$filename = \Foomo\Zugspitze\Module::getTempDir() . DIRECTORY_SEPARATOR . basename($uploadId);
 			if (!file_exists($filename)) throw new \Exception('File ' . $filename . ' does not exist!');
 			$fp = fopen($filename, 'a');
 		}
@@ -71,4 +71,4 @@ class Upload
 		}
 		return true;
 	}
-}	
+}

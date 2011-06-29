@@ -5,7 +5,7 @@ namespace Foomo\Zugspitze;
 /**
  * zugspitze module
  */
-class Module extends \Foomo\Modules\ModuleBase
+class Module extends \Foomo\Modules\ModuleBase implements \Foomo\Frontend\ToolboxInterface
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Constants
@@ -14,7 +14,7 @@ class Module extends \Foomo\Modules\ModuleBase
 	const NAME = 'Foomo.Zugspitze';
 
 	//---------------------------------------------------------------------------------------------
-	// ~ Public static methods
+	// ~ Overriden methods
 	//---------------------------------------------------------------------------------------------
 
 	/**
@@ -43,69 +43,28 @@ class Module extends \Foomo\Modules\ModuleBase
 	{
 		return array(
 			\Foomo\Modules\Resource\Module::getResource('Foomo.Flash', self::VERSION),
-			\Foomo\Modules\Resource\Config::getResource('Foomo.Flash', 'Foomo.Flash.flex'),
+			// @todo enable
+			//\Foomo\Modules\Resource\Module::getResource('Foomo.Services', self::VERSION),
 			\Foomo\Modules\Resource\Config::getResource(self::NAME, 'Foomo.Zugspitze.libraryGenerator'),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'tmp' . DIRECTORY_SEPARATOR . self::NAME),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'modules' . DIRECTORY_SEPARATOR . self::NAME)
 		);
 	}
 
-	/**
-	 * @return string
-	 */
-	public static function getBaseDir()
-	{
-		return \Foomo\CORE_CONFIG_DIR_MODULES . DIRECTORY_SEPARATOR . self::NAME;
-	}
+	//---------------------------------------------------------------------------------------------
+	// ~ Public static methods
+	//---------------------------------------------------------------------------------------------
 
 	/**
 	 * @return string
 	 */
 	public static function getVendorDir()
 	{
-		return self::getBaseDir() . DIRECTORY_SEPARATOR . 'vendor';
+		return self::getBaseDir('vendor');
 	}
 
 	/**
-	 * @return string
-	 */
-	public static function getTmpDir()
-	{
-		$filename = 'tmp' . DIRECTORY_SEPARATOR . self::NAME;
-		self::validateResourceDir($filename);
-		return \Foomo\Config::getVarDir() . DIRECTORY_SEPARATOR . $filename;
-	}
-
-	/**
-	 * @return string
-	 */
-	public static function getLogDir()
-	{
-		return \Foomo\Config::getLogDir(self::NAME);
-	}
-
-	/**
-	 * @return string
-	 */
-	public static function getVarDir()
-	{
-		$filename = 'modules' . DIRECTORY_SEPARATOR . self::NAME;
-		self::validateResourceDir($filename);
-		return \Foomo\Config::getVarDir() . DIRECTORY_SEPARATOR . $filename;
-	}
-
-	/**
-	 * @param string $filename
-	 */
-	public static function validateResourceDir($filename)
-	{
-		$resource = \Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, $filename);
-		if (!$resource->resourceValid()) $resource->tryCreate();
-		if (!\file_exists(\Foomo\Config::getVarDir() . DIRECTORY_SEPARATOR . $filename)) throw new \Exception('Resource ' . $filename . ' does not exits');
-	}
-
-	/**
-	 *
+	 * @todo rename config
 	 * @return Foomo\Zugspitze\LibraryGenerator\DomainConfig
 	 */
 	public static function getLibraryGeneratorConfig()
@@ -113,12 +72,21 @@ class Module extends \Foomo\Modules\ModuleBase
 		return \Foomo\Config::getConf(self::NAME, LibraryGenerator\DomainConfig::NAME);
 	}
 
+	//---------------------------------------------------------------------------------------------
+	// ~ Toolbox interface methods
+	//---------------------------------------------------------------------------------------------
+
 	/**
-	 *
-	 * @return Foomo\Flex\DomainConfig
+	 * @internal
+	 * @return array
 	 */
-	public static function getFlexConfig()
+	public static function getMenu()
 	{
-		return \Foomo\Config::getConf(\Foomo\Flash\Module::NAME, \Foomo\Flex\DomainConfig::NAME);
+		return array(
+			'Root.Modules.Zugspitze.ApplicationGenerator' => array('name' => 'Application Generator', 'module' => self::NAME, 'app' => 'Foomo\\Zugspitze\\Scaffold\\Frontend', 'action' => 'default', 'target' => '_self'),
+			'Root.Modules.Zugspitze.LibraryGenerator' => array('name' => 'Library Generator', 'module' => self::NAME, 'app' => 'Foomo\\Zugspitze\\LibraryGenerator\\Frontend', 'action' => 'default', 'target' => '_self'),
+			'Root.Modules.Zugspitze.ProxynGenerator' => array('name' => 'Proxy Generator', 'module' => self::NAME, 'app' => 'Foomo\\Zugspitze\\ProxyGenerator\\Frontend', 'action' => 'default', 'target' => '_self'),
+			'Root.Modules.Zugspitze.ProxyUpdater' => array('name' => 'Proxy Updater', 'module' => self::NAME, 'app' => 'Foomo\\Zugspitze\\ProxyUpdater\\Frontend', 'action' => 'default', 'target' => '_self')
+		);
 	}
 }

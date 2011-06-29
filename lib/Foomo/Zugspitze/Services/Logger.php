@@ -29,7 +29,7 @@ class Logger
 		if ($report->screenshot && $report->screenshot->base64String) {
 
 			$fileBinary = base64_decode($report->screenshot->base64String);
-			$report->screenshot->file =  \Foomo\Zugspitze\Module::getTmpDir() . '/' . $report->id . '.jpg';
+			$report->screenshot->file =  \Foomo\Zugspitze\Module::getTempDir() . '/' . $report->id . '.jpg';
 
 			# save files
 			if (!\file_put_contents($report->screenshot->file, $fileBinary)) \trigger_error('Could not create file ' . $report->screenshot->file);

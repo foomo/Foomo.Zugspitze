@@ -62,7 +62,7 @@ class ApplicationGenerator
 
 		$this->packageName = $packageName;
 
-		$this->baseDir = \Foomo\Zugspitze\Module::getTmpDir(__CLASS__);
+		$this->baseDir = \Foomo\Zugspitze\Module::getTempDir();
 		$this->workingDir = $this->baseDir . DIRECTORY_SEPARATOR . $this->getWorkingDirName();
 	}
 

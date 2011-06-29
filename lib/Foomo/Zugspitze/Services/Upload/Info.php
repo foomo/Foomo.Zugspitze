@@ -7,7 +7,7 @@ namespace Foomo\Zugspitze\Services\Upload;
  *
  * be careful wit these data, they are user input
  */
-class Info 
+class Info
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Variables
@@ -27,7 +27,7 @@ class Info
 	public $mimeType = '';
 	/**
 	 * you may want to use self::moveTo() instead
-	 * 
+	 *
 	 * temporary location of the file, if you want to use it, then move it from here
 	 *
 	 * @var string
@@ -69,11 +69,11 @@ class Info
 	 * @var string
 	 */
 	public $uploadIp;
-	
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Constructor
 	//---------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * translate an upload array into a proper object
 	 *
@@ -93,7 +93,7 @@ class Info
 			$this->size       = $uploadArray['size'];
 		}
 	}
-	
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Public methods
 	//---------------------------------------------------------------------------------------------
@@ -101,13 +101,13 @@ class Info
 	/**
 	 *
 	 * @param string $pathname
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function moveTo($pathname)
 	{
 		return rename($this->tempName, $pathname);
 	}
-	
+
 	/**
 	 * @return int
 	 */
@@ -115,7 +115,7 @@ class Info
 	{
 		return file_put_contents(self::getFile($this->id), serialize($this));
 	}
-	
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Public static methods
 	//---------------------------------------------------------------------------------------------
@@ -141,6 +141,6 @@ class Info
 	 */
 	private static function getFile($uploadId)
 	{
-		return \Foomo\Zugspitze\Upload::getTmpDir(). DIRECTORY_SEPARATOR . 'upload-' . $uploadId . '.info.ser';
+		return \Foomo\Zugspitze\Module::getTempDir(). DIRECTORY_SEPARATOR . 'upload-' . $uploadId . '.info.ser';
 	}
 }

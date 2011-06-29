@@ -21,10 +21,4 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 		$config = Module::getLibraryGeneratorConfig();
 		$this->assertNotNull($config);
 	}
-
-	public function testGetFlexConfig()
-	{
-		$config = Module::getFlexConfig();
-		$this->assertNotNull($config);
-	}
 }

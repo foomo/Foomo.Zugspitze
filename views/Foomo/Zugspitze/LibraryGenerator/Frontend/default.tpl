@@ -6,7 +6,7 @@
 <h2>Zugspitze Library Generator</h2>
 
 Select a configuration entry: <select class="flexConfigEntryList">
-<? foreach(\Foomo\Flex\DomainConfig::getInstance()->entries as $entryId => $entry): ?>
+<? foreach(\Foomo\Flash\Module::getCompilerConfig()->entries as $entryId => $entry): ?>
 	<option value="<?= $entryId ?>"><?= $entry['name'] ?></option>
 <? endforeach; ?>
 </select>

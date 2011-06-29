@@ -16,7 +16,7 @@ class LibraryGenerator
 	 */
 	public static function compile($libraryProjectIds, $configId, &$report)
 	{
-		$flexConfigEntry = \Foomo\Flex\DomainConfig::getInstance()->getEntry($configId);
+		$flexConfigEntry = \Foomo\Flash\Module::getCompilerConfig()->getEntry($configId);
 
 		$compc = \Foomo\CliCall\Compc::create(
 					$flexConfigEntry->sdkPath,
@@ -76,6 +76,6 @@ class LibraryGenerator
 	 */
 	private static function getSWCFileName($libraryProjectIds)
 	{
-		return Module::getTmpDir() . DIRECTORY_SEPARATOR . 'Zugspitze-' . substr(md5(implode('.', $libraryProjectIds)), 0, 10) .'.swc';
+		return \Foomo\Zugspitze\Module::getTempDir() . DIRECTORY_SEPARATOR . 'Zugspitze-' . substr(md5(implode('.', $libraryProjectIds)), 0, 10) .'.swc';
 	}
 }

@@ -25,14 +25,14 @@ class Server
 		if (count($_FILES)) {
 			$ids = array();
 			foreach ($_FILES as $id => $uploadArray) {
-				$uploadInfo = tempnam(\Foomo\Zugspitze\Upload::getTmpDir(), 'upload-');
+				$uploadInfo = tempnam(\Foomo\Zugspitze\Module::getTempDir(), 'upload-');
 				$id = basename($uploadInfo);
 				move_uploaded_file($uploadArray['tmp_name'], $uploadInfo);
 				$uploadArray['tmp_name'] = $uploadInfo;
 				$upload = new \Foomo\Zugspitze\Services\Upload\Info($id, $uploadArray);
-				
+
 				if ($upload->error !== 0) trigger_error('there was an upload error ' . var_export($upload, true), E_USER_WARNING);
-				
+
 				$upload->uploadSessionId = session_id();
 				$upload->uploadIp = $_SERVER['REMOTE_ADDR'];
 				$upload->mimeType = \Foomo\Utils::guessMime($uploadInfo);
@@ -46,7 +46,7 @@ class Server
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private static function reflectUploadedFile()
 	{
