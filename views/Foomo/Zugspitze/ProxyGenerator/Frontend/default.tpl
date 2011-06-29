@@ -1,6 +1,7 @@
 <?php
 /* @var $view Foomo\MVC\View */
 /* @var $model Foomo\Zugspitze\ProxyGenerator\Frontend\Model */
+// @todo: add service endpoint
 \Foomo\HTMLDocument::getInstance()->addJavascripts(array(\Foomo\ROOT_HTTP . '/js/jquery-1.6.1.min.js'));
 \Foomo\HTMLDocument::getInstance()->addJavascript("
 	$(document).ready(function() {

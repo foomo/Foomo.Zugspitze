@@ -2,19 +2,19 @@
 
 namespace Foomo\Zugspitze\LibraryGenerator;
 
-class DomainConfig extends \Foomo\Config\AbstractConfig
+class Config extends \Foomo\Config\AbstractConfig
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Constants
 	//---------------------------------------------------------------------------------------------
 
-	const NAME = 'Foomo.Zugspitze.libraryGenerator';
+	const NAME = 'Foomo.Zugspitze.libraryGeneratorConfig';
 
 	//---------------------------------------------------------------------------------------------
 	// ~ Variables
 	//---------------------------------------------------------------------------------------------
 
-	public $entries = array(
+	public $presets = array(
 		'flex4' => array(
 			'name' => 'Flex 4 (Spark)',
 			'description' => '',
@@ -47,17 +47,22 @@ class DomainConfig extends \Foomo\Config\AbstractConfig
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * @param string $id
-	 * @return Foomo\Zugspitze\LibraryGenerator\DomainConfigEntry
+	 * @return Foomo\Zugspitze\LibraryGenerator\Config\Preset[]
 	 */
-	public function getEntry($id)
+	public function getPresets()
 	{
-		if (!isset($this->entries[$id])) throw new \Exception('Config ' . $id . ' does not exist! Check your Foomo.Flash.flex config!');
-		$entry = new DomainConfig\Entry();
-		$entry->id = $id;
-		$entry->name = $this->entries[$id]['name'];
-		$entry->description = $this->entries[$id]['description'];
-		$entry->projectLibraryIds = $this->entries[$id]['projectLibraryIds'];
-		return $entry;
+		$presets = array();
+		foreach ($this->presets as $id => $preset) $presets[] = $this->getPreset($id);
+		return $presets;
+	}
+
+	/**
+	 * @param string $id
+	 * @return Foomo\Zugspitze\LibraryGenerator\Config\Preset
+	 */
+	public function getPreset($id)
+	{
+		if (null == $preset = $this->presets[$id]) throw new \Exception('Preset ' . $id . ' does not exist! Check your ' . self::NAME . ' config!');
+		return Config\Preset::create($id, $preset['name'], $preset['description'], $preset['projectLibraryIds']);
 	}
 }

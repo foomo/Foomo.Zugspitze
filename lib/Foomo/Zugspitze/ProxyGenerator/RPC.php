@@ -133,6 +133,29 @@ class RPC extends \Foomo\Services\ProxyGenerator\ActionScript\AbstractGenerator
 		return implode(', ', $output);
 	}
 
+	/**
+	 * @param string $configId Flex config id to use
+	 * @return string
+	 */
+	public function compile($configId)
+	{
+		# add zugspitze swcs
+		$sources = \Foomo\Zugspitze\Vendor::getSources();
+		$zsExternals = array(
+			'org.foomo.zugspitze.core'					=> 'zugspitze_core.swc',
+			'org.foomo.zugspitze.services.core.rpc'		=> 'zugspitze_servicesCoreRpc.swc',
+			'org.foomo.zugspitze.services.core.proxy'	=> 'zugspitze_servicesCoreProxy.swc',
+		);
+		foreach ($zsExternals as $zsKey => $zsValue) {
+			$libraryProject = $sources->getLibraryProject($zsKey);
+			$zsLibrarySwc = $libraryProject->pathname . DIRECTORY_SEPARATOR . 'bin'  . DIRECTORY_SEPARATOR . $zsValue;
+			if (!\file_exists($zsLibrarySwc)) trigger_error ($zsLibrarySwc . ' does noet exist!');
+			$this->externalLibraryPaths[] = $zsLibrarySwc;
+		}
+
+		return parent::compile($configId);
+	}
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Protected methods
 	//---------------------------------------------------------------------------------------------

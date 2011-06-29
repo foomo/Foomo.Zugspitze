@@ -15,8 +15,8 @@ Select a configuration entry: <select class="flexConfigEntryList">
 
 Select a configuration preset: <select class="libraryConfigPresetList">
 	<option value="">User defined</option>
-<? foreach($model->presets as $entryId => $entry): ?>
-	<option value="<?= implode(',', $entry['projectLibraryIds']) ?>"><?= $entry['name'] ?></option>
+<? foreach($model->presets as $preset): ?>
+	<option value="<?= implode(',', $preset->projectLibraryIds) ?>"><?= $preset->name ?></option>
 <? endforeach; ?>
 </select>
 

@@ -16,7 +16,7 @@ class Model
 	 */
 	public $report;
 	/**
-	 * @var array
+	 * @var Foomo\Zugspitze\LibraryGenerator\Config\Preset[]
 	 */
 	public $presets;
 	/**

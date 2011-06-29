@@ -42,10 +42,10 @@ class Module extends \Foomo\Modules\ModuleBase implements \Foomo\Frontend\Toolbo
 	public static function getResources()
 	{
 		return array(
+			\Foomo\Modules\Resource\Module::getResource('Foomo', self::VERSION),
 			\Foomo\Modules\Resource\Module::getResource('Foomo.Flash', self::VERSION),
-			// @todo enable
-			//\Foomo\Modules\Resource\Module::getResource('Foomo.Services', self::VERSION),
-			\Foomo\Modules\Resource\Config::getResource(self::NAME, 'Foomo.Zugspitze.libraryGenerator'),
+			\Foomo\Modules\Resource\Module::getResource('Foomo.Services', self::VERSION),
+			\Foomo\Modules\Resource\Config::getResource(self::NAME, 'Foomo.Zugspitze.libraryGeneratorConfig'),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'tmp' . DIRECTORY_SEPARATOR . self::NAME),
 			\Foomo\Modules\Resource\Fs::getVarResource(\Foomo\Modules\Resource\Fs::TYPE_FOLDER, 'modules' . DIRECTORY_SEPARATOR . self::NAME)
 		);
@@ -65,11 +65,11 @@ class Module extends \Foomo\Modules\ModuleBase implements \Foomo\Frontend\Toolbo
 
 	/**
 	 * @todo rename config
-	 * @return Foomo\Zugspitze\LibraryGenerator\DomainConfig
+	 * @return Foomo\Zugspitze\LibraryGenerator\Config
 	 */
 	public static function getLibraryGeneratorConfig()
 	{
-		return \Foomo\Config::getConf(self::NAME, LibraryGenerator\DomainConfig::NAME);
+		return \Foomo\Config::getConf(self::NAME, LibraryGenerator\Config::NAME);
 	}
 
 	//---------------------------------------------------------------------------------------------
@@ -83,10 +83,10 @@ class Module extends \Foomo\Modules\ModuleBase implements \Foomo\Frontend\Toolbo
 	public static function getMenu()
 	{
 		return array(
-			'Root.Modules.Zugspitze.ApplicationGenerator' => array('name' => 'Application Generator', 'module' => self::NAME, 'app' => 'Foomo\\Zugspitze\\Scaffold\\Frontend', 'action' => 'default', 'target' => '_self'),
-			'Root.Modules.Zugspitze.LibraryGenerator' => array('name' => 'Library Generator', 'module' => self::NAME, 'app' => 'Foomo\\Zugspitze\\LibraryGenerator\\Frontend', 'action' => 'default', 'target' => '_self'),
-			'Root.Modules.Zugspitze.ProxynGenerator' => array('name' => 'Proxy Generator', 'module' => self::NAME, 'app' => 'Foomo\\Zugspitze\\ProxyGenerator\\Frontend', 'action' => 'default', 'target' => '_self'),
-			'Root.Modules.Zugspitze.ProxyUpdater' => array('name' => 'Proxy Updater', 'module' => self::NAME, 'app' => 'Foomo\\Zugspitze\\ProxyUpdater\\Frontend', 'action' => 'default', 'target' => '_self')
+			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.ApplicationGenerator', 'Application Generator', self::NAME, 'Foomo\\Zugspitze\\Scaffold\\Frontend'),
+			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.LibraryGenerator', 'Library Generator', self::NAME, 'Foomo\\Zugspitze\\LibraryGenerator\\Frontend'),
+			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.ProxynGenerator', 'Proxy Generator', self::NAME, 'Foomo\\Zugspitze\\ProxyGenerator\\Frontend'),
+			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.ProxyUpdater', 'Proxy Updater', self::NAME, 'Foomo\\Zugspitze\\ProxyUpdater\\Frontend'),
 		);
 	}
 }

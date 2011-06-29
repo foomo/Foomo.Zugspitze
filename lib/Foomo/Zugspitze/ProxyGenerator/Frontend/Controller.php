@@ -2,6 +2,9 @@
 
 namespace Foomo\Zugspitze\ProxyGenerator\Frontend;
 
+/**
+ * @todo: only allow compilation on dev or test env
+ */
 class Controller
 {
 	//---------------------------------------------------------------------------------------------
