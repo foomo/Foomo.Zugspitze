@@ -1,15 +1,37 @@
 <?php
 
+/*
+ * This file is part of the foomo Opensource Framework.
+ *
+ * The foomo Opensource Framework is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License as
+ * published  by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * The foomo Opensource Framework is distributed in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with
+ * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 namespace Foomo\Zugspitze;
 
-class UploadTest extends \PHPUnit_Framework_TestCase 
+/**
+ * @link www.foomo.org
+ * @license www.gnu.org/licenses/lgpl.txt
+ * @author jan <jan@bestbytes.de>
+ */
+class UploadTest extends \PHPUnit_Framework_TestCase
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Constants
 	//---------------------------------------------------------------------------------------------
 
 	const SESSION_ID = 'UPLOAD-ID-SESSION';
-	
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Variables
 	//---------------------------------------------------------------------------------------------
@@ -113,7 +135,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @param array $files
-	 * @return type 
+	 * @return type
 	 */
 	private function postFiles($files)
 	{
@@ -129,7 +151,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
 		\curl_close($ch);
 		return $postResult;
 	}
-	
+
 	/**
 	 * helper function upload a file in a session and return the curl handle with the session
 	 *

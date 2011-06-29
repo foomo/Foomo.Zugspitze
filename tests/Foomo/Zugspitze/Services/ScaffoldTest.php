@@ -1,16 +1,38 @@
 <?php
 
+/*
+ * This file is part of the foomo Opensource Framework.
+ *
+ * The foomo Opensource Framework is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License as
+ * published  by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * The foomo Opensource Framework is distributed in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with
+ * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 namespace Foomo\Zugspitze\Services;
 
-class ScaffoldTest extends \PHPUnit_Framework_TestCase 
+/**
+ * @link www.foomo.org
+ * @license www.gnu.org/licenses/lgpl.txt
+ * @author franklin <franklin@weareinteractive.com>
+ */
+class ScaffoldTest extends \PHPUnit_Framework_TestCase
 {
 	//---------------------------------------------------------------------------------------------
 	// ~ Constants
 	//---------------------------------------------------------------------------------------------
-	
+
 	const FLEX4_EXAMPLES_PROJECT_ID			= 'org.foomo.zugspitze.flex4.examples';
 	const FLEX4_LIBRARY_ID					= 'org.foomo.zugspitze.flex4';
-	
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Variables
 	//---------------------------------------------------------------------------------------------
@@ -19,16 +41,16 @@ class ScaffoldTest extends \PHPUnit_Framework_TestCase
 	 * @var Foomo\Zugspitze\Services\Scaffold
 	 */
 	private $service;
-	
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Setup
 	//---------------------------------------------------------------------------------------------
-	
+
 	public function setUp()
 	{
 		$this->service = new \Foomo\Zugspitze\Services\Scaffold();
 	}
-	
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Test methods
 	//---------------------------------------------------------------------------------------------
@@ -46,7 +68,7 @@ class ScaffoldTest extends \PHPUnit_Framework_TestCase
 		$this->assertNotEquals(0, count($projects));
 		#\var_dump($projects);
 	}
-	
+
 	public function testGetApplications()
 	{
 		$applications = $this->service->getApplications(self::FLEX4_EXAMPLES_PROJECT_ID);

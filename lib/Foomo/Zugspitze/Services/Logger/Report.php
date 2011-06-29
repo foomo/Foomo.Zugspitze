@@ -1,6 +1,29 @@
 <?php
+
+/*
+ * This file is part of the foomo Opensource Framework.
+ *
+ * The foomo Opensource Framework is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License as
+ * published  by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * The foomo Opensource Framework is distributed in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with
+ * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 namespace Foomo\Zugspitze\Services\Logger;
 
+/**
+ * @link www.foomo.org
+ * @license www.gnu.org/licenses/lgpl.txt
+ * @author franklin <franklin@weareinteractive.com>
+ */
 class Report
 {
 	//---------------------------------------------------------------------------------------------
@@ -50,7 +73,7 @@ class Report
 	/**
 	 * Set if included in logging setttings | LEVEL_*
 	 *
-	 * @var integer 
+	 * @var integer
 	 */
     public $level;
 	/**
@@ -62,13 +85,13 @@ class Report
 	/**
 	 * Set if included in logging setttings | DD-MM-YYY
 	 *
-	 * @var string 
+	 * @var string
 	 */
     public $date;
 	/**
 	 * Set if included in logging setttings | HH:MM:SS
 	 *
-	 * @var string 
+	 * @var string
 	 */
     public $time;
 	/**
@@ -96,7 +119,7 @@ class Report
 	 */
     public $capabilities;
 	/**
-	 * The amount of memory (in bytes) currently in use by Adobe¬Æ Flash¬Æ Player or Adobe¬Æ AIR¬Æ.
+	 * The amount of memory (in bytes) currently in use by Adobe¬¨√Ü Flash¬¨√Ü Player or Adobe¬¨√Ü AIR¬¨√Ü.
 	 *
 	 * @var integer
 	 */
