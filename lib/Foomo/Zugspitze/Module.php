@@ -102,10 +102,10 @@ class Module extends \Foomo\Modules\ModuleBase implements \Foomo\Frontend\Toolbo
 	public static function getMenu()
 	{
 		return array(
-			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.ApplicationGenerator', 'Application Generator', self::NAME, 'Foomo\\Zugspitze\\Scaffold\\Frontend'),
-			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.LibraryGenerator', 'Library Generator', self::NAME, 'Foomo\\Zugspitze\\LibraryGenerator\\Frontend'),
-			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.ProxynGenerator', 'Proxy Generator', self::NAME, 'Foomo\\Zugspitze\\ProxyGenerator\\Frontend'),
-			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.ProxyUpdater', 'Proxy Updater', self::NAME, 'Foomo\\Zugspitze\\ProxyUpdater\\Frontend'),
+			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.ProxyGenerator', 'Services', self::NAME, 'Foomo.Zugspitze.ProxyGenerator'),
+			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.ProxyUpdater', 'Services Updater', self::NAME, 'Foomo.Zugspitze.ProxyUpdater'),
+			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.LibraryGenerator', 'Library Generator', self::NAME, 'Foomo.Zugspitze.LibraryGenerator'),
+			\Foomo\Frontend\ToolboxConfig\MenuEntry::create('Root.Modules.Zugspitze.ApplicationGenerator', 'Application Generator', self::NAME, 'Foomo.Zugspitze.Scaffold'),
 		);
 	}
 }
