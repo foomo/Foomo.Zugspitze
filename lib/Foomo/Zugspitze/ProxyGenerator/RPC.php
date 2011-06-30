@@ -24,10 +24,11 @@ use Foomo\Flash\ActionScript\PHPUtils;
 
 /**
  * renders AS RPC Proxy clients rocking Zugspitze
- * 
+ *
  * @link www.foomo.org
  * @license www.gnu.org/licenses/lgpl.txt
  * @author jan <jan@bestbytes.de>
+ * @author franklin <franklin@weareinteractive.com>
  */
 class RPC extends \Foomo\Services\ProxyGenerator\ActionScript\AbstractGenerator
 {

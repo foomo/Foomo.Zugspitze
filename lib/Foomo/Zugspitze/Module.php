@@ -97,7 +97,6 @@ class Module extends \Foomo\Modules\ModuleBase implements \Foomo\Frontend\Toolbo
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * @internal
 	 * @return array
 	 */
 	public static function getMenu()
