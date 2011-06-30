@@ -1,0 +1,1 @@
+<?= \Foomo\MVC::run('Foomo\\Zugspitze\\LibraryGenerator\\Frontend'); ?>

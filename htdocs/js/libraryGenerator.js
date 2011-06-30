@@ -1,12 +1,22 @@
 $(document).ready(function() {
 
-	var defaultFormAction = $('#zugspitze-library-form').attr('action');
+	var downloadSwcAction = $('#zugspitze-library-form').attr('actionDownloadSwc');
+	var downloadAntAction = $('#zugspitze-library-form').attr('actionDownloadAnt');
 
-	$('#zugspitze-library-form').submit(function(event) {
+	$('#download-swc-button').click(function(event) {
+		event.preventDefault();
 		var configId = $('select.flexConfigEntryList').val();
-		var url = defaultFormAction + '/' + configId;
+		var url = downloadSwcAction + '/' + configId;
 		$('#zugspitze-library-form').attr('action', url);
-		return true;
+		$('#zugspitze-library-form').submit();
+	});
+
+	$('#download-ant-button').click(function(event) {
+		event.preventDefault();
+		var configId = $('select.flexConfigEntryList').val();
+		var url = downloadAntAction + '/' + configId;
+		$('#zugspitze-library-form').attr('action', url);
+		$('#zugspitze-library-form').submit();
 	});
 
 	$('select.libraryConfigPresetList').change(function(event) {

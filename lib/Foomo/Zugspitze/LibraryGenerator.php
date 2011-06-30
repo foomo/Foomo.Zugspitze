@@ -87,6 +87,18 @@ class LibraryGenerator
 		return self::getSWCFileName($libraryProjectIds);
 	}
 
+	/**
+	 * @return string Filename
+	 */
+	public static function generateAntBuildFile($libraryProjectIds, $configId, &$report)
+	{
+		$sdk = \Foomo\Flash\Module::getCompilerConfig()->getEntry($configId);
+		$view = Module::getView('Foomo\\Zugspitze\\LibraryGenerator', 'LibraryGenerator/AntBuildFile', array('configId' => $sdk->id, 'libraryProjectIds' => $libraryProjectIds));
+		$fileName = tempnam(\Foomo\Zugspitze\Module::getTempDir(), 'libraryGeneratorAntBuildFile-');
+		file_put_contents($fileName, $view->render());
+		return $fileName;
+	}
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Private static methods
 	//---------------------------------------------------------------------------------------------

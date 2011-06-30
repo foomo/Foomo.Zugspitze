@@ -20,7 +20,7 @@ Select a configuration preset: <select class="libraryConfigPresetList">
 <? endforeach; ?>
 </select>
 
-<form id="zugspitze-library-form" method="POST" action="<?= $view->url('compileLibrary') ?>">
+<form id="zugspitze-library-form" method="POST" actionDownloadSwc="<?= $view->url('compileLibrary') ?>"  actionDownloadAnt="<?= $view->url('getAntBuildFile') ?>">
 	<table>
 		<thead>
 			<tr>
@@ -56,6 +56,9 @@ Select a configuration preset: <select class="libraryConfigPresetList">
 		</tbody>
 	</table>
 
-	<p><input type="submit" value="generate"></p>
+	<p>
+		<input id="download-swc-button" type="submit" value="Download SWC">
+		<input id="download-ant-button" type="submit" value="Download ANT File">
+	</p>
 
 </form>

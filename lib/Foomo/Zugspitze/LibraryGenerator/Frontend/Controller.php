@@ -57,11 +57,25 @@ class Controller
 	public function actionCompileLibrary($sdkId)
 	{
 		$projectLibraryIds = $_POST['projectLibraryIds'];
-		if (is_null($projectLibraryIds) || empty($projectLibraryIds)) \Foomo\MVC::redirect ('default');
+		if (is_null($projectLibraryIds) || empty($projectLibraryIds)) \Foomo\MVC::redirect('default');
 		$filename = \Foomo\Zugspitze\LibraryGenerator::compile($projectLibraryIds, $sdkId, $this->model->report);
 		if (file_exists($filename)) {
 			\Foomo\MVC::abort();
 			\Foomo\Utils::streamFile($filename, 'Zugspitze.swc', 'application/octet-stream', true);
+			exit;
+		}
+	}
+
+	/**
+	 * Renders an ant file and pumps it out
+	 */
+	public function actionGetAntBuildFile($sdkId)
+	{
+		$projectLibraryIds = $_POST['projectLibraryIds'];
+		$filename = \Foomo\Zugspitze\LibraryGenerator::generateAntBuildFile($projectLibraryIds, $sdkId, $this->model->report);
+		if ($filename) {
+			\Foomo\MVC::abort();
+			\Foomo\Utils::streamFile($filename, 'Zugspitze-update.xml', 'text/xml', true);
 			exit;
 		}
 	}

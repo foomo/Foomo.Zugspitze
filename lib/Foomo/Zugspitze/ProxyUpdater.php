@@ -37,7 +37,7 @@ class ProxyUpdater
 	{
 		$sdk = \Foomo\Flash\Module::getCompilerConfig()->getEntry($configId);
 		$view = Module::getView('Foomo\\Zugspitze\\ProxyUpdater', 'ProxyUpdater/AntBuildFile', $sdk);
-		$fileName = tempnam(\Foomo\Zugspitze\Module::getTempDir(), 'proxyUpdater-');
+		$fileName = tempnam(\Foomo\Zugspitze\Module::getTempDir(), 'proxyUpdaterAntBuildFile-');
 		file_put_contents($fileName, $view->render());
 		return $fileName;
 	}
