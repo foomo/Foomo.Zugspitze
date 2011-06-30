@@ -48,6 +48,13 @@ class Controller
 	}
 
 	/**
+	 *
+	 */
+	public function actionReport()
+	{
+	}
+
+	/**
 	 * @param string $serviceUrl
 	 */
 	public function actionGenerateASClient($serviceUrl)
@@ -56,7 +63,6 @@ class Controller
 	}
 
 	/**
-	 *
 	 * @param string $serviceUrl
 	 */
 	public function actionGetASClientAsTgz($serviceUrl)
@@ -75,7 +81,6 @@ class Controller
 	}
 
 	/**
-	 *
 	 * @param string $serviceUrl
 	 * @param string $configId
 	 */
