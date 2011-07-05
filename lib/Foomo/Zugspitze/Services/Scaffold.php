@@ -60,11 +60,12 @@ class Scaffold
 	public function getLibraries()
 	{
 		$result = array();
-		foreach (\Foomo\Zugspitze\Vendor::getSources()->getLibraryProjects() as $project) {
-			/* @var  $library Foomo\Zugspitze\Vendor\Sources\Project */
+		foreach (\Foomo\Flash\Vendor::getSources()->getLibraryProjects() as $project) {
+			/* @var  $library Foomo\Flash\Vendor\Sources\Project */
 			$obj = new \Foomo\Zugspitze\Services\Scaffold\Library();
 			$obj->id = $project->id;
 			$obj->name = $project->name;
+			$obj->group = $project->group;
 			$obj->description = $project->description;
 			$result[] = $obj;
 		}
@@ -78,11 +79,12 @@ class Scaffold
 	public function getProjects($libraryProjectId)
 	{
 		$result = array();
-		foreach (\Foomo\Zugspitze\Vendor::getSources()->getImplementationProjects($libraryProjectId) as $project) {
-			/* @var  $library Foomo\Zugspitze\Vendor\Sources\Project */
+		foreach (\Foomo\Flash\Vendor::getSources()->getImplementationProjects($libraryProjectId) as $project) {
+			/* @var $library Foomo\Flash\Vendor\Sources\Project */
 			$obj = new \Foomo\Zugspitze\Services\Scaffold\Project();
 			$obj->id = $project->id;
 			$obj->name = $project->name;
+			$obj->group = $project->group;
 			$obj->description = $project->description;
 			$result[] = $obj;
 		}
@@ -96,8 +98,8 @@ class Scaffold
 	public function getApplications($implementationProjectId)
 	{
 		$result = array();
-		foreach (\Foomo\Zugspitze\Vendor::getSources()->getImplementationProjectApplications($implementationProjectId) as $application) {
-			/* @var  $library Foomo\Zugspitze\Vendor\Sources\Application */
+		foreach (\Foomo\Flash\Vendor::getSources()->getImplementationProjectApplications($implementationProjectId) as $application) {
+			/* @var  $library Foomo\Flash\Vendor\Sources\Application */
 			$obj = new \Foomo\Zugspitze\Services\Scaffold\Application();
 			$obj->id = $application->id;
 			$obj->name = $application->name;

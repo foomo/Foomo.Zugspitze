@@ -90,6 +90,19 @@ class Controller
 		if ($this->model->report->success) $this->streamSwc();
 	}
 
+	/**
+	 * Renders an ant file and pumps it out
+	 */
+	public function actionGetAntBuildFile($configId)
+	{
+		$filename = \Foomo\Zugspitze\ProxyUpdater::generateAntBuildFile($configId);
+		if ($filename) {
+			\Foomo\MVC::abort();
+			\Foomo\Zugspitze\ProxyUpdater::streamAntBuildFile($filename);
+			exit;
+		}
+	}
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Private methods
 	//---------------------------------------------------------------------------------------------

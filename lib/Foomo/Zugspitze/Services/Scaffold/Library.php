@@ -37,6 +37,10 @@ class Library
 	/**
 	 * @var string
 	 */
+	public $group;
+	/**
+	 * @var string
+	 */
 	public $name;
 	/**
 	 * @var string

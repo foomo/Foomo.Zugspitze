@@ -50,7 +50,7 @@ class Scaffold
 	 */
 	public static function getApplicationGenerator($libraryProjectId, $implementationProjectId, $implementationProjectApplicationId, $packageName)
 	{
-		$sources = Vendor::getSources();
+		$sources = \Foomo\Flash\Vendor::getSources();
 		$libraryProject = $sources->getLibraryProject($libraryProjectId);
 		$implementationProject = $sources->getImplementationProject($libraryProjectId, $implementationProjectId);
 		$implementationProjectApplication = $sources->getImplementationProjectApplication($implementationProjectId, $implementationProjectApplicationId);

@@ -6,7 +6,7 @@
 \Foomo\HTMLDocument::getInstance()->addJavascript("
 	$(document).ready(function() {
 
-		$('td.flexSDKLink a').click(function(event){
+		$('a').click(function(event){
 			event.preventDefault();
 			var configId = $('select.flexConfigEntryList').val();
 			var url = $(this).attr('href') + '/' + configId;
@@ -23,7 +23,7 @@ Select a configuration entry: <select class="flexConfigEntryList">
 </select>
 <table>
 <? foreach(\Foomo\Services\Utils::getAllServices() as $moduleName => $serviceUrls): ?>
-	<? if(count($serviceUrls) > 0): ?>
+	<? if (count($serviceUrls) > 0): ?>
 		<? $serviceRoot = \Foomo\ROOT_HTTP . '/modules/' . $moduleName . '/services'; ?>
 		<tr>
 			<td><h2 title="<?= $serviceRoot ?>"><?= $moduleName ?></h2></td>
@@ -34,10 +34,11 @@ Select a configuration entry: <select class="flexConfigEntryList">
 			<td><?= substr($serviceUrl, strlen($serviceRoot)+1) ?></td>
 			<td><?= $view->link('generate', 'generateASClient', array('serviceUrl' => $fullServiceUrl)) ?></td>
 			<td><?= $view->link('download tgz', 'getASClientAsTgz', array('serviceUrl' => $fullServiceUrl)) ?></td>
-			<td class="flexSDKLink"><?= $view->link('compile', 'compileASClient', array('serviceUrl' => $fullServiceUrl)) ?></td>
-			<td class="flexSDKLink"><?= $view->link('download swc', 'getASClientAsSwc', array('serviceUrl' => $fullServiceUrl)) ?></td>
+			<td><?= $view->link('compile', 'compileASClient', array('serviceUrl' => $fullServiceUrl), array('class' => 'flexSDKLink')) ?></td>
+			<td><?= $view->link('download swc', 'getASClientAsSwc', array('serviceUrl' => $fullServiceUrl), array('class' => 'flexSDKLink')) ?></td>
 		</tr>
 		<? endforeach; ?>
 	<? endif; ?>
 <? endforeach; ?>
 </table>
+<?= $view->link('Download Ant Build File', 'getAntBuildFile', array(), array('class' => 'flexSDKLink')); ?>

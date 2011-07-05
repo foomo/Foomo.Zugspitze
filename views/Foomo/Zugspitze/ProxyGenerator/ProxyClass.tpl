@@ -4,15 +4,36 @@
 /* @var $view Foomo\MVC\View */
 use Foomo\Flash\ActionScript\PHPUtils;
 use Foomo\Flash\ActionScript\ViewHelper;
-?>package <?= $model->myPackage . PHP_EOL; ?>
+?>/*
+ * This file is part of the foomo Opensource Framework.
+ *
+ * The foomo Opensource Framework is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License as
+ * published  by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * The foomo Opensource Framework is distributed in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with
+ * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
+ */
+package <?= $model->myPackage . PHP_EOL; ?>
 {
 	import org.foomo.zugspitze.zugspitze_internal;
-	import org.foomo.zugspitze.services.core.proxy.Proxy;
+	import org.foomo.zugspitze.rpc.Proxy;
 <? foreach($model->operations as $operation): ?>
 	import <?= $model->myPackage ?>.calls.<?=ViewHelper::toClassName($operation->name, 'Call') ?>;
 <? endforeach; ?>
 <?= $view->indent($model->getAllClientClassImports(), 1) . PHP_EOL; ?>
 
+	/**
+	 * @link    http://www.foomo.org
+	 * @license http://www.gnu.org/licenses/lgpl.txt
+	 * @author  franklin <franklin@weareinteractive.com>
+	 */
 	public class <?= PHPUtils::getASType($model->proxyClassName) ?> extends Proxy
 	{
 		//-----------------------------------------------------------------------------------------
@@ -23,21 +44,12 @@ use Foomo\Flash\ActionScript\ViewHelper;
 		public static const CLASS_NAME:String 	= '<?= str_replace('\\', '\\\\', $model->serviceName); ?>';
 
 		//-----------------------------------------------------------------------------------------
-		// ~ Static variables
-		//-----------------------------------------------------------------------------------------
-
-		/**
-		 *
-		 */
-		public static var defaultEndPoint:String = '<?= Foomo\Utils::getServerUrl() . \Foomo\MVC::getCurrentUrlHandler()->renderMethodUrl('serve') ?>';
-
-		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function <?= PHPUtils::getASType($model->proxyClassName) ?>(endPoint:String=null)
+		public function <?= PHPUtils::getASType($model->proxyClassName) ?>(endPoint:String)
 		{
-			super((endPoint != null) ? endPoint : defaultEndPoint, CLASS_NAME, VERSION);
+			super(endPoint, CLASS_NAME, VERSION);
 		}
 
 		//-----------------------------------------------------------------------------------------

@@ -162,11 +162,12 @@ class RPC extends \Foomo\Services\ProxyGenerator\ActionScript\AbstractGenerator
 	public function compile($configId)
 	{
 		# add zugspitze swcs
-		$sources = \Foomo\Zugspitze\Vendor::getSources();
+		$sources = \Foomo\Flash\Vendor::getSources();
 		$zsExternals = array(
-			'org.foomo.zugspitze.core'					=> 'zugspitze_core.swc',
-			'org.foomo.zugspitze.services.core.rpc'		=> 'zugspitze_servicesCoreRpc.swc',
-			'org.foomo.zugspitze.services.core.proxy'	=> 'zugspitze_servicesCoreProxy.swc',
+			'org.foomo.core'			=> 'foomo_core.swc',
+			'org.foomo.rpc'				=> 'foomo_rpc.swc',
+			'org.foomo.zugspitze.core'	=> 'zugspitze_core.swc',
+			'org.foomo.zugspitze.rpc'	=> 'zugspitze_rpc.swc',
 		);
 		foreach ($zsExternals as $zsKey => $zsValue) {
 			$libraryProject = $sources->getLibraryProject($zsKey);

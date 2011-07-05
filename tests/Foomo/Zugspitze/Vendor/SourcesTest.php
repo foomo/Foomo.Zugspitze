@@ -41,76 +41,42 @@ class SourcesTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->sources = new \Foomo\Zugspitze\Vendor\Sources(\Foomo\Zugspitze\Module::getVendorDir() . '/sources');
+		$this->sources = new \Foomo\Flash\Vendor\Sources(array(\Foomo\Zugspitze\Module::getBaseDir('vendor/org.foomo.zugspitze')));
 	}
 
 	//---------------------------------------------------------------------------------------------
 	// ~ Test methods
 	//---------------------------------------------------------------------------------------------
 
-	public function testUpdateProjects()
-	{
-		$this->sources = new \Foomo\Zugspitze\Vendor\Sources(\Foomo\Zugspitze\Module::getVendorDir() . '/sources', false);
-		$this->assertTrue((count($this->sources->getLibraryProjects()) == 0));
-		$this->sources->updateProjects();
-		$this->assertFalse((count($this->sources->getLibraryProjects()) == 0));
-	}
-
-	public function testGetLibraryProject()
-	{
-		$library = $this->sources->getLibraryProject(\Foomo\Zugspitze\TestSuite::CORE_LIBRARY_ID);
-		$this->assertNotNull($library);
-	}
-
-	public function testGetLibraryProjects()
-	{
-		$libraries = $this->sources->getLibraryProjects();
-		$this->assertEquals(\Foomo\Zugspitze\TestSuite::LIBRARY_COUNT, count($libraries));
-
-		$allLibraries = $this->sources->getLibraryProjects(false);
-		$this->assertTrue(count($allLibraries) > count($libraries));
-	}
-
-	public function testGetLibraryProjectsByType()
-	{
-		$libraries = $this->sources->getLibraryProjectsByType(Sources\Project::TYPE_LIBRARY_PROJECT);
-		$this->assertTrue(count($libraries) > 0);
-
-		$allLibraries = $this->sources->getLibraryProjectsByType(Sources\Project::TYPE_CORE_LIBRARY_PROJECT);
-		$this->assertTrue(count($allLibraries) > 0);
-
-		$this->assertTrue(count($allLibraries) > count($libraries));
-	}
-
 	public function testGetImplementationProject()
 	{
-		$project = $this->sources->getImplementationProject(\Foomo\Zugspitze\TestSuite::FLEX4_LIBRARY_ID, \Foomo\Zugspitze\TestSuite::FLEX4_EXAMPLES_ID);
+		$project = $this->sources->getImplementationProject(\Foomo\Zugspitze\VendorTest::FLEX4_LIBRARY_ID, \Foomo\Zugspitze\VendorTest::FLEX4_EXAMPLES_ID);
 		$this->assertNotNull($project);
 	}
 
 	public function testGetImplementationProjects()
 	{
-		$projects = $this->sources->getImplementationProjects(\Foomo\Zugspitze\TestSuite::FLEX4_LIBRARY_ID);
+		$projects = $this->sources->getImplementationProjects(\Foomo\Zugspitze\VendorTest::FLEX4_LIBRARY_ID);
 		$this->assertNotEquals(0, count($projects));
 		#\var_dump($projects);
 	}
 
 	public function testGetImplementationProjectApplication()
 	{
-		$application = $this->sources->getImplementationProjectApplication(\Foomo\Zugspitze\TestSuite::FLEX4_EXAMPLES_ID, \Foomo\Zugspitze\TestSuite::FLEX4_EXAMPLES_APPLICATION_ID);
+		$application = $this->sources->getImplementationProjectApplication(\Foomo\Zugspitze\VendorTest::FLEX4_EXAMPLES_ID, \Foomo\Zugspitze\VendorTest::FLEX4_EXAMPLES_APPLICATION_ID);
 		$this->assertNotNull($application);
 	}
 
 	public function testGetImplementationProjectApplications()
 	{
-		$applications = $this->sources->getImplementationProjectApplications(\Foomo\Zugspitze\TestSuite::FLEX4_EXAMPLES_ID);
+		$applications = $this->sources->getImplementationProjectApplications(\Foomo\Zugspitze\VendorTest::FLEX4_EXAMPLES_ID);
 		$this->assertNotEquals(0, count($applications));
 		#\var_dump($projects);
 	}
 
 	public function testGetLibrary()
 	{
-		$library = $this->sources->getLibrary(\Foomo\Zugspitze\TestSuite::SERVICES_UPLOAD_LIBRARY_ID);
+		$library = $this->sources->getLibrary(\Foomo\Zugspitze\VendorTest::SERVICES_UPLOAD_LIBRARY_ID);
 		$this->assertNotNull($library);
 	}
 

@@ -23,7 +23,7 @@ use Foomo\Services\ServiceDescription;
 
 /**
  * a service info
- * 
+ *
  * @link www.foomo.org
  * @license www.gnu.org/licenses/lgpl.txt
  * @author jan <jan@bestbytes.de>
@@ -64,11 +64,11 @@ class ServiceInfo
 	 */
 	public $recompileUrl;
 	/**
-	 * compile and download - all at once
+	 * service url
 	 *
 	 * @var string
 	 */
-	public $compileAndDownloadUrl;
+	public $url;
 	/**
 	 * basically the name of the class that was exposed as a service
 	 *
@@ -121,8 +121,8 @@ class ServiceInfo
 		$ret->module = $module;
 		foreach($ret as $k => $v) {
 			switch($k) {
+				case 'url':
 				case 'documentationUrl':
-				case 'compileAndDownloadUrl':
 					$ret->$k = \Foomo\Utils::getServerUrl() . $serviceDescription->$k;
 					break;
 				case 'asPackage':

@@ -23,9 +23,22 @@ namespace Foomo\Zugspitze\Scaffold;
  * @link www.foomo.org
  * @license www.gnu.org/licenses/lgpl.txt
  * @author franklin <franklin@weareinteractive.com>
+ * @todo find better place for constants and rename
  */
 class ApplicationGeneratorTest extends \PHPUnit_Framework_TestCase
 {
+	//---------------------------------------------------------------------------------------------
+	// ~ Constants
+	//---------------------------------------------------------------------------------------------
+
+	const LIBRARY_COUNT						= 6;
+	const CORE_LIBRARY_ID					= 'org.foomo.zugspitze.core';
+	const FLEX4_LIBRARY_ID					= 'org.foomo.zugspitze.spark';
+	const FLEX4_EXAMPLES_ID					= 'org.foomo.zugspitze.spark.examples';
+	const FLEX4_EXAMPLES_APPLICATION_ID		= 'org.foomo.zugspitze.spark.applications.blank';
+	const SERVICES_UPLOAD_LIBRARY_ID		= 'org.foomo.zugspitze.services.upload';
+	const TEST_PACKAGE						= 'org.foomo.tests.applications.blank';
+
 	//---------------------------------------------------------------------------------------------
 	// ~ Variables
 	//---------------------------------------------------------------------------------------------
@@ -42,10 +55,10 @@ class ApplicationGeneratorTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		$this->generator = \Foomo\Zugspitze\Scaffold::getApplicationGenerator(
-			\Foomo\Zugspitze\TestSuite::FLEX4_LIBRARY_ID,
-			\Foomo\Zugspitze\TestSuite::FLEX4_EXAMPLES_ID,
-			\Foomo\Zugspitze\TestSuite::FLEX4_EXAMPLES_APPLICATION_ID,
-			\Foomo\Zugspitze\TestSuite::TEST_PACKAGE
+			self::FLEX4_LIBRARY_ID,
+			self::FLEX4_EXAMPLES_ID,
+			self::FLEX4_EXAMPLES_APPLICATION_ID,
+			self::TEST_PACKAGE
 		);
 	}
 

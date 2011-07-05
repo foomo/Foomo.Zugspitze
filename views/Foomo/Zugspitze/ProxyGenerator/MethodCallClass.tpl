@@ -23,10 +23,26 @@ function renderMethodProperties($props)
 	}
 	return ', ' . implode(', ', $output);
 }
-?>package <?= $model->myPackage; ?>.calls
+?>/*
+ * This file is part of the foomo Opensource Framework.
+ *
+ * The foomo Opensource Framework is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License as
+ * published  by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * The foomo Opensource Framework is distributed in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with
+ * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
+ */
+package <?= $model->myPackage; ?>.calls
 {
 <? if (count($operation->throwsTypes) > 0): ?>
-	import org.foomo.zugspitze.services.core.rpc.events.RPCMethodCallEvent;
+	import org.foomo.rpc.events.RPCMethodCallEvent;
 <? foreach ($operation->throwsTypes as $throwType): ?>
 <? $dataClass = $model->complexTypes[$throwType->type]; ?>
 	<?= $model->getClientAsClassImport($throwType->type) .PHP_EOL ?>
@@ -35,10 +51,15 @@ function renderMethodProperties($props)
 
 <? endif; ?>
 	import <?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>;
-	import org.foomo.zugspitze.services.core.proxy.calls.ProxyMethodCall;
+	import org.foomo.zugspitze.rpc.calls.ProxyMethodCall;
 <?	if (!PHPUtils::isASStandardType($operation->returnType->type)): ?>
 	<?= $model->getClientAsClassImport($operation->returnType->type) . PHP_EOL ?>
 <? endif ?>
+<? if (count($operation->parameters) > 0): ?>
+<? foreach($operation->parameters as $name => $type): ?>
+	<? if (!PHPUtils::isASStandardType($type)) echo $model->getClientAsClassImport($type); ?>
+<? endforeach; ?>
+<? endif; ?>
 
 	[Event(name="<?= $operation->name ?>CallComplete", type="<?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>")]
 	[Event(name="<?= $operation->name ?>CallProgress", type="<?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>")]
@@ -51,7 +72,9 @@ function renderMethodProperties($props)
 <? endif; ?>
 
 	/**
-	 *
+	 * @link    http://www.foomo.org
+	 * @license http://www.gnu.org/licenses/lgpl.txt
+	 * @author  franklin <franklin@weareinteractive.com>
 	 */
 	public class <?= ViewHelper::toClassName($operation->name, 'Call') ?> extends ProxyMethodCall
 	{

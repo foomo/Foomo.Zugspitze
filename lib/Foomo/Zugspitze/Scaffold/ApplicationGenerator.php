@@ -41,15 +41,15 @@ class ApplicationGenerator
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * @var Foomo\Zugspitze\Vendor\Sources\Project
+	 * @var Foomo\Flash\Vendor\Sources\Project
 	 */
 	private $libraryProject;
 	/**
-	 * @var Foomo\Zugspitze\Vendor\Sources\Project
+	 * @var Foomo\Flash\Vendor\Sources\Project
 	 */
 	private $implementationProject;
 	/**
-	 * @var Foomo\Zugspitze\Vendor\Sources\Application
+	 * @var Foomo\Flash\Vendor\Sources\Application
 	 */
 	private $implementationProjectApplication;
 	/**
@@ -70,12 +70,12 @@ class ApplicationGenerator
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * @param Foomo\Zugspitze\Vendor\Sources\Project $libraryProject
-	 * @param Foomo\Zugspitze\Vendor\Sources\Project $implementationProject
-	 * @param Foomo\Zugspitze\Vendor\Sources\Application $implementationProjectApplication
+	 * @param Foomo\Flash\Vendor\Sources\Project $libraryProject
+	 * @param Foomo\Flash\Vendor\Sources\Project $implementationProject
+	 * @param Foomo\Flash\Vendor\Sources\Application $implementationProjectApplication
 	 * @param string $packageName
 	 */
-	public function __construct(\Foomo\Zugspitze\Vendor\Sources\Project $libraryProject, \Foomo\Zugspitze\Vendor\Sources\Project $implementationProject, \Foomo\Zugspitze\Vendor\Sources\Application $implementationProjectApplication, $packageName)
+	public function __construct(\Foomo\Flash\Vendor\Sources\Project $libraryProject, \Foomo\Flash\Vendor\Sources\Project $implementationProject, \Foomo\Flash\Vendor\Sources\Application $implementationProjectApplication, $packageName)
 	{
 		# set values
 		$this->libraryProject = $libraryProject;
