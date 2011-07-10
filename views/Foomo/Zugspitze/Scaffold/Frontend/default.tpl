@@ -6,29 +6,32 @@
 <div id="ZSFormContainer">
 
 	<form id="zugspitze-scaffolding-form" method="POST" action="<?= $view->url('generateApplication') ?>">
+		<div class="greyBox">
 
-		<div>
-			<h3>Select library</h3>
-			<select id="zugspitze-scaffolding-form-libraries" name="libraryProjectId"></select>
+			<div class="formBox">
+				<div class="formTitle">Select library</div>
+				<select id="zugspitze-scaffolding-form-libraries" name="libraryProjectId"></select>
+			</div>
+
+			<div class="formBox">
+				<div class="formTitle">Select Project</div>
+				<select id="zugspitze-scaffolding-form-projects" name="implementationProjectId"></select>
+			</div>
+
+			<div class="formBox">
+				<div class="formTitle">Select application</div>
+				<select id="zugspitze-scaffolding-form-applications" name="implementationProjectApplicationId"></select>
+			</div>
+
+			<div class="formBox">
+				<div class="formTitle">Package name (i.e. com.bestbytes.yourApplication)</div>
+				<input id="packageInput" type="text" name="packageName" value="" size="50" />
+			</div>
+
+			<div class="formBox">
+				<input type="submit" value="generate" class="submitButton">
+			</div>
 		</div>
-
-		<div>
-			<h3>Select Project</h3>
-			<select id="zugspitze-scaffolding-form-projects" name="implementationProjectId"></select>
-		</div>
-
-		<div>
-			<h3>Select application</h3>
-			<select id="zugspitze-scaffolding-form-applications" name="implementationProjectApplicationId"></select>
-		</div>
-
-		<div>
-			<h3>Package name (i.e. com.bestbytes.yourApplication)</h3>
-			<input id="packageInput" type="text" name="packageName" value="" size="50" /><br>
-		</div>
-
-
-		<p><input type="submit" value="generate"></p>
 
 	</form>
 

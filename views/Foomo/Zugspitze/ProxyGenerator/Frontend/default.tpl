@@ -15,12 +15,18 @@
 	});
 ");
 ?>
-<h1>Local Services</h1>
-Select a configuration entry: <select class="flexConfigEntryList">
-<? foreach(\Foomo\Flash\Module::getCompilerConfig()->entries as $entryId => $entry): ?>
-	<option value="<?= $entryId ?>"><?= $entry['name'] ?></option>
-<? endforeach; ?>
-</select>
+<h2>Local Services</h2>
+
+<div class="greyBox">
+
+	<div class="formBox">
+		<div class="formTitle">Select a configuration entry</div>
+		<select class="flexConfigEntryList">
+		<? foreach(\Foomo\Flash\Module::getCompilerConfig()->entries as $entryId => $entry): ?>
+			<option value="<?= $entryId ?>"><?= $entry['name'] ?></option>
+		<? endforeach; ?>
+		</select>
+	</div>
 <table>
 <? foreach(\Foomo\Services\Utils::getAllServices() as $moduleName => $serviceUrls): ?>
 	<? if (count($serviceUrls) > 0): ?>
@@ -32,13 +38,17 @@ Select a configuration entry: <select class="flexConfigEntryList">
 		<? $fullServiceUrl = 'http://' . $_SERVER['HTTP_HOST'] . $serviceUrl ?>
 		<tr>
 			<td><?= substr($serviceUrl, strlen($serviceRoot)+1) ?></td>
-			<td><?= $view->link('generate', 'generateASClient', array('serviceUrl' => $fullServiceUrl)) ?></td>
+			<td><?= $view->link('generate', 'generateASClient', array('serviceUrl' => $fullServiceUrl), array('class' => 'overlay')) ?></td>
 			<td><?= $view->link('download tgz', 'getASClientAsTgz', array('serviceUrl' => $fullServiceUrl)) ?></td>
-			<td><?= $view->link('compile', 'compileASClient', array('serviceUrl' => $fullServiceUrl), array('class' => 'flexSDKLink')) ?></td>
-			<td><?= $view->link('download swc', 'getASClientAsSwc', array('serviceUrl' => $fullServiceUrl), array('class' => 'flexSDKLink')) ?></td>
+			<td><?= $view->link('compile', 'compileASClient', array('serviceUrl' => $fullServiceUrl), array('class' => 'flexSDKLink overlay')) ?></td>
+			<td><?= $view->link('download swc', 'getASClientAsSwc', array('serviceUrl' => $fullServiceUrl)) ?></td>
 		</tr>
 		<? endforeach; ?>
 	<? endif; ?>
 <? endforeach; ?>
 </table>
-<?= $view->link('Download Ant Build File', 'getAntBuildFile', array(), array('class' => 'flexSDKLink')); ?>
+	<div class="innerBox" >
+		<?= $view->link('Download Ant Build File', 'getAntBuildFile', array(), array('class' => 'flexSDKLink linkButtonYellow')); ?><br>
+		<br>
+	</div>
+</div>
