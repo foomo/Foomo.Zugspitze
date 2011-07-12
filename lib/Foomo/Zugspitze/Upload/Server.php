@@ -40,7 +40,7 @@ class Server
 	//---------------------------------------------------------------------------------------------
 
 	/**
-	 * used in /radact/upload.php to "serve" upload functionality
+	 * used to "serve" upload functionality
 	 */
 	public static function serve()
 	{
