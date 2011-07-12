@@ -27,13 +27,6 @@ namespace Foomo\Zugspitze\Services;
 class ScaffoldTest extends \PHPUnit_Framework_TestCase
 {
 	//---------------------------------------------------------------------------------------------
-	// ~ Constants
-	//---------------------------------------------------------------------------------------------
-
-	const FLEX4_EXAMPLES_PROJECT_ID			= 'org.foomo.zugspitze.flex4.examples';
-	const FLEX4_LIBRARY_ID					= 'org.foomo.zugspitze.flex4';
-
-	//---------------------------------------------------------------------------------------------
 	// ~ Variables
 	//---------------------------------------------------------------------------------------------
 
@@ -64,14 +57,14 @@ class ScaffoldTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetProjects()
 	{
-		$projects = $this->service->getProjects(self::FLEX4_LIBRARY_ID);
+		$projects = $this->service->getProjects(\Foomo\Zugspitze\Tests\VendorHelper::SPARK_LIBRARY_ID);
 		$this->assertNotEquals(0, count($projects));
 		#\var_dump($projects);
 	}
 
 	public function testGetApplications()
 	{
-		$applications = $this->service->getApplications(self::FLEX4_EXAMPLES_PROJECT_ID);
+		$applications = $this->service->getApplications(\Foomo\Zugspitze\Tests\VendorHelper::SPARK_EXAMPLES_ID);
 		$this->assertNotEquals(0, count($applications));
 		#\var_dump($applications);
 	}

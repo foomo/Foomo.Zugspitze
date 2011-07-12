@@ -17,30 +17,24 @@
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Foomo\Zugspitze;
+namespace Foomo\Zugspitze\Tests;
 
 /**
  * @link www.foomo.org
  * @license www.gnu.org/licenses/lgpl.txt
  * @author franklin <franklin@weareinteractive.com>
  */
-class ModuleTest extends \PHPUnit_Framework_TestCase
+class VendorHelper
 {
 	//---------------------------------------------------------------------------------------------
-	// ~ Setup
+	// ~ Constants
 	//---------------------------------------------------------------------------------------------
 
-	public function setUp()
-	{
-	}
-
-	//---------------------------------------------------------------------------------------------
-	// ~ Test methods
-	//---------------------------------------------------------------------------------------------
-
-	public function testGetLibraryGeneratorConfig()
-	{
-		$config = Module::getLibraryGeneratorConfig();
-		$this->assertNotNull($config);
-	}
+	const LIBRARY_COUNT						= 6;
+	const CORE_LIBRARY_ID					= 'org.foomo.zugspitze.core';
+	const SPARK_LIBRARY_ID					= 'org.foomo.zugspitze.spark';
+	const SPARK_EXAMPLES_ID					= 'org.foomo.zugspitze.spark.examples';
+	const SPARK_EXAMPLES_APPLICATION_ID		= 'org.foomo.zugspitze.spark.applications.blank';
+	const SERVICES_UPLOAD_LIBRARY_ID		= 'org.foomo.zugspitze.services.upload';
+	const TEST_PACKAGE						= 'org.foomo.tests.applications.blank';
 }

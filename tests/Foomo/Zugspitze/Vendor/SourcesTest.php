@@ -41,7 +41,7 @@ class SourcesTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->sources = new \Foomo\Flash\Vendor\Sources(array(\Foomo\Zugspitze\Module::getBaseDir('vendor/org.foomo.zugspitze')));
+		$this->sources = new \Foomo\Flash\Vendor\Sources(array(\Foomo\Zugspitze\Module::getVendorDir('org.foomo.zugspitze'), \Foomo\Zugspitze\Module::getVendorDir('org.foomo.zugspitze.services')));
 	}
 
 	//---------------------------------------------------------------------------------------------
@@ -50,33 +50,31 @@ class SourcesTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetImplementationProject()
 	{
-		$project = $this->sources->getImplementationProject(\Foomo\Zugspitze\VendorTest::FLEX4_LIBRARY_ID, \Foomo\Zugspitze\VendorTest::FLEX4_EXAMPLES_ID);
+		$project = $this->sources->getImplementationProject(\Foomo\Zugspitze\Tests\VendorHelper::SPARK_LIBRARY_ID, \Foomo\Zugspitze\Tests\VendorHelper::SPARK_EXAMPLES_ID);
 		$this->assertNotNull($project);
 	}
 
 	public function testGetImplementationProjects()
 	{
-		$projects = $this->sources->getImplementationProjects(\Foomo\Zugspitze\VendorTest::FLEX4_LIBRARY_ID);
+		$projects = $this->sources->getImplementationProjects(\Foomo\Zugspitze\Tests\VendorHelper::SPARK_LIBRARY_ID);
 		$this->assertNotEquals(0, count($projects));
-		#\var_dump($projects);
 	}
 
 	public function testGetImplementationProjectApplication()
 	{
-		$application = $this->sources->getImplementationProjectApplication(\Foomo\Zugspitze\VendorTest::FLEX4_EXAMPLES_ID, \Foomo\Zugspitze\VendorTest::FLEX4_EXAMPLES_APPLICATION_ID);
+		$application = $this->sources->getImplementationProjectApplication(\Foomo\Zugspitze\Tests\VendorHelper::SPARK_EXAMPLES_ID, \Foomo\Zugspitze\Tests\VendorHelper::SPARK_EXAMPLES_APPLICATION_ID);
 		$this->assertNotNull($application);
 	}
 
 	public function testGetImplementationProjectApplications()
 	{
-		$applications = $this->sources->getImplementationProjectApplications(\Foomo\Zugspitze\VendorTest::FLEX4_EXAMPLES_ID);
+		$applications = $this->sources->getImplementationProjectApplications(\Foomo\Zugspitze\Tests\VendorHelper::SPARK_EXAMPLES_ID);
 		$this->assertNotEquals(0, count($applications));
-		#\var_dump($projects);
 	}
 
 	public function testGetLibrary()
 	{
-		$library = $this->sources->getLibrary(\Foomo\Zugspitze\VendorTest::SERVICES_UPLOAD_LIBRARY_ID);
+		$library = $this->sources->getLibrary(\Foomo\Zugspitze\Tests\VendorHelper::SERVICES_UPLOAD_LIBRARY_ID);
 		$this->assertNotNull($library);
 	}
 

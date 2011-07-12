@@ -47,7 +47,7 @@ class Server
 		if (count($_FILES)) {
 			$ids = array();
 			foreach ($_FILES as $id => $uploadArray) {
-				$uploadInfo = tempnam(\Foomo\Zugspitze\Module::getTempDir(), 'upload-');
+				$uploadInfo = tempnam(\Foomo\Zugspitze\Module::getTempDir('Upload'), 'upload-');
 				$id = basename($uploadInfo);
 				move_uploaded_file($uploadArray['tmp_name'], $uploadInfo);
 				$uploadArray['tmp_name'] = $uploadInfo;

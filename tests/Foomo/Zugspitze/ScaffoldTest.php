@@ -40,7 +40,7 @@ class ScaffoldTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetApplicationGenerator()
 	{
-		$generator = Scaffold::getApplicationGenerator(TestSuite::FLEX4_LIBRARY_ID, TestSuite::FLEX4_EXAMPLES_ID, TestSuite::FLEX4_EXAMPLES_APPLICATION_ID, TestSuite::TEST_PACKAGE);
+		$generator = Scaffold::getApplicationGenerator(Tests\VendorHelper::SPARK_LIBRARY_ID, Tests\VendorHelper::SPARK_EXAMPLES_ID, Tests\VendorHelper::SPARK_EXAMPLES_APPLICATION_ID, Tests\VendorHelper::TEST_PACKAGE);
 		$this->assertNotNull($generator);
 	}
 }

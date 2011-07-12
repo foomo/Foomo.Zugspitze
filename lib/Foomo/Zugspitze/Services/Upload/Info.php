@@ -162,6 +162,6 @@ class Info
 	 */
 	private static function getFile($uploadId)
 	{
-		return \Foomo\Zugspitze\Module::getTempDir(). DIRECTORY_SEPARATOR . 'upload-' . $uploadId . '.info.ser';
+		return \Foomo\Zugspitze\Module::getTempDir('Upload'). DIRECTORY_SEPARATOR . 'upload-' . $uploadId . '.info.ser';
 	}
 }

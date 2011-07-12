@@ -34,4 +34,27 @@ class Model
 	 * @var Foomo\Services\ProxyGenerator\ActionScript\Report
 	 */
 	public $report;
+	/**
+	 * @var array
+	 */
+	public $services = array();
+
+	//---------------------------------------------------------------------------------------------
+	// ~ Constructor
+	//---------------------------------------------------------------------------------------------
+
+	public function __construct()
+	{
+		foreach(\Foomo\Services\Utils::getAllServices() as $moduleName => $serviceUrls) {
+			$moduleServices = array();
+			foreach ($serviceUrls as $url) {
+				$description = \Foomo\Services\Utils::getServiceDescription(\Foomo\Utils::getServerUrl() . $url);
+				if (is_null($description)) continue;
+				if ($description->type != \Foomo\Services\ServiceDescription::TYPE_RPC_AMF) continue;
+				$moduleServices[] = $description;
+			}
+			if (empty($moduleServices)) continue;
+			$this->services[$moduleName] = $moduleServices;
+		}
+	}
 }
