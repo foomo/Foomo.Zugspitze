@@ -35,10 +35,10 @@
 			<? foreach ($descriptions as $description): ?>
 				<tr>
 					<td><a href="<?= $description->documentationUrl ?>" target="_blank"><?= substr($description->url, strlen($serviceRoot)+1) ?></a></td>
-					<td><?= $view->link('generate', 'generateASClient', array('serviceUrl' => $description->url), array('class' => 'overlay')) ?></td>
-					<td><?= $view->link('download tgz', 'getASClientAsTgz', array('serviceUrl' => $description->url)) ?></td>
-					<td><?= $view->link('compile', 'compileASClient', array('serviceUrl' => $description->url), array('class' => 'flexSDKLink overlay')) ?></td>
-					<td><?= $view->link('download swc', 'getASClientAsSwc', array('serviceUrl' => $description->url), array('class' => 'flexSDKLink')) ?></td>
+					<td><?= $view->link('generate', 'generateASClient', array('serviceUrl' => $description->url)) ?></td>
+					<td><?= $view->link('download tgz', 'getASClientAsTgz', array('serviceUrl' => $description->url), array('class' => 'linkButtonYellow')) ?></td>
+					<td><?= $view->link('compile', 'compileASClient', array('serviceUrl' => $description->url), array('class' => 'flexSDKLink')) ?></td>
+					<td><?= $view->link('download swc', 'getASClientAsSwc', array('serviceUrl' => $description->url), array('class' => 'flexSDKLink linkButtonYellow')) ?></td>
 				</tr>
 			<? endforeach; ?>
 		<? endforeach; ?>
