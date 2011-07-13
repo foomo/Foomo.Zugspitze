@@ -66,7 +66,7 @@ class UploadTest extends \PHPUnit_Framework_TestCase
 		foreach ($uploadIds as $uploadId) {
 			$upload = \Foomo\Zugspitze\Upload\Server::getUpload($uploadId);
 			if (is_null($upload)) {
-				$this->fail('could not RadFileUploadServer::getUpload with id ' . $uploadId);
+				$this->fail('could not getUpload with id ' . $uploadId);
 			}
 			if (file_get_contents($upload->tempName) != $me) {
 				$this->fail('upload with id ' . $uploadId . ' failed contents were not like me');
@@ -80,7 +80,6 @@ class UploadTest extends \PHPUnit_Framework_TestCase
 		$refs = \Foomo\Zugspitze\Upload\Client::uploadFilesToRemoteServer($files);
 		$me = file_get_contents(__FILE__);
 		foreach ($refs as $uploadReference) {
-			/* @var uploadReference RadFileUploadReference */
 			$upload = \Foomo\Zugspitze\Upload\Server::getUpload($uploadReference->id);
 
 			if ($upload->name != $uploadReference->name) {

@@ -4,7 +4,7 @@
 
 When it comes to uploading files from the flash player, you will find yourself being locked in the browsers sandbox, this means, that you can browse for files, but you will not get a handle to read file contents. With AIR this is different, you can access file data.
 
-If you are using the radact frameworks service functionality, you will want to use files as parameters. Because of the limitations mentioned before this is not possible.
+If you are using the foomo frameworks service functionality, you will want to use files as parameters. Because of the limitations mentioned before this is not possible.
 
 The approach that solves the problem has the following steps
 
@@ -15,7 +15,7 @@ The approach that solves the problem has the following steps
 
 <code type="javascript">
 	// 
-    // from the FileUploadExample.mxml in the radact repo
+    // from the FileUploadExample.mxml in the foomo repo
     //
     // ...
 
@@ -45,7 +45,7 @@ The approach that solves the problem has the following steps
 	private function fileSelected(event:Event):void
 	{
 		this.fileDisplay.text = this.fileRef.toString();
-		UploadCommand.SERVER = 'http://radact';
+		UploadCommand.SERVER = 'http://foomo';
 		var cmd:UploadCommand = new UploadCommand(this.fileRef);
 		cmd.addEventListener(CommandEvent.COMMAND_COMPLETE, this.uploadComplete);
 		cmd.execute();
@@ -70,12 +70,12 @@ The approach that solves the problem has the following steps
 /**
   * example call in a webservice saving a previously uploaded file
   * 
-  * @param RadFileUploadReference $ref previously uploaded file
+  * @param \Zugspitze\Upload\Server\UploadReference $ref previously uploaded file
   * @return boolean
   *
   */
-function someCall(RadFileUploadReference $ref) {
-	$upload = RadFileUploadServer::getUpload($ref->id);
+function someCall(\Zugspitze\Upload\Server\UploadReference $ref) {
+	$upload = \Zugspitze\Upload\Server::getUpload($ref->id);
 	// do some cool stuff
 	return true;
 }
@@ -90,13 +90,13 @@ $files = array(
 	'/path/to/fileA',
 	'/path/to/fileB'
 );
-$uploadRefs = RadFileUploadClient::uploadFilesToRemoteServer(
+$uploadRefs = \Zugspitze\Upload\Client::uploadFilesToRemoteServer(
 	$files,
-	'http://some.radact.server.org'
+	'http://some.foomo.server.org'
 );
 
 foreach($uploadRefs as $uploadReference) {
-	/* @var uploadReference RadFileUploadReference */
+	/* @var uploadReference \Zugspitze\Upload\Server\UploadReference */
 	$someService->uploadFile($uploadReference);
 }
 </code>
