@@ -114,7 +114,7 @@ class Controller
 	{
 		$this->model->report = \Foomo\Services\ProxyGenerator\ActionScript::generateSrc(
 			$description->name,
-			new \Foomo\Zugspitze\ProxyGenerator\RPC($description->package)
+			new \Foomo\Zugspitze\ProxyGenerator\RPC($description)
 		);
 	}
 
@@ -125,7 +125,7 @@ class Controller
 	{
 		$this->model->report = \Foomo\Services\ProxyGenerator\ActionScript::packSrc(
 			$description->name,
-			new \Foomo\Zugspitze\ProxyGenerator\RPC($description->package)
+			new \Foomo\Zugspitze\ProxyGenerator\RPC($description)
 		);
 	}
 
@@ -136,7 +136,7 @@ class Controller
 	{
 		$this->model->report = \Foomo\Services\ProxyGenerator\ActionScript::compileSrc(
 			$description->name,
-			new \Foomo\Zugspitze\ProxyGenerator\RPC($description->package),
+			new \Foomo\Zugspitze\ProxyGenerator\RPC($description),
 			$configId
 		);
 	}

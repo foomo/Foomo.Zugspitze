@@ -22,11 +22,11 @@
 <? if ($serviceDescription->type != \Foomo\Services\ServiceDescription::TYPE_RPC_AMF) continue; ?>
 	<target name="<?= ucfirst($moduleName) ?> :: <?= ucfirst($serviceDescription->name) ?> - <?= parse_url($serviceDescription->url, PHP_URL_PATH); ?>" description="<?=$host ?> : <?=$serviceDescription->name ?>">
 		<echo message="Generating client source code, compiling it and downloading swc:"/>
-		<echo message="Calling: <?= Foomo\Utils::getServerUrl(false, true) . Foomo\Zugspitze\Module::getHtdocsPath() . '/proxyGenerator.php/Foomo.Zugspitze.ProxyGenerator/getASClientAsSwc/' . urlencode(Foomo\Utils::getServerUrl() .$serviceDescription->url) . '/' . $model->id ?>"/>
+		<echo message="Calling: <?= Foomo\Utils::getServerUrl(false, true) . Foomo\Zugspitze\Module::getHtdocsPath() . '/proxyGenerator.php/Foomo.Zugspitze.ProxyGenerator/getASClientAsSwc/' . urlencode($serviceDescription->url) . '/' . $model->id ?>"/>
 		<echo message="Please wait..."/>
 		<exec executable="/usr/bin/curl">
 			<arg value="-k"/>
-			<arg value="<?= Foomo\Utils::getServerUrl(false, true) . Foomo\Zugspitze\Module::getHtdocsPath() . '/proxyGenerator.php/Foomo.Zugspitze.ProxyGenerator/getASClientAsSwc/' . urlencode(Foomo\Utils::getServerUrl() . $serviceDescription->url) . '/' . $model->id ?>"/>
+			<arg value="<?= Foomo\Utils::getServerUrl(false, true) . Foomo\Zugspitze\Module::getHtdocsPath() . '/proxyGenerator.php/Foomo.Zugspitze.ProxyGenerator/getASClientAsSwc/' . urlencode($serviceDescription->url) . '/' . $model->id ?>"/>
 			<arg value="-o"/>
 			<arg value="../libs/<?= str_replace('\\', '', $serviceDescription->name) . '.swc' ?>"/>
 		</exec>

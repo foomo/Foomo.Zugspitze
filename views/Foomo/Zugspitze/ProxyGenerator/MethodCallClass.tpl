@@ -52,12 +52,15 @@ package <?= $model->myPackage; ?>.calls
 <? endif; ?>
 	import <?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>;
 	import org.foomo.zugspitze.rpc.calls.ProxyMethodCall;
-<?	if (!PHPUtils::isASStandardType($operation->returnType->type)): ?>
+<?	if ((PHPUtils::isArray($operation->returnType->type) && !PHPUtils::isASArrayStandardType($operation->returnType->type)) || !PHPUtils::isASStandardType($operation->returnType->type)): ?>
 	<?= $model->getClientAsClassImport($operation->returnType->type) . PHP_EOL ?>
+	import org.foomo.utils.CompilerUtil;
 <? endif ?>
 <? if (count($operation->parameters) > 0): ?>
 <? foreach($operation->parameters as $name => $type): ?>
-	<? if (!PHPUtils::isASStandardType($type)) echo $model->getClientAsClassImport($type); ?>
+<? if (!PHPUtils::isASStandardType($type)): ?>
+	<?= $model->getClientAsClassImport($type) . PHP_EOL; ?>
+<? endif; ?>
 <? endforeach; ?>
 <? endif; ?>
 
@@ -91,6 +94,9 @@ package <?= $model->myPackage; ?>.calls
 		public function <?= ViewHelper::toClassName($operation->name, 'Call') ?>(<?= ViewHelper::renderParameters($operation->parameters) ?>)
 		{
 			super(METHOD_NAME, [<?= ViewHelper::renderParameters($operation->parameters, false) ?>], <?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>);
+<?	if (PHPUtils::isArray($operation->returnType->type) && !PHPUtils::isASArrayStandardType($operation->returnType->type)): ?>
+			CompilerUtil.force(<?= PHPUtils::getASArrayType($operation->returnType->type) ?>);
+<? endif ?>
 		}
 
 		//-----------------------------------------------------------------------------------------

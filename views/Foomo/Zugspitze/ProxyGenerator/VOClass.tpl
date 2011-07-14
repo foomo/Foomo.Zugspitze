@@ -24,6 +24,12 @@ $dataClass = $model->currentDataClass;
  */
 package <?= $dataClass->getRemotePackage() . PHP_EOL ?>
 {
+<? if (count($dataClass->props) > 0): ?>
+<? foreach($dataClass->props as $name => $type): ?>
+	<? if (!PHPUtils::isASStandardType($type->type)) echo $model->getClientAsClassImport($type->type); ?>
+<? endforeach; ?>
+<?php endif; ?>
+
 	[Bindable]
 <? if ('' != $remoteClass = $dataClass->getRemoteClass()):?>
 	// this class is "abstract" - use  <?= $remoteClass ?>
@@ -38,7 +44,7 @@ package <?= $dataClass->getRemotePackage() . PHP_EOL ?>
 	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author  franklin <franklin@weareinteractive.com>
 	 */
-	public class <?= $model->getVOClassName($dataClass) . PHP_EOL ?>
+	public class <?= $model->getVOClassName($dataClass) ?>
 	{
 <?php if (count($dataClass->constants) > 0): ?>
 		//-----------------------------------------------------------------------------------------

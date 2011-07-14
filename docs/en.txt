@@ -1,5 +1,3 @@
 + Abstract
-+ Installation
-+ Configuration
-+ Flex Project Conventions
++ The Book
 + Flex File Uploads

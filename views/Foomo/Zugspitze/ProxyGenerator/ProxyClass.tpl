@@ -44,11 +44,25 @@ package <?= $model->myPackage . PHP_EOL; ?>
 		public static const CLASS_NAME:String 	= '<?= str_replace('\\', '\\\\', $model->serviceName); ?>';
 
 		//-----------------------------------------------------------------------------------------
+		// ~ Static variables
+		//-----------------------------------------------------------------------------------------
+
+		/**
+		 *
+		 */
+		private static var _instance:<?= PHPUtils::getASType($model->proxyClassName) ?>;
+		/**
+		 *
+		 */
+		public static var defaultEndPoint:String = "<?= $model->serviceDescription->url ?>/Foomo.Services.RPC/serve";
+
+		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function <?= PHPUtils::getASType($model->proxyClassName) ?>(endPoint:String)
+		public function <?= PHPUtils::getASType($model->proxyClassName) ?>(endPoint:String=null)
 		{
+			if (endPoint == null) endPoint = defaultEndPoint;
 			super(endPoint, CLASS_NAME, VERSION);
 		}
 
@@ -65,5 +79,18 @@ package <?= $model->myPackage . PHP_EOL; ?>
 			return zugspitze_internal::sendMethodCall(new <?= ViewHelper::toClassName($operation->name, 'Call') ?>(<?= ViewHelper::renderParameters($operation->parameters, false) ?>));
 		}
 <?php endforeach; ?>
+
+		//-----------------------------------------------------------------------------------------
+		// ~ Public static methods
+		//-----------------------------------------------------------------------------------------
+
+		/**
+		 *
+		 */
+		public static function get defaultInstance():<?= PHPUtils::getASType($model->proxyClassName) ?>
+		{
+			if (!_instance) _instance = new <?= PHPUtils::getASType($model->proxyClassName) ?>(defaultEndPoint);
+			return _instance;
+		}
 	}
 }

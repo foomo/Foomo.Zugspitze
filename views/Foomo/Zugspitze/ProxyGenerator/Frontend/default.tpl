@@ -30,7 +30,7 @@
 		<? foreach($model->services as $moduleName => $descriptions): ?>
 			<? $serviceRoot = \Foomo\Utils::getServerUrl() . \Foomo\ROOT_HTTP . '/modules/' . $moduleName . '/services'; ?>
 			<tr>
-				<td colspan="5"><h2><?= $moduleName ?></h2></td>
+				<td colspan="5" class="tableInnerHead"><h2><?= $moduleName ?></h2></td>
 			</tr>
 			<? foreach ($descriptions as $description): ?>
 				<tr>

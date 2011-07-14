@@ -1,1 +1,15 @@
-Zugspitze is BestBytes' Flex MVC Framework.
+Zugspitze is foomo's ActionScript MVC Framework.
+
+Client:
+* Basic Code structure
+* Different implementation possibilities
+* Applications / Components
+* Model-View-Controller
+* Async. Commands (execute | undo | redo)
+* Async. Operations
+* Supported Project Types: Pure ActionScript, Flex (MX | Spark), Air (MX | Spark), Mobile, (Flash Professional and Reflex comming soon)
+
+Server:
+* Application / Component Scaffolding
+* Service Proxy Generator
+* Ant Tasks

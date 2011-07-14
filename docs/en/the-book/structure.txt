@@ -1,0 +1,12 @@
++++ Files & Folders
+
+<geshi>
+controllers/
+	ApplicationController.as
+models/
+	ApplicationModel.as
+views/
+	AppliccationView.mxml
+	ViewInclude.as
+Application
+</geshi>
