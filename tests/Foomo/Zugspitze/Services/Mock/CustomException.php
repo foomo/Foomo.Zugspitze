@@ -34,4 +34,8 @@ class CustomException extends \Exception
 	 * @var string
 	 */
 	public $note = 'Hear my note!';
+	/**
+	 * @var string
+	 */
+	public $xdebug_message;
 }

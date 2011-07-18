@@ -25,13 +25,6 @@ package <?= $model->myPackage; ?>.commands
 {
 	import <?= $model->myPackage; ?>.<?= PHPUtils::getASType($model->proxyClassName) ?>;
 	import <?= $model->myPackage; ?>.calls.<?= ViewHelper::toClassName($operation->name, 'Call') ?>;
-	import <?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>;
-<? if (count($operation->throwsTypes) > 0): ?>
-<? foreach ($operation->throwsTypes as $throwType): ?>
-<? $dataClass = $model->complexTypes[$throwType->type]; ?>
-	import <?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($model->getVOClassName($dataClass), 'Event') ?>;
-<? endforeach; ?>
-<? endif; ?>
 <? if (count($operation->parameters) > 0): ?>
 <? foreach($operation->parameters as $name => $type): ?>
 	<? if (!PHPUtils::isASStandardType($type)) echo $model->getClientAsClassImport($type); ?>
@@ -40,6 +33,7 @@ package <?= $model->myPackage; ?>.commands
 
 	import org.foomo.zugspitze.commands.Command;
 	import org.foomo.zugspitze.commands.ICommand;
+	import org.foomo.zugspitze.rpc.events.ProxyMethodCallEvent;
 	import org.foomo.core.IUnload;
 
 	/**
@@ -100,15 +94,9 @@ package <?= $model->myPackage; ?>.commands
 		public function execute():void
 		{
 			this._methodCall = this.proxy.<?= $operation->name ?>(<?= ViewHelper::renderParameters($operation->parameters, false, true) ?>);
-			this._methodCall.addEventListener(<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>.<?= ViewHelper::toConstantName($operation->name) ?>_CALL_ERROR, this.abstractErrorHandler);
-			this._methodCall.addEventListener(<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>.<?= ViewHelper::toConstantName($operation->name) ?>_CALL_PROGRESS, this.abstractProgressHandler);
-			this._methodCall.addEventListener(<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>.<?= ViewHelper::toConstantName($operation->name) ?>_CALL_COMPLETE, this.abstractCompleteHandler);
-<? if (count($operation->throwsTypes) > 0): ?>
-<? foreach ($operation->throwsTypes as $throwType): ?>
-<? $dataClass = $model->complexTypes[$throwType->type]; ?>
-			this._methodCall.addEventListener(<?= ViewHelper::toClassName($model->getVOClassName($dataClass), 'Event') ?>.<?= ViewHelper::toConstantName($model->getVOClassName($dataClass)) ?>, this.abstract<?= $model->getVOClassName($dataClass) ?>Handler);
-<? endforeach; ?>
-<? endif; ?>
+			this._methodCall.addEventListener(ProxyMethodCallEvent.PROXY_METHOD_CALL_RESULT, this.methodCall_proxyMethodCallResultHandler);
+			this._methodCall.addEventListener(ProxyMethodCallEvent.PROXY_METHOD_CALL_PROGRESS, this.methodCall_proxyMethodCallProgressHandler);
+			this._methodCall.addEventListener(ProxyMethodCallEvent.PROXY_METHOD_CALL_EXCEPTION, this.methodCall_proxyMethodCallExceptionHandler);
 		}
 
 		/**
@@ -123,15 +111,9 @@ package <?= $model->myPackage; ?>.commands
 <? endforeach; ?>
 <? endif; ?>
 			if (this._methodCall) {
-				this._methodCall.removeEventListener(<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>.<?= ViewHelper::toConstantName($operation->name) ?>_CALL_ERROR, this.abstractErrorHandler);
-				this._methodCall.removeEventListener(<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>.<?= ViewHelper::toConstantName($operation->name) ?>_CALL_PROGRESS, this.abstractProgressHandler);
-				this._methodCall.removeEventListener(<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>.<?= ViewHelper::toConstantName($operation->name) ?>_CALL_COMPLETE, this.abstractCompleteHandler);
-<? if (count($operation->throwsTypes) > 0): ?>
-<? foreach ($operation->throwsTypes as $throwType): ?>
-<? $dataClass = $model->complexTypes[$throwType->type]; ?>
-				this._methodCall.removeEventListener(<?= ViewHelper::toClassName($model->getVOClassName($dataClass), 'Event') ?>.<?= ViewHelper::toConstantName($model->getVOClassName($dataClass)) ?>, this.abstract<?= $model->getVOClassName($dataClass) ?>Handler);
-<? endforeach; ?>
-<? endif; ?>
+				this._methodCall.removeEventListener(ProxyMethodCallEvent.PROXY_METHOD_CALL_RESULT, this.methodCall_proxyMethodCallResultHandler);
+				this._methodCall.removeEventListener(ProxyMethodCallEvent.PROXY_METHOD_CALL_PROGRESS, this.methodCall_proxyMethodCallProgressHandler);
+				this._methodCall.removeEventListener(ProxyMethodCallEvent.PROXY_METHOD_CALL_EXCEPTION, this.methodCall_proxyMethodCallExceptionHandler);
 				this._methodCall = null;
 			}
 		}
@@ -141,24 +123,24 @@ package <?= $model->myPackage; ?>.commands
 		//-----------------------------------------------------------------------------------------
 
 		/**
-		 * Handle method call progress
-		 *
-		 * @param event Method call event
-		 */
-		protected function abstractProgressHandler(event:<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>):void
-		{
-			// Overwrite this method in your implementation class
-		}
-
-		/**
 		 * Handle method call result
 		 *
 		 * @param event Method call event
 		 */
-		protected function abstractCompleteHandler(event:<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>):void
+		protected function methodCall_proxyMethodCallResultHandler(event:ProxyMethodCallEvent):void
 		{
 			// Overwrite this method in your implementation class
 			this.dispatchCommandCompleteEvent();
+		}
+
+		/**
+		 * Handle method call progress
+		 *
+		 * @param event Method call event
+		 */
+		protected function methodCall_proxyMethodCallProgressHandler(event:ProxyMethodCallEvent):void
+		{
+			// Overwrite this method in your implementation class
 		}
 
 		/**
@@ -166,25 +148,10 @@ package <?= $model->myPackage; ?>.commands
 		 *
 		 * @param event Method call event
 		 */
-		protected function abstractErrorHandler(event:<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>):void
+		protected function methodCall_proxyMethodCallExceptionHandler(event:ProxyMethodCallEvent):void
 		{
 			// Overwrite this method in your implementation class
-			this.dispatchCommandErrorEvent(event.error);
+			this.dispatchCommandErrorEvent();
 		}
-<? if (count($operation->throwsTypes) > 0): ?>
-<? foreach ($operation->throwsTypes as $throwType): ?>
-<? $dataClass = $model->complexTypes[$throwType->type]; ?>
-
-		/**
-		 * Handle exception
-		 *
-		 * @param event Exception event
-		 */
-		protected function abstract<?= $model->getVOClassName($dataClass) ?>Handler(event:<?= ViewHelper::toClassName($model->getVOClassName($dataClass), 'Event') ?>):void
-		{
-			this.dispatchCommandErrorEvent(event.toString());
-		}
-<? endforeach; ?>
-<? endif; ?>
 	}
 }

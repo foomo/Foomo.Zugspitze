@@ -41,36 +41,22 @@ function renderMethodProperties($props)
  */
 package <?= $model->myPackage; ?>.calls
 {
+	import org.foomo.utils.CompilerUtil;
+	import org.foomo.zugspitze.rpc.calls.ProxyMethodCall;
 <? if (count($operation->throwsTypes) > 0): ?>
-	import org.foomo.rpc.events.RPCMethodCallEvent;
 <? foreach ($operation->throwsTypes as $throwType): ?>
 <? $dataClass = $model->complexTypes[$throwType->type]; ?>
 	<?= $model->getClientAsClassImport($throwType->type) .PHP_EOL ?>
-	import <?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($model->getVOClassName($dataClass), 'Event') ?>;
 <? endforeach; ?>
-
 <? endif; ?>
-	import <?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>;
-	import org.foomo.zugspitze.rpc.calls.ProxyMethodCall;
 <?	if ((PHPUtils::isArray($operation->returnType->type) && !PHPUtils::isASArrayStandardType($operation->returnType->type)) || !PHPUtils::isASStandardType($operation->returnType->type)): ?>
 	<?= $model->getClientAsClassImport($operation->returnType->type) . PHP_EOL ?>
-	import org.foomo.utils.CompilerUtil;
 <? endif ?>
 <? if (count($operation->parameters) > 0): ?>
 <? foreach($operation->parameters as $name => $type): ?>
 <? if (!PHPUtils::isASStandardType($type)): ?>
 	<?= $model->getClientAsClassImport($type) . PHP_EOL; ?>
 <? endif; ?>
-<? endforeach; ?>
-<? endif; ?>
-
-	[Event(name="<?= $operation->name ?>CallComplete", type="<?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>")]
-	[Event(name="<?= $operation->name ?>CallProgress", type="<?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>")]
-	[Event(name="<?= $operation->name ?>CallError", type="<?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>")]
-<? if (count($operation->throwsTypes) > 0): ?>
-<? foreach ($operation->throwsTypes as $throwType): ?>
-<? $dataClass = $model->complexTypes[$throwType->type]; ?>
-	[Event(name="<?= lcfirst($model->getVOClassName($dataClass)) ?>", type="<?= $model->myPackage; ?>.events.<?= ViewHelper::toClassName($model->getVOClassName($dataClass), 'Event') ?>")]
 <? endforeach; ?>
 <? endif; ?>
 
@@ -93,10 +79,16 @@ package <?= $model->myPackage; ?>.calls
 
 		public function <?= ViewHelper::toClassName($operation->name, 'Call') ?>(<?= ViewHelper::renderParameters($operation->parameters) ?>)
 		{
-			super(METHOD_NAME, [<?= ViewHelper::renderParameters($operation->parameters, false) ?>], <?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>);
+			super(METHOD_NAME, [<?= ViewHelper::renderParameters($operation->parameters, false) ?>]);
 <?	if (PHPUtils::isArray($operation->returnType->type) && !PHPUtils::isASArrayStandardType($operation->returnType->type)): ?>
 			CompilerUtil.force(<?= PHPUtils::getASArrayType($operation->returnType->type) ?>);
 <? endif ?>
+<? if (count($operation->throwsTypes) > 0): ?>
+<? foreach ($operation->throwsTypes as $throwType): ?>
+<? $dataClass = $model->complexTypes[$throwType->type]; ?>
+			CompilerUtil.force(<?= PHPUtils::getASType($throwType->type) ?>);
+<? endforeach; ?>
+<? endif; ?>
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -110,36 +102,5 @@ package <?= $model->myPackage; ?>.calls
 		{
 			return this.methodReply.value;
 		}
-<? if (count($operation->throwsTypes) > 0): ?>
-
-		//-----------------------------------------------------------------------------------------
-		// ~ Overriden methods
-		//-----------------------------------------------------------------------------------------
-
-		/**
-		 * Complete handler
-		 *
-		 * @private
-		 */
-		override protected function token_methodCallTokenCompleteHandler(event:RPCMethodCallEvent):void
-		{
-			this._methodReply = event.methodReply;
-			if (this._methodReply.exception != null) {
-				switch (true) {
-<? foreach ($operation->throwsTypes as $throwType): ?>
-<? $dataClass = $model->complexTypes[$throwType->type]; ?>
-					case (this._methodReply.exception is <?= $model->getVOClassName($dataClass) ?>):
-						this.dispatchEvent(new <?= ViewHelper::toClassName($model->getVOClassName($dataClass), 'Event') ?>(<?= ViewHelper::toClassName($model->getVOClassName($dataClass), 'Event') ?>.<?= ViewHelper::toConstantName($model->getVOClassName($dataClass)) ?><?= renderMethodProperties($dataClass->props) ?>));
-						break;
-<? endforeach; ?>
-					default:
-						throw new Error('Unhandled exception type');
-						break;
-				}
-			} else {
-				this.dispatchEvent(new <?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>(<?= ViewHelper::toClassName($operation->name, 'CallEvent') ?>.<?= ViewHelper::toConstantName($operation->name) ?>_CALL_COMPLETE, this));
-			}
-		}
-<? endif; ?>
 	}
 }

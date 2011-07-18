@@ -39,7 +39,7 @@ class RPC extends \Foomo\Services\ProxyGenerator\ActionScript\AbstractGenerator
 	/**
 	 * @var string[]
 	 */
-	public $packageFolders = array('calls', 'operations', 'events', 'commands');
+	public $packageFolders = array('calls', 'operations', 'commands');
 	/**
 	 * @var ServiceObjectType[]
 	 */
@@ -60,10 +60,6 @@ class RPC extends \Foomo\Services\ProxyGenerator\ActionScript\AbstractGenerator
 		$view = $this->getView('MethodCallClass');
 		$this->classFiles['calls' . DIRECTORY_SEPARATOR . ViewHelper::toClassName($op->name, 'Call')] = $view->render();
 
-		// Method calls events
-		$view = $this->getView('MethodCallEventClass');
-		$this->classFiles['events' . DIRECTORY_SEPARATOR . ViewHelper::toClassName($op->name, 'CallEvent')] = $view->render();
-
 		// Method calls exceptions
 		if (count($this->currentOperation->throwsTypes) > 0) {
 			foreach ($this->currentOperation->throwsTypes as $throwType) {
@@ -74,10 +70,6 @@ class RPC extends \Foomo\Services\ProxyGenerator\ActionScript\AbstractGenerator
 		// Operations
 		$view = $this->getView('OperationClass');
 		$this->classFiles['operations' . DIRECTORY_SEPARATOR . ViewHelper::toClassName($op->name, 'Operation')] = $view->render();
-
-		// Operations events
-		$view = $this->getView('OperationEventClass');
-		$this->classFiles['events' . DIRECTORY_SEPARATOR . ViewHelper::toClassName($op->name, 'OperationEvent')] = $view->render();
 
 		// Commands
 		$view = $this->getView('AbstractCommandClass');
@@ -95,13 +87,6 @@ class RPC extends \Foomo\Services\ProxyGenerator\ActionScript\AbstractGenerator
 
 		// render all the vos
 		foreach ($this->complexTypes as $complexType) $this->renderVOClass($complexType);
-
-		// render all exception events
-		foreach ($this->throwsTypes as $throwType) {
-			$this->currentDataClass = $this->complexTypes[$throwType->type];
-			$view = $this->getView('ExceptionEventClass');
-			$this->classFiles['events' . DIRECTORY_SEPARATOR . PHPUtils::getASType($this->currentDataClass->type) . 'Event'] = $view->render();
-		}
 
 		return parent::output();
 	}
