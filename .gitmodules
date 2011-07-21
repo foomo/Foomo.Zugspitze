@@ -1,42 +1,42 @@
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.air.mx"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.air.mx
-	url = ssh://git.bestbytes.net/var/git/ASLibrary-zugspitze_air_mx.git
+	url = ../ASLibrary-zugspitze_air_mx.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.air.spark.examples"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.air.spark.examples
-	url = ssh://git.bestbytes.net/var/git/FlexProject-zugspitze_air_sparkExamples.git
+	url = ../FlexProject-zugspitze_air_sparkExamples.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.as3"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.as3
-	url = ssh://git.bestbytes.net/var/git/ASLibrary-zugspitze_as3.git
+	url = ./ASLibrary-zugspitze_as3.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.as3.examples"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.as3.examples
-	url = ssh://git.bestbytes.net/var/git/FlexProject-zugspitze_as3Examples.git
+	url = ../FlexProject-zugspitze_as3Examples.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.core"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.core
-	url = ssh://git.bestbytes.net/var/git/ASLibrary-zugspitze_core.git
+	url = ../ASLibrary-zugspitze_core.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.mobile"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.mobile
-	url = ssh://git.bestbytes.net/var/git/ASLibrary-zugspitze_mobile.git
+	url = ../ASLibrary-zugspitze_mobile.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.mobile.examples"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.mobile.examples
-	url = ssh://git.bestbytes.net/var/git/FlexProject-zugspitze_mobileExamples.git
+	url = ../FlexProject-zugspitze_mobileExamples.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.mx"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.mx
-	url = ssh://git.bestbytes.net/var/git/ASLibrary-zugspitze_mx.git
+	url = ../ASLibrary-zugspitze_mx.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.mx.examples"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.mx.examples
-	url = ssh://git.bestbytes.net/var/git/FlexProject-zugspitze_mxExamples.git
+	url = ../FlexProject-zugspitze_mxExamples.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.rpc"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.rpc
-	url = ssh://git.bestbytes.net/var/git/ASLibrary-zugspitze_rpc.git
+	url = ../ASLibrary-zugspitze_rpc.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.spark"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.spark
-	url = ssh://git.bestbytes.net/var/git/ASLibrary-zugspitze_spark.git
+	url = ../ASLibrary-zugspitze_spark.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.spark.examples"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.spark.examples
-	url = ssh://git.bestbytes.net/var/git/FlexProject-zugspitze_sparkExamples.git
+	url = ../FlexProject-zugspitze_sparkExamples.git
 [submodule "vendor/org.foomo.zugspitze.services/org.foomo.zugspitze.services.upload"]
 	path = vendor/org.foomo.zugspitze.services/org.foomo.zugspitze.services.upload
-	url = ssh://git.bestbytes.net/var/git/ASLibrary-zugspitze_services_upload.git
+	url = ../ASLibrary-zugspitze_services_upload.git
 [submodule "vendor/org.foomo.zugspitze.services/org.foomo.zugspitze.services.upload.examples"]
 	path = vendor/org.foomo.zugspitze.services/org.foomo.zugspitze.services.upload.examples
-	url = ssh://git.bestbytes.net/var/git/FlexProject-zugspitze_services_uploadExamples.git
+	url = ../FlexProject-zugspitze_services_uploadExamples.git
