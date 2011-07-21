@@ -6,7 +6,7 @@
 	url = ../FlexProject-zugspitze_air_sparkExamples.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.as3"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.as3
-	url = ./ASLibrary-zugspitze_as3.git
+	url = ../ASLibrary-zugspitze_as3.git
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.as3.examples"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.as3.examples
 	url = ../FlexProject-zugspitze_as3Examples.git
