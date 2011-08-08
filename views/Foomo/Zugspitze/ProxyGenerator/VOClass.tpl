@@ -51,7 +51,7 @@ package <?= $dataClass->getRemotePackage() . PHP_EOL ?>
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-<?= $view->intend(ViewHelper::renderConstants($dataClass->constants), 2) . PHP_EOL ?>
+<?= $view->indent(ViewHelper::renderConstants($dataClass->constants), 2) . PHP_EOL ?>
 
 <?php endif; ?>
 <? if (count($dataClass->props) > 0): ?>
