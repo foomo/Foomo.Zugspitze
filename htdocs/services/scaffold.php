@@ -1,3 +1,15 @@
 <?php
 
-\Foomo\Services\RPC::serveClass(new \Foomo\Zugspitze\Services\Scaffold(), new \Foomo\Services\RPC\Serializer\JSON(), 'Foomo.Zugspitze.Services.Scaffold');
+
+use Foomo\Services\RPC;
+use Foomo\Services\RPC\Serializer\JSON;
+
+RPC::create(
+		new \Foomo\Zugspitze\Services\Scaffold()
+	)
+	->serializeWith(new JSON())
+	->clientNamespace('Foomo.Zugspitze.Services.Scaffold')
+	->requestAuth()
+	->requestAuthForDev()
+	->run()
+;

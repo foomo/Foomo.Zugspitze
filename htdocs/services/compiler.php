@@ -1,7 +1,14 @@
 <?php
 
-// @todo: basic auth should come with the serve class
-// @see: https://github.com/foomo/Foomo.Services/issues/1
-#Foomo\Frontend::setUpToolbox();
+use Foomo\Services\RPC;
+use Foomo\Services\RPC\Serializer\AMF;
 
-Foomo\Services\RPC::serveClass(new Foomo\Zugspitze\Services\Compiler, new Foomo\Services\RPC\Serializer\AMF(), 'org.foomo.services');
+RPC::create(
+		new Foomo\Zugspitze\Services\Compiler
+	)
+	->clientNamespace('org.foomo.services')
+	->serializeWith(new AMF())
+	->requestAuthForDev()
+	->requestAuth()
+	->run()
+;

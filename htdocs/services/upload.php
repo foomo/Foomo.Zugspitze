@@ -1,7 +1,13 @@
 <?php
 
-\Foomo\Services\RPC::serveClass(
-	new \Foomo\Zugspitze\Services\Upload(),
-	new \Foomo\Services\RPC\Serializer\AMF(),
-	'org.foomo.zugspitze.services.upload'
-);
+use Foomo\Services\RPC;
+use Foomo\Services\RPC\Serializer\AMF;
+
+RPC::create(
+		new \Foomo\Zugspitze\Services\Upload()
+	)
+	->serializeWith(new AMF())
+	->clientNamespace('org.foomo.zugspitze.services.upload')
+	->requestAuthForDev()
+	->run()
+;
