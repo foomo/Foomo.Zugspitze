@@ -40,3 +40,6 @@
 [submodule "vendor/org.foomo.zugspitze.services/org.foomo.zugspitze.services.upload.examples"]
 	path = vendor/org.foomo.zugspitze.services/org.foomo.zugspitze.services.upload.examples
 	url = ../FlexProject-zugspitze_services_uploadExamples.git
+[submodule "vendor/org.foomo.zugspitze.air.spark"]
+	path = vendor/org.foomo.zugspitze.air.spark
+	url = ../ASLibrary-zugspitze_air_spark.git
