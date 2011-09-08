@@ -25,7 +25,7 @@ namespace Foomo\Zugspitze\Upload;
  * @link www.foomo.org
  * @license www.gnu.org/licenses/lgpl.txt
  * @author jan <jan@bestbytes.de>
- * @Foomo\Services\Reflection\RemoteClass(package='com.test.services.upload.vos')
+ * @Foomo\Services\Reflection\RemoteClass(package='org.foomo.zugspitze.services.upload.vos')
  */
 class UploadReference
 {

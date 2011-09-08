@@ -94,7 +94,7 @@ class Server
 	 * try to get a previously uploaded file
 	 *
 	 * @param string $uploadId
-	 * @return Foomo\Zugspitze\Services\Upload\File
+	 * @return Foomo\Zugspitze\Services\Upload\Info
 	 */
 	public static function getUpload($uploadId)
 	{
