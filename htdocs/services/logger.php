@@ -1,13 +1,7 @@
 <?php
 
-use Foomo\Services\RPC;
-use Foomo\Services\RPC\Serializer\AMF;
-
-RPC::create(
-		new Foomo\Zugspitze\Services\Logger()
-	)
-	->serializeWith(new AMF())
+\Foomo\Services\RPC::create(new Foomo\Zugspitze\Services\Logger())
+	->serializeWith(new \Foomo\Services\RPC\Serializer\AMF())
 	->clientNamespace('org.foomo.zugspitze.services.logger')
-	->requestAuthForDev()
 	->run()
 ;
