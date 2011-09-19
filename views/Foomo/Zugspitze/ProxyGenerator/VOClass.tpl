@@ -42,9 +42,8 @@ package <?= $dataClass->getRemotePackage() . PHP_EOL ?>
 	/**
 	 * @link    http://www.foomo.org
 	 * @license http://www.gnu.org/licenses/lgpl.txt
-	 * @author  franklin <franklin@weareinteractive.com>
 	 */
-	public class <?= $model->getVOClassName($dataClass) ?>
+	public class <?= $model->getVOClassName($dataClass) . PHP_EOL ?>
 	{
 <?php if (count($dataClass->constants) > 0): ?>
 		//-----------------------------------------------------------------------------------------

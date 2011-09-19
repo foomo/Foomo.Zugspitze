@@ -31,7 +31,6 @@ class Logger
 	//---------------------------------------------------------------------------------------------
 
 	const VERSION = 0.1;
-	const LOGFILE_NAME = 'zugspitze.log';
 
 	//---------------------------------------------------------------------------------------------
 	// ~ Service methods
@@ -40,18 +39,19 @@ class Logger
 	/**
 	 * Log a error report
 	 *
+	 * @param string $clientId
 	 * @param Foomo\Zugspitze\Services\Logger\Report $report
 	 * @return boolean
 	 */
-	public function log($report)
+	public function log($clientId, $report)
 	{
 		$view = \Foomo\Zugspitze\Module::getView(__CLASS__, 'Logger/report.tpl', $report);
-		$logFile = \Foomo\Zugspitze\Module::getLogDir() . '/' . self::LOGFILE_NAME;
+		$logFile = \Foomo\Zugspitze\Module::getLogDir('Logger') . '/' . $clientId . '.log';
 
 		if ($report->screenshot && $report->screenshot->base64String) {
 
 			$fileBinary = base64_decode($report->screenshot->base64String);
-			$report->screenshot->file =  \Foomo\Zugspitze\Module::getTempDir() . '/' . $report->id . '.jpg';
+			$report->screenshot->file =  \Foomo\Zugspitze\Module::getTempDir('Logger/' . $clientId) . '/' . $report->id . '.jpg';
 
 			# save files
 			if (!\file_put_contents($report->screenshot->file, $fileBinary)) \trigger_error('Could not create file ' . $report->screenshot->file);

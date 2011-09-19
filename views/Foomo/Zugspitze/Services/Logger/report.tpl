@@ -1,26 +1,33 @@
 <?php
-/* @var $report Zugspitze\Log\Vo\Report */
+/* @var $report Foomo\Zugspitze\Services\Logger\Report */
 $report = $model;
 ?>
 ===============================================================================
 REPORT: <?= date('d-m-Y H:i:s') . PHP_EOL ?>
 ===============================================================================
-INFO
-...............................................................................
 Id           : <?= $report->id . PHP_EOL ?>
-Level        : <?= (($report->levelName) ? $report->levelName : '-') . PHP_EOL ?>
 Date         : <?= (($report->date) ? $report->date : '-') . PHP_EOL ?>
 Time         : <?= (($report->time) ? $report->time : '-') . PHP_EOL ?>
-Category     : <?= (($report->category) ? $report->category : '-') . PHP_EOL ?>
 Location     : <?= (($report->location) ? $report->location : '-') . PHP_EOL ?>
-Total Memory : <?= (($report->totalMemory) ? $report->totalMemory : '-') . PHP_EOL ?>
 Screenshot   : <?= (($report->screenshot) ? $report->screenshot->file : '-') . PHP_EOL ?>
 
 
-MESSAGE
+
+LOG
 ...............................................................................
-<?= $report->message . PHP_EOL ?>
+Level        : <?= (($report->log->levelName) ? $report->log->levelName : '-') . PHP_EOL ?>
+Category     : <?= (($report->log->category) ? $report->log->category : '-') . PHP_EOL ?>
+Message      : <?= $report->log->message . PHP_EOL ?>
+<? if ($report->system): ?>
+
+
+SYSTEM
 ...............................................................................
+Uptime         : <?= (($report->system->uptime) ? round($report->system->uptime/1000/60, 1) . ' min' : '-') . PHP_EOL ?>
+Free Memory    : <?= (($report->system->freeMemory) ? round($report->system->freeMemory/1024/1024, 2) . ' MB' : '-') . PHP_EOL ?>
+Total Memory   : <?= (($report->system->totalMemory) ? round($report->system->totalMemory/1024/1024, 2) . ' MB' : '-') . PHP_EOL ?>
+Private Memory : <?= (($report->system->privateMemory) ? round($report->system->privateMemory/1024/1024, 2) . ' MB' : '-') . PHP_EOL ?>
+<? endif; ?>
 <? if ($report->capabilities): ?>
 
 
