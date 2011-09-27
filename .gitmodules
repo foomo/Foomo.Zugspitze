@@ -43,3 +43,9 @@
 [submodule "vendor/org.foomo.zugspitze/org.foomo.zugspitze.air.spark"]
 	path = vendor/org.foomo.zugspitze/org.foomo.zugspitze.air.spark
 	url = ../ASLibrary-zugspitze_air_spark.git
+[submodule "vendor/org.foomo.zugspitze.services/org.foomo.zugspitze.services.logger"]
+	path = vendor/org.foomo.zugspitze.services/org.foomo.zugspitze.services.logger
+	url = ../ASLibrary-zugspitze_services_logger.git
+[submodule "vendor/org.foomo.zugspitze.services/org.foomo.zugspitze.services.logger.examples"]
+	path = vendor/org.foomo.zugspitze.services/org.foomo.zugspitze.services.logger.examples
+	url = ../FlexProject-zugspitze_services_loggerExamples.git
