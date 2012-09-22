@@ -34,7 +34,7 @@ package <?= $model->myPackage . PHP_EOL; ?>
 	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author  franklin <franklin@weareinteractive.com>
 	 */
-	public class <?= PHPUtils::getASType($model->proxyClassName) ?> extends Proxy
+	public class <?= $model->proxyClassName ?> extends Proxy
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Constants
@@ -50,7 +50,7 @@ package <?= $model->myPackage . PHP_EOL; ?>
 		/**
 		 *
 		 */
-		private static var _instance:<?= PHPUtils::getASType($model->proxyClassName) ?>;
+		private static var _instance:<?= $model->proxyClassName ?>;
 		/**
 		 *
 		 */
@@ -60,7 +60,7 @@ package <?= $model->myPackage . PHP_EOL; ?>
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function <?= PHPUtils::getASType($model->proxyClassName) ?>(endPoint:String=null)
+		public function <?= $model->proxyClassName ?>(endPoint:String=null)
 		{
 			if (endPoint == null) endPoint = defaultEndPoint;
 			super(endPoint, CLASS_NAME, VERSION);
@@ -87,9 +87,9 @@ package <?= $model->myPackage . PHP_EOL; ?>
 		/**
 		 *
 		 */
-		public static function get defaultInstance():<?= PHPUtils::getASType($model->proxyClassName) ?>
+		public static function get defaultInstance():<?= $model->proxyClassName . PHP_EOL ?>
 		{
-			if (!_instance) _instance = new <?= PHPUtils::getASType($model->proxyClassName) ?>(defaultEndPoint);
+			if (!_instance) _instance = new <?= $model->proxyClassName ?>(defaultEndPoint);
 			return _instance;
 		}
 	}
