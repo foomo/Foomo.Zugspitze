@@ -98,7 +98,7 @@ class RPC extends \Foomo\Services\ProxyGenerator\ActionScript\AbstractGenerator
 	 */
 	public function getTargetSrcDir()
 	{
-		return \Foomo\Zugspitze\Module::getTempDir() . DIRECTORY_SEPARATOR . 'ProxyGenerator' . DIRECTORY_SEPARATOR . str_replace('\\', '', $this->serviceName);
+		return \Foomo\Zugspitze\Module::getTempDir('proxies') . DIRECTORY_SEPARATOR . str_replace('\\', '', $this->serviceName);
 	}
 
 	/**
@@ -106,7 +106,7 @@ class RPC extends \Foomo\Services\ProxyGenerator\ActionScript\AbstractGenerator
 	 */
 	public function getSWCFilename()
 	{
-		return \Foomo\Zugspitze\Module::getTempDir() . DIRECTORY_SEPARATOR . 'ProxyGenerator' . DIRECTORY_SEPARATOR . str_replace('\\', '', $this->serviceName) . '.swc';
+		return \Foomo\Zugspitze\Module::getVarDir('proxies') . DIRECTORY_SEPARATOR . str_replace('\\', '', $this->serviceName) . '.swc';
 	}
 
 	/**
@@ -114,7 +114,7 @@ class RPC extends \Foomo\Services\ProxyGenerator\ActionScript\AbstractGenerator
 	 */
 	public function getTGZFilename()
 	{
-		return \Foomo\Zugspitze\Module::getTempDir() . DIRECTORY_SEPARATOR . 'ProxyGenerator' . DIRECTORY_SEPARATOR . str_replace('\\', '', $this->serviceName) . '.tgz';
+		return \Foomo\Zugspitze\Module::getVarDir('proxies') . DIRECTORY_SEPARATOR . str_replace('\\', '', $this->serviceName) . '.tgz';
 	}
 
 	/**

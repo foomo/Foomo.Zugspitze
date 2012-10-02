@@ -59,7 +59,8 @@ class Controller
 	 */
 	public function actionGenerateASClient($serviceUrl)
 	{
-		$this->generateASClientSrc(\Foomo\Services\Utils::getServiceDescription($serviceUrl));
+		//$this->generateASClientSrc(\Foomo\Services\Utils::getServiceDescription($serviceUrl));
+		$this->compressASClientSrc(\Foomo\Services\Utils::getServiceDescription($serviceUrl));
 	}
 
 	/**
