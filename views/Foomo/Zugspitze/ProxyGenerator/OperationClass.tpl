@@ -23,7 +23,7 @@ $operation = $model->currentOperation;
  */
 package <?= $model->myPackage; ?>.operations
 {
-	import <?= $model->myPackage; ?>.<?= PHPUtils::getASType($model->proxyClassName) ?>;
+	import <?= $model->myPackage; ?>.<?= $model->proxyClassName ?>;
 <? if (count($operation->parameters) > 0): ?>
 <? foreach($operation->parameters as $name => $type): ?>
 	<? if (!PHPUtils::isASStandardType($type)) echo $model->getClientAsClassImport($type); ?>
@@ -46,7 +46,7 @@ package <?= $model->myPackage; ?>.operations
 		/**
 		 *
 		 */
-		public function <?= ViewHelper::toClassName($operation->name, 'Operation') ?>(<?= ViewHelper::renderParameters($operation->parameters); ?><?= (count($operation->parameters) > 0) ? ', ' : ''; ?>proxy:<?= PHPUtils::getASType($model->proxyClassName) ?>)
+		public function <?= ViewHelper::toClassName($operation->name, 'Operation') ?>(<?= ViewHelper::renderParameters($operation->parameters); ?><?= (count($operation->parameters) > 0) ? ', ' : ''; ?>proxy:<?= $model->proxyClassName ?>)
 		{
 			super(proxy, '<?= $operation->name ?>', [<?= ViewHelper::renderParameters($operation->parameters, false); ?>]);
 		}

@@ -23,7 +23,7 @@ $operation = $model->currentOperation;
  */
 package <?= $model->myPackage; ?>.commands
 {
-	import <?= $model->myPackage; ?>.<?= PHPUtils::getASType($model->proxyClassName) ?>;
+	import <?= $model->myPackage; ?>.<?= $model->proxyClassName ?>;
 	import <?= $model->myPackage; ?>.calls.<?= ViewHelper::toClassName($operation->name, 'Call') ?>;
 <? if (count($operation->parameters) > 0): ?>
 <? foreach($operation->parameters as $name => $type): ?>
@@ -52,7 +52,7 @@ package <?= $model->myPackage; ?>.commands
 		/**
 		 * Service proxy
 		 */
-		public var proxy:<?= PHPUtils::getASType($model->proxyClassName) ?>;
+		public var proxy:<?= $model->proxyClassName ?>;
 <? foreach ($operation->parameters as $name => $type): ?>
 <?= $view->indent(ViewHelper::renderComment(isset($operation->parameterDocs[$name]) ? $operation->parameterDocs[$name]->comment : ''), 2) . PHP_EOL ?>
 		public var <?= $name ?>:<?= PHPUtils::getASType($type) ?>;
@@ -73,7 +73,7 @@ package <?= $model->myPackage; ?>.commands
 		 * @param proxy Service proxy
 		 * @param setBusyStatus Set busy status while pending
 		 */
-		public function <?= ViewHelper::toClassName($operation->name, 'Command', 'Abstract') ?>(<?= ViewHelper::renderParameters($operation->parameters) ?><? echo (count($operation->parameters) > 0) ? ', ' : ''; ?>proxy:<?= PHPUtils::getASType($model->proxyClassName) ?>, setBusyStatus:Boolean=false)
+		public function <?= ViewHelper::toClassName($operation->name, 'Command', 'Abstract') ?>(<?= ViewHelper::renderParameters($operation->parameters) ?><? echo (count($operation->parameters) > 0) ? ', ' : ''; ?>proxy:<?= $model->proxyClassName ?>, setBusyStatus:Boolean=false)
 		{
 <? if (count($operation->parameters) > 0): ?>
 <? foreach($operation->parameters as $name => $type): ?>
